@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import postcss from './postcss.config.js'
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
