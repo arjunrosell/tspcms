@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('event_references', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_detail_id');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('slug');
+            $table->string('name')->nullable();
             $table->enum('status', ['Active', 'Disabled'])->default('Active');
             $table->timestamps();
             $table->softDeletes();
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('event_references');
     }
 };
