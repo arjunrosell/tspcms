@@ -44,7 +44,7 @@
         </script>
 
         <!-- Page wrapper -->
-        <div class="flex h-[100dvh] overflow-hidden">
+        <div class="flex h-[100vh] overflow-hidden">
 
             <x-app.sidebar />
 
@@ -54,7 +54,9 @@
             <x-app.header />
 
                 <main class="grow">
-                    {{ $slot }}
+                    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                        {{ $slot }}
+                    </div>
                 </main>
 
             </div>
