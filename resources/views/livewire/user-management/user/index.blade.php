@@ -47,13 +47,15 @@
         </div>
 
         <livewire:table.user-table />
+
+        @include('livewire.user-management.user.modal.modal')
     
         @push('script')
             <script>
                 document.addEventListener('livewire:init', () =>{
                     Alpine.data('initData', function(){
                         return {
-                            show: false,
+                            show: @entangle('show'),
                             showEdit: false,
                             toggleShowModal(){
                                 this.$wire.show = ! this.$wire.show;
