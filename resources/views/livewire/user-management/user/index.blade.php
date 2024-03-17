@@ -1,5 +1,5 @@
-<div>
-    <div x-data="initData">
+<div x-data='initData'>
+    <div >
         <div class="mb-11">
             <div class=" mb-4">
                 <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">User Information</h2>
@@ -38,7 +38,7 @@
 
     
         <div class="mb-5 ">
-            <button @click="toggleShowModal" class=" py-2 px-3 text-white rounded-md bg-indigo-600 hover:bg-indigo-700 flex items-center gap-2">
+            <button @click="showModal" class=" py-2 px-3 text-white rounded-md bg-indigo-600 hover:bg-indigo-700 flex items-center gap-2">
                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4.2a1 1 0 1 0-2 0V11H7.8a1 1 0 1 0 0 2H11v3.2a1 1 0 1 0 2 0V13h3.2a1 1 0 1 0 0-2H13V7.8Z" clip-rule="evenodd"/>
                 </svg>
@@ -48,35 +48,19 @@
 
         <livewire:table.user-table />
 
-        @include('livewire.user-management.user.modal.modal')
+        @include('livewire.user-management.user.modal.modal')     
     
         @push('script')
             <script>
                 document.addEventListener('livewire:init', () =>{
                     Alpine.data('initData', function(){
                         return {
-                            show: @entangle('show'),
-                            showEdit: false,
-                            toggleShowModal(){
-                                this.$wire.show = ! this.$wire.show;
+                            showModal(){
+                                this.$dispatch('open-modal', [{ name: 'add' }])
                             },
-                            toggleEditClose(){
-                                this.showEdit = false
-                                this.$wire.resetComponent()
+                            closeModal(){
+                                this.$dispatch('close-modal')
                             },
-                            init(){
-                                this.$watch('showEdit', value =>{
-                                    if(value){
-                                        document.body.style.overflowY = 'hidden';
-                                    }else{
-                                        document.body.style.overflowY = 'auto';
-                                    }
-                                })
-                                Livewire.on('edit-modal', () =>{
-                                    this.showEdit = true
-                                })
-                            }
-        
                         }
                     })
                 });

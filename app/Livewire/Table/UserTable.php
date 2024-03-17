@@ -4,6 +4,7 @@ namespace App\Livewire\Table;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+use Illuminate\Support\Facades\Blade;
 use App\Models\UserDetail;
 
 class UserTable extends DataTableComponent
@@ -42,8 +43,11 @@ class UserTable extends DataTableComponent
                 ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
+            Column::make('Action', 'id')
+                ->format(function($value, $row, Column $column){
+                    return Blade::render("<livewire:components.action.edit obj_id='$row->id' />");
+                })
+                ->html()
         ];
     }
 }
