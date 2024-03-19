@@ -18,7 +18,9 @@
                 </button>
             </div>
             <div class="p-4 space-y-4 md:p-5">
-                {{-- content --}}
+                <x-select label="Income Ref" wire:model.defer="income_reference_id" />
+                <x-input wire:model="amount" label="Amount" />
+                <x-select label="Given By" wire:model.defer="given_by" />
             </div>
             <div
                 class="flex items-center justify-end p-4 border-t border-gray-200 rounded-b md:p-3 dark:border-gray-600">

@@ -18,7 +18,9 @@
                 </button>
             </div>
             <div class="p-4 space-y-4 md:p-5">
-                {{-- content --}}
+                <x-input wire:model="name" label="Name" />
+                <x-select label="Event Reference" wire:model.defer="event_id" />
+                <x-textarea wire:model="event_description" label="Event Description" />
             </div>
             <div
                 class="flex items-center justify-end p-4 border-t border-gray-200 rounded-b md:p-3 dark:border-gray-600">
