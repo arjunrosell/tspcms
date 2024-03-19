@@ -4,7 +4,9 @@ namespace App\Livewire\Table;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+use Illuminate\Support\Facades\Blade;
 use App\Models\UserDetail;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserTable extends DataTableComponent
 {
@@ -13,6 +15,11 @@ class UserTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+    }
+
+    public function builder(): Builder
+    {
+        return UserDetail::query()->with(['position', 'user'])->select('user_details.*');
     }
 
     public function columns(): array
@@ -30,7 +37,7 @@ class UserTable extends DataTableComponent
                 ->sortable(),
             Column::make("Nickname", "nickname")
                 ->sortable(),
-            Column::make("Position id", "position_id")
+            Column::make("Position", "position.name")
                 ->sortable(),
             Column::make("DOB", "DOB")
                 ->sortable(),
@@ -42,8 +49,11 @@ class UserTable extends DataTableComponent
                 ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
+            Column::make('Action', 'id')
+                ->format(function ($value, $row, Column $column) {
+                    return Blade::render("<livewire:components.action.edit obj_id='$row->id' />");
+                })
+                ->html()
         ];
     }
 }
