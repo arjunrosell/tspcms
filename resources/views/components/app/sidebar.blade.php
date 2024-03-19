@@ -26,7 +26,7 @@
             </button>
             <!-- Logo -->
             <a class="block" href="{{ route('index') }}">
-                <h1 class=" text-center text-primary-yellow-light font-bold tracking-wide text-2xl">TSPCMS</h1>
+                <h1 class=" text-center text-primary-yellow-light font-bold tracking-wide text-2xl">Santo Kristo Parish Church Management System</h1>
             </a>     
         </div>
 
