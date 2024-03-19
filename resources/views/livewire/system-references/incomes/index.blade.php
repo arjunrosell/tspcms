@@ -3,7 +3,7 @@
         <div class="mb-11">
             <div class="mb-4 ">
                 <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">System References |
-                    Income</h2>
+                    Donations</h2>
             </div>
             <nav class="flex mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -27,7 +27,7 @@
                             </svg>
                             <a href="{{ route('system-references.income') }}"
                                 class="text-xs font-normal text-gray-600 ms-1 hover:text-primary-red md:ms-2 dark:text-gray-400 dark:hover:text-white">
-                                Income
+                                Donations
                             </a>
                         </div>
                     </li>
@@ -54,7 +54,7 @@
                         d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4.2a1 1 0 1 0-2 0V11H7.8a1 1 0 1 0 0 2H11v3.2a1 1 0 1 0 2 0V13h3.2a1 1 0 1 0 0-2H13V7.8Z"
                         clip-rule="evenodd" />
                 </svg>
-                Add Income
+                Add Donations
             </button>
         </div>
 

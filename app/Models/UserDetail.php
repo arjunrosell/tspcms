@@ -36,11 +36,11 @@ class UserDetail extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'user_detail_id');
+        return $this->belongsTo(User::class, 'user_detail_id', 'id');
     }
 
     public function position()
     {
-        return $this->belongsTo(Position::class, 'id', 'position_id');
+        return $this->belongsTo(Position::class, 'position_id', 'id');
     }
 }

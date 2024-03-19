@@ -20,8 +20,6 @@ class ExpenseRefTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("Slug", "slug")
-                ->sortable(),
             Column::make("Name", "name")
                 ->sortable(),
             Column::make("Status", "status")
