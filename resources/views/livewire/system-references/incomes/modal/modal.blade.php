@@ -4,7 +4,7 @@
             class="relative w-[500px] bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex items-center justify-between p-4 border-b rounded-t md:p-3 dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Create Position
+                    Create Income References
                 </h3>
                 <button @click="closeModal" type="button"
                     class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
@@ -20,7 +20,7 @@
             <div class="p-4 space-y-4 md:p-5">
                 <div>
                     <label for="position"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                     <input type="text" wire:model='name'
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"
                         required />
