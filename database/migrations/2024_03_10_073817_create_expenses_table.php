@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('expense_references_id');
+            $table->double('amount');
+            $table->longText('remarks')->nullable();
             $table->enum('status', ['Active', 'Disabled'])->default('Active');
             $table->timestamps();
             $table->softDeletes();

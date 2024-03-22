@@ -4,8 +4,14 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+import jQuery from "jquery";
+window.$ = window.jquery = jQuery;
+
 import axios from 'axios';
 window.axios = axios;
+
+import { TabulatorFull as Tabulator } from 'tabulator-tables';
+window.Tabulator = Tabulator;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

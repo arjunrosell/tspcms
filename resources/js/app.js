@@ -1,7 +1,6 @@
 import './bootstrap';
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import Clipboard from '@ryangjchandler/alpine-clipboard'
-
 document.addEventListener('DOMContentLoaded', () => {
     // Light switcher
     const lightSwitches = document.querySelectorAll('.light-switch');

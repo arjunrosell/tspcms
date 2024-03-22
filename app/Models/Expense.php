@@ -10,4 +10,15 @@ class Expense extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $fillable = [
+        'expense_references_id',
+        'amount',
+        'remarks',
+    ];
+
+    public function expense_references()
+    {
+        return $this->belongsTo(ExpenseReference::class, 'expense_references_id', 'id');
+    }
 }

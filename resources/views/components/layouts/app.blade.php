@@ -13,38 +13,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    @livewireStyles
-    <wireui:scripts />
     <!-- Scripts -->
+    <wireui:scripts />
+    @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    
     <!-- Styles -->
-
-    <script>
-        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
-            document.querySelector('html').classList.remove('dark');
-            document.querySelector('html').style.colorScheme = 'light';
-        } else {
-            document.querySelector('html').classList.add('dark');
-            document.querySelector('html').style.colorScheme = 'dark';
-        }
-    </script>
 </head>
 
 <body class="antialiased font-inter bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400"
     :class="{ 'sidebar-expanded': sidebarExpanded }" x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }" x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))">
-
-    <script>
-        if (localStorage.getItem('sidebar-expanded') == 'true') {
-            document.querySelector('body').classList.add('sidebar-expanded');
-        } else {
-            document.querySelector('body').classList.remove('sidebar-expanded');
-        }
-    </script>
-
+    
+    <x-notifications z-index="z-[100]" position="bottom-center" />
     <!-- Page wrapper -->
     <div class="flex h-[100vh] overflow-hidden">
-
+        
         <x-app.sidebar />
 
         <!-- Content area -->
@@ -52,7 +35,6 @@
             x-ref="contentarea">
 
             <x-app.header />
-
             <main class="grow">
                 <div class="w-full px-4 py-8 mx-auto sm:px-6 lg:px-8 max-w-9xl">
                     {{ $slot }}
@@ -63,8 +45,26 @@
 
     </div>
 
+    @livewireScriptConfig 
     @livewireScripts
+
     @stack('script')
+    <script>
+        if (localStorage.getItem('sidebar-expanded') == 'true') {
+            document.querySelector('body').classList.add('sidebar-expanded');
+        } else {
+            document.querySelector('body').classList.remove('sidebar-expanded');
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+            document.querySelector('html').style.colorScheme = 'light';
+        } else {
+            document.querySelector('html').classList.add('dark');
+            document.querySelector('html').style.colorScheme = 'dark';
+        }
+        </script>
 </body>
 
 </html>

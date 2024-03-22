@@ -37,11 +37,11 @@ class Index extends Component
         'editModal' => 'fetch'
     ];
 
-    public function fetch($name, $id)
+    public function fetch($name, $pkey)
     {
 
         try {
-            $this->objId = $id;
+            $this->objId = $pkey;
             $this->dispatch('edit-modal');
             $user = User::find($this->objId);
             $this->profile = $user->user_detail->profile;

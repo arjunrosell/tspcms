@@ -26,12 +26,12 @@
             </button>
             <!-- Logo -->
             <a class="block" href="{{ route('index') }}">
-                <h1 class=" text-center text-primary-yellow-light font-bold tracking-wide text-2xl">Santo Kristo Parish Church Management System</h1>
+                <h1 class=" text-center text-primary-yellow-light font-bold tracking-wide text-2xl">TSPCMS</h1>
             </a>     
         </div>
 
         <!-- Links -->
-        <div class="space-y-8">
+        <div class="space-y-8" x-init='toggleRecordMenu("{{trim(Request()->route()->getPrefix(),"/")}}")'>
             <!-- Pages group -->
             <div>
                 <h3 class="text-xs uppercase text-white font-semibold pl-3">
@@ -42,7 +42,7 @@
                     <!-- Dashboard -->
                     @foreach (config('sidebar') as $key => $sidebar)
                         @if(array_key_exists('routes', $sidebar))
-                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" >
                                 <button class="block text-white hover:text-white truncate transition duration-150" @click="toggleRecordMenu('{{$sidebar['unique_name']}}')">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center">
@@ -109,6 +109,13 @@
                     systemRefMenu: false,
                     authenticationMenu: false,
                     toggleRecordMenu(key){
+                        if(key=="user-management"){
+                            key="userManagement"
+                        }if(key=="analytics"){
+                            key="analyticsManagement"
+                        }if(key=="system-references"){
+                            key="systemReferences"
+                        }
                         switch (key) {
                             case 'userManagement':
                                 this.sidebarExpanded ? this.userMenu = ! this.userMenu : this.sidebarExpanded = true

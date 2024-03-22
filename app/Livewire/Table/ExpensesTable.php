@@ -5,6 +5,9 @@ namespace App\Livewire\Table;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Expense;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Blade;
+use NumberFormatter;
 
 class ExpensesTable extends DataTableComponent
 {
@@ -18,11 +21,27 @@ class ExpensesTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Action', 'id')
+                ->format(function ($value, $row, Column $column) {
+                    return Blade::render("<livewire:components.action.edit obj_id='$row->id' />");
+                })
+                ->html(),
+            Column::make("Expense Category", "expense_references.name")
+                ->searchable()
+                ->sortable(),
+            Column::make("Amount", "amount")
+                ->format(function ($value, $row, Column $column) {
+                    return numfmt_format_currency(numfmt_create('en_PH', NumberFormatter::CURRENCY), $row->amount, 'PHP');
+                })
+                ->searchable()
+                ->sortable(),
+            Column::make("Remarks", "remarks")
+                ->searchable()
                 ->sortable(),
             Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
+                ->format(function ($value, $row, Column $column) {
+                    return Carbon::parse($row->created_at)->format('M d,Y');
+                })
                 ->sortable(),
         ];
     }

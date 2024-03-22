@@ -6,3 +6,4 @@
 @import 'additional-styles/flatpickr.css';
 
 @import 'tailwindcss/utilities';
+@import "tabulator-tables"

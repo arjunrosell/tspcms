@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('income_reference_id')->nullable();
+            $table->foreignId('income_references_id')->nullable();
             $table->double('amount');
-            $table->string('given_by')->nullable();
+            $table->string('remarks')->nullable();
+            $table->string('address')->nullable();
+            $table->string('received_from')->nullable();
+            $table->unsignedBigInteger('received_by')->nullable();
             $table->enum('status', ['Active', 'Disabled'])->default('Active');
             $table->timestamps();
             $table->softDeletes();

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('event_references', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
-            $table->string('name')->nullable();
+            $table->string('name')->unique();
             $table->enum('status', ['Active', 'Disabled'])->default('Active');
             $table->timestamps();
             $table->softDeletes();

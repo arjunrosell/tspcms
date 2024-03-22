@@ -129,12 +129,6 @@
                             <x-select wire:model="position_id" placeholder="Select your position" :options="$positions"
                                 option-label="name" option-value="id" />
                         </div>
-                        <div>
-                            <label for="contact_no"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
-                            <x-select wire:model.defer="position_id" placeholder="Select your role" :options="[]"
-                                option-label="name" option-value="id" />
-                        </div>
                     </div>
                     <div>
                         <label for="perm_address"
@@ -294,13 +288,7 @@
                         <div>
                             <label for="contact_no"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
-                            <x-select wire:model.defer="position_id" placeholder="Select your position"
-                                :options="[]" option-label="name" option-value="id" />
-                        </div>
-                        <div>
-                            <label for="contact_no"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
-                            <x-select wire:model.defer="position_id" placeholder="Select your role" :options="[]"
+                            <x-select wire:model="position_id" placeholder="Select your position" :options="$positions"
                                 option-label="name" option-value="id" />
                         </div>
                     </div>

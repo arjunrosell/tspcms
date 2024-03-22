@@ -122,10 +122,10 @@ class Index extends Component
         }
     }
 
-    public function fetch($name, $pKey)
+    public function fetch($name, $pkey)
     {
         try {
-            $this->objId = $pKey;
+            $this->objId = $pkey;
             $this->dispatch('edit-modal');
             $position = Position::find($this->objId);
             $this->name = $position->name;
