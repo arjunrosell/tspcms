@@ -14,7 +14,8 @@ use App\Livewire\SystemReferences\Expenses\Index as SysExpensesIndex;
 use App\Livewire\SystemReferences\Incomes\Index as SysIncomeIndex;
 use App\Livewire\SystemReferences\Events\Index as SysEventsIndex;
 use App\Livewire\GeneralReport\Index as GeneralReportIndex;
-
+use App\Livewire\Analytics\Events\FuneralMass\Add as FuneralMassAdd;
+use App\Livewire\Analytics\Events\Baptism\Add as BaptismAdd;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,8 @@ Route::prefix('analytics')->name('analytics.')->group(function () {
     Route::get('/expenses', ExpensesIndex::class)->name('expenses');
     Route::get('/income', IncomeIndex::class)->name('income');
     Route::get('/events', EventsIndex::class)->name('events');
+    Route::get('/add-funeral-mass', FuneralMassAdd::class)->name('add-funeral-mass');
+    Route::get('/add-baptism', BaptismAdd::class)->name('add-baptism');
 });
 
 Route::prefix('appointments')->name('appointments.')->group(function () {
