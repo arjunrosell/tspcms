@@ -1,5 +1,5 @@
-<div>
-    <div x-data="initData">
+<div x-data="initData">
+    <div >
         <div class="mb-11">
             <div class=" mb-4">
                 <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Analytics | Events</h2>
@@ -43,7 +43,7 @@
                 </ol>
             </nav>
         </div>
-        <div class="grid grid-cols-12 gap-4">
+        <div class="grid grid-cols-12 gap-4 mb-7">
             <div class="col-span-12 sm:col-span-6 md:col-span-3">
               <div class="flex flex-row bg-white shadow-sm rounded p-4">
                 <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500">
@@ -88,6 +88,57 @@
                 </div>
               </div>
             </div>
+        </div>
+        <div class=" grid grid-cols-3 gap-2">
+          <div class=" col-span-2">
+            <h2 class="text-lg font-medium mb-2 tracking-wide text-gray-800 dark:text-gray-100 ">Appointments</h2>
+            <div class=" bg-white shadow-md p-3 rounded-md shadow-gray-300">
+              <div class=" mb-3 w-48">
+                <x-native-select
+                    placeholder="Choose Appointment"
+                    :options="['Kasal', 'Binyag']"
+                    wire:model="appointment"
+                />
+              </div>
+              <canvas x-ref='appointment' id="myChart"></canvas>
+            </div>
           </div>
+          <div></div>
+        </div>
+
+    </div>
+
+    @push('script')
+      <script>
+        document.addEventListener('livewire:init', () =>{
+          Alpine.data('initData', function(){
+            return {
+              init(){
+                let appointment = this.$refs.appointment;
+                let  months = ['Jan', 'Feb','Mar','Apr','May','Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                new Chart(appointment, {
+                  type: 'bar',
+                  data: {
+                    labels: months,
+                    datasets: [{
+                      label: '',
+                      data: [12, 19, 3, 5, 2, 3, 23, 45, 43, 3, 2, 10],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    }
+                  }
+                });
+              }
+            }
+          })
+        })
+      </script>
+    @endpush
 
 </div>

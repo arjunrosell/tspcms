@@ -12,7 +12,7 @@
 >
     <div @class([
             'd-md-flex' => $component->isBootstrap(),
-            'w-full mb-4 md:mb-0 md:w-2/4 md:flex space-y-4 md:space-y-0 md:space-x-2' => $component->isTailwind(),
+            'w-full mb-4 md:mb-0 md:w-2/4 md:flex space-y-4 md:space-y-0' => $component->isTailwind(),
         ])
     >
         <div x-cloak x-show="!currentlyReorderingStatus">

@@ -1,8 +1,9 @@
 import './bootstrap';
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import Clipboard from '@ryangjchandler/alpine-clipboard'
+import Chart from 'chart.js/auto'
+window.Chart = Chart;
 document.addEventListener('DOMContentLoaded', () => {
-    // Light switcher
     const lightSwitches = document.querySelectorAll('.light-switch');
     if (lightSwitches.length > 0) {
         lightSwitches.forEach((lightSwitch, i) => {
