@@ -65,6 +65,16 @@
                 </svg>
                 Baptism
             </a>
+            <a href="{{route('analytics.add-wedding')}}"
+                class="inline-flex items-center gap-2 px-3 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
+                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd"
+                        d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4.2a1 1 0 1 0-2 0V11H7.8a1 1 0 1 0 0 2H11v3.2a1 1 0 1 0 2 0V13h3.2a1 1 0 1 0 0-2H13V7.8Z"
+                        clip-rule="evenodd" />
+                </svg>
+                Wedding
+            </a>
         </div>
 
         <livewire:table.event-table />

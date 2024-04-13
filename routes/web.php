@@ -16,6 +16,8 @@ use App\Livewire\SystemReferences\Events\Index as SysEventsIndex;
 use App\Livewire\GeneralReport\Index as GeneralReportIndex;
 use App\Livewire\Analytics\Events\FuneralMass\Add as FuneralMassAdd;
 use App\Livewire\Analytics\Events\Baptism\Add as BaptismAdd;
+use App\Livewire\Analytics\Events\Wedding\Add as WeddingAdd;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,7 @@ Route::prefix('analytics')->name('analytics.')->group(function () {
     Route::get('/events', EventsIndex::class)->name('events');
     Route::get('/add-funeral-mass', FuneralMassAdd::class)->name('add-funeral-mass');
     Route::get('/add-baptism', BaptismAdd::class)->name('add-baptism');
+    Route::get('/add-wedding', WeddingAdd::class)->name('add-wedding');
 });
 
 Route::prefix('appointments')->name('appointments.')->group(function () {
