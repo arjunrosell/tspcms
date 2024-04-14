@@ -2,7 +2,7 @@
     <div >
         <div class="mb-11">
             <div class=" mb-4">
-                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Analytics | Events</h2>
+                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Dashboard</h2>
             </div>
             <nav class="flex mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -89,21 +89,70 @@
               </div>
             </div>
         </div>
-        <div class=" grid grid-cols-3 gap-2">
+        <div class=" grid grid-cols-3 gap-2 mb-7">
           <div class=" col-span-2">
-            <h2 class="text-lg font-medium mb-2 tracking-wide text-gray-800 dark:text-gray-100 ">Appointments</h2>
-            <div class=" bg-white shadow-md p-3 rounded-md shadow-gray-300">
-              <div class=" mb-3 w-48">
-                <x-native-select
-                    placeholder="Choose Appointment"
-                    :options="['Kasal', 'Binyag']"
-                    wire:model="appointment"
-                />
-              </div>
-              <canvas x-ref='appointment' id="myChart"></canvas>
+            <h2 class="text-lg font-medium mb-2 tracking-wide text-gray-800 dark:text-gray-100 ">Appointments Rate</h2>
+            <div class=" bg-white p-4 border">
+              <canvas x-ref='appointment' class=""></canvas>
             </div>
           </div>
-          <div></div>
+          <div>
+            <h2 class="text-lg font-medium mb-2 tracking-wide text-gray-800 dark:text-gray-100 ">Upcoming Appointment (This month)</h2>
+            <div class=" bg-white border">
+              <div>
+                <ul class=" divide-y-[1px] divide-gray-300">
+                  <li class=" flex items-center justify-between px-3 py-2 hover:border-l-2 border-indigo-500">
+                    <div>
+                      <p class=" font-semibold">John Doe</p>
+                      <p class=" text-xs font-light">April 15, 2024 - 8:15AM</p>
+                    </div>
+                    <div>
+                      <p class=" bg-green-400 py-1 px-2 rounded-md text-sm text-black">Baptism</p>
+                    </div>
+                  </li>
+                  <li class=" flex items-center justify-between px-3 py-2 hover:border-l-2 border-indigo-500">
+                    <div>
+                      <p class=" font-semibold">John Doe</p>
+                      <p class=" text-xs font-light">April 15, 2024 - 8:15AM</p>
+                    </div>
+                    <div>
+                      <p class=" bg-blue-400 py-1 px-2 rounded-md text-sm text-black">Wedding</p>
+                    </div>
+                  </li>
+                  <li class=" flex items-center justify-between px-3 py-2 hover:border-l-2 border-indigo-500">
+                    <div>
+                      <p class=" font-semibold">John Doe</p>
+                      <p class=" text-xs font-light">April 15, 2024 - 8:15AM</p>
+                    </div>
+                    <div>
+                      <p class=" bg-black py-1 px-2 rounded-md text-sm text-white">Funeral</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="">
+            <h2 class="text-lg font-medium mb-2 tracking-wide text-gray-800 dark:text-gray-100 ">Sales Summary (Overview of the month)</h2>
+            <div class=" bg-white pl-7 p-4 border grid grid-cols-[30%_70%]">
+              <div class="flex flex-col gap-10 pt-6">
+                <div>
+                  <h4 class=" text-4xl font-bold tracking-wide text-green-500">&#x20B1;20,000</h4>
+                  <p class=" text-sm tracking-wide">Overall Earnings</p>
+                </div>
+                <div>
+                  <h4 class=" text-xl font-bold tracking-wide ">&#x20B1;1,000</h4>
+                  <p class="text-sm tracking-wide">Current Month Earnings</p>
+                </div>
+              </div>
+              <div class=" border p-2">
+                <canvas x-ref='sales' class=""></canvas>
+              </div>
+            </div>
+          </div>
         </div>
 
     </div>
@@ -113,16 +162,77 @@
         document.addEventListener('livewire:init', () =>{
           Alpine.data('initData', function(){
             return {
+              months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
               init(){
                 let appointment = this.$refs.appointment;
-                let  months = ['Jan', 'Feb','Mar','Apr','May','Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                let sales = this.$refs.sales;
+                
+                // appoinment
                 new Chart(appointment, {
+                  type: 'line',
+                  data: {
+                    labels: this.months,
+                    datasets: [
+                      {
+                        label: 'Kasal',
+                        data: [1,4,5,6,7],
+                        borderColor: '#50623A',
+                        backgroundColor: '#789461',
+                      },
+                      {
+                        label: 'Binyag',
+                        data: [2,43,43,2,23],
+                        borderColor: '#FFB534',
+                        backgroundColor: '#DBCC95',
+                      },
+                      {
+                        label: 'Funeral',
+                        data: [2,10,2,5,23],
+                        borderColor: '#29ADB2',
+                        backgroundColor: '#61A3BA',
+                      }
+                    ]
+                  },
+                  options: {
+                    responsive: true,
+                    plugins: {
+                      legend: {
+                        position: 'top',
+                      },
+                      title: {
+                        display: false,
+                        text: 'Chart.js Line Chart'
+                      }
+                    }
+                  },
+                });
+
+                // sales summary
+                new Chart(sales, {
                   type: 'bar',
                   data: {
-                    labels: months,
+                    labels: this.months,
                     datasets: [{
-                      label: '',
-                      data: [12, 19, 3, 5, 2, 3, 23, 45, 43, 3, 2, 10],
+                      label: 'My First Dataset',
+                      data: [65, 59, 80, 81, 56, 55, 40],
+                      backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)'
+                      ],
+                      borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                      ],
                       borderWidth: 1
                     }]
                   },
@@ -132,7 +242,7 @@
                         beginAtZero: true
                       }
                     }
-                  }
+                  },
                 });
               }
             }
