@@ -26,7 +26,7 @@
     
     <x-notifications z-index="z-[100]" position="bottom-center" />
     <!-- Page wrapper -->
-    <div class="flex h-[100vh] overflow-hidden">
+    <div class="flex h-[100vh] overflow-hidden animate__animated animate__fadeIn">
         
         <x-app.sidebar />
 

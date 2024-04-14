@@ -1,6 +1,7 @@
 import './bootstrap';
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import Clipboard from '@ryangjchandler/alpine-clipboard'
+import 'animate.css';
 import Chart from 'chart.js/auto'
 window.Chart = Chart;
 document.addEventListener('DOMContentLoaded', () => {
