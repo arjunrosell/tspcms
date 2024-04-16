@@ -178,7 +178,7 @@ class Index extends Component
         try {
             $this->objId = $pkey;
             $this->dialog()->confirm([
-                'title'       => 'Are you Sure you want to delete this?',
+                'title'       => 'Are you Sure you want to archieve this?',
                 'description' => 'You cant revert this',
                 'acceptLabel' => 'Yes',
                 'method'      => 'delete'
