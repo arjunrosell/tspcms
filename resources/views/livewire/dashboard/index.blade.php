@@ -181,7 +181,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <p class="px-2 py-1 text-sm text-black bg-green-400 rounded-md ">Weddings</p>
+                                        <p class="px-2 py-1 text-sm text-black bg-green-400 rounded-md ">Funeral</p>
                                     </div>
                                 </li>
 
