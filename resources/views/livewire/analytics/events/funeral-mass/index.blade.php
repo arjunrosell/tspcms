@@ -1,8 +1,8 @@
 <div>
     <div x-data="initData">
-        <div class="mb-11">
+        <div class="mb-6">
             <div class="mb-4 ">
-                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Analytics | Events</h2>
+                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Events | Funeral Mass</h2>
             </div>
             <nav class="flex mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -43,6 +43,8 @@
                 </ol>
             </nav>
         </div>
+
+        <livewire:components.tabs.events-tab />
 
         <div class="flex items-center gap-2 mb-5 ">
             <a href="{{ route('analytics-events-funeral-mass.add-funeral-mass') }}"

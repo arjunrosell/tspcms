@@ -49,7 +49,7 @@ return [
             ],
             [
                 'title' => 'Events',
-                'route' => 'analytics.events',
+                'route' => 'analytics-events-funeral-mass.index',
             ],
         ]
     ],
