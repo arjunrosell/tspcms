@@ -14,10 +14,9 @@ class Income extends Model
     protected $fillable = [
         'income_references_id',
         'amount',
-        'remarks',
         'address',
+        'remarks',
         'received_from',
-        'received_by',
     ];
 
     public function income_references()

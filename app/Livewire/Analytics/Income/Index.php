@@ -29,16 +29,20 @@ class Index extends Component
         'editModal' => 'fetch'
     ];
 
+    protected $rules = [
+        'income_references_id' => 'required',
+        'amount' => 'required',
+    ];
+
     public function create()
     {
         try {
+            $this->validate();
             $income = Income::create([
                 'income_references_id' => $this->income_references_id,
                 'amount' => $this->amount,
                 'remarks' => $this->remarks,
-                'address' => $this->address,
                 'received_from' => $this->received_from,
-                'received_by' => $this->received_by
             ]);
 
             if ($income) {
@@ -58,7 +62,7 @@ class Index extends Component
         } catch (\Throwable $th) {
             $this->notification()->error(
                 $title = 'Error',
-                $description = 'Something went wrong'
+                $description = 'Something went wrong ' . $th->getMessage()
             );
         }
     }
@@ -70,9 +74,7 @@ class Index extends Component
             $income->income_references_id = $this->income_references_id;
             $income->amount = $this->amount;
             $income->remarks = $this->remarks;
-            $income->address = $this->address;
             $income->received_from = $this->received_from;
-            $income->received_by = $this->received_by;
             if ($income->save()) {
                 $this->notification()->success(
                     $title = 'Success',
@@ -148,8 +150,6 @@ class Index extends Component
             $this->income_references_id = $income->income_references_id;
             $this->amount = $income->amount;
             $this->remarks = $income->remarks;
-            $this->address = $income->address;
-            $this->received_from = $income->received_from;
             $this->received_by = $income->received_by;
             $this->dispatch('open-modal', ['name' => $name]);
         } catch (\Throwable $th) {

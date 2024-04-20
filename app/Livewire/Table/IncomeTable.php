@@ -32,7 +32,7 @@ class IncomeTable extends DataTableComponent
                     return Blade::render("<livewire:components.action.edit obj_id='$row->id' />");
                 })
                 ->html(),
-            Column::make("Expense Category", "income_references.name")
+            Column::make("Donation Category", "income_references.name")
                 ->searchable()
                 ->sortable(),
             Column::make("Amount", "amount")
@@ -45,12 +45,6 @@ class IncomeTable extends DataTableComponent
                 ->searchable()
                 ->sortable(),
             Column::make("Received From", "received_from")
-                ->searchable()
-                ->sortable(),
-            Column::make("Received By", "user.user_detail.fname")
-                ->format(function ($value, $row, Column $column) {
-                    return $row->user ? $row->user->user_detail->fname . " " . $row->user->user_detail->lname : "Not Available";
-                })
                 ->searchable()
                 ->sortable(),
             Column::make("Created at", "created_at")
