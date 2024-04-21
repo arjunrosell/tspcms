@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('event_reference_id');
-            $table->json('event_description')->nullable();
+            $table->longText('event_description')->nullable();
+            $table->date('date');
+            $table->string('location')->default('Concepcion');
             $table->enum('status', ['Active', 'Disabled'])->default('Active');
             $table->timestamps();
             $table->softDeletes();

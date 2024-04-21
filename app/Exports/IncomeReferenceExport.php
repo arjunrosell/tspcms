@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\IncomeReference;
+use App\Models\DonationReference;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -19,9 +19,9 @@ class IncomeReferenceExport implements FromCollection, WithHeadings, WithMapping
     public function collection()
     {
         if (count($this->objData) != 0) {
-            return IncomeReference::whereIn('id', $this->objData)->get();
+            return DonationReference::whereIn('id', $this->objData)->get();
         } else {
-            return IncomeReference::get();
+            return DonationReference::get();
         }
     }
 

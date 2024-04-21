@@ -6,7 +6,7 @@ use App\Models\Baptism;
 use App\Models\Event;
 use App\Models\Expense;
 use App\Models\FuneralMass;
-use App\Models\Income;
+use App\Models\Donation;
 use App\Models\User;
 use App\Models\Wedding;
 use Livewire\Component;
@@ -20,7 +20,7 @@ class Index extends Component
     {
         $totalActiveUsers = User::where('status', 'Active')->paginate(1000);
         $totalExpenses = Expense::sum('amount');
-        $totalDonations = Income::sum('amount');
+        $totalDonations = Donation::sum('amount');
         $totalEvents = FuneralMass::all()->count() + Baptism::all()->count() + Wedding::all()->count();
         $this->upcomingWedddings  = Wedding::limit(5)->get();
         $this->upcomingBapstisms  = Baptism::limit(5)->get();

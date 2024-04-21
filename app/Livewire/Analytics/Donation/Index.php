@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Livewire\Analytics\Events;
+namespace App\Livewire\Analytics\Donation;
 
-use App\Models\Event;
-use App\Models\EventReference;
+use App\Models\Donation;
+use App\Models\DonationReference;
+use App\Models\User;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
@@ -11,32 +12,39 @@ class Index extends Component
 {
     use Actions;
 
+    public $donation_references_id;
     public $name;
-    public $event_reference_id;
-    public $event_description;
+    public $category;
+    public $amount;
     public $date;
-    public $location;
     public $status;
     public $objId;
-    public $event_references;
+    public $donation_references;
+    public $users;
     public $show = true;
 
     protected $listeners = [
         'editModal' => 'fetch'
     ];
 
+    protected $rules = [
+        'donation_references_id' => 'required',
+        'amount' => 'required',
+    ];
+
     public function create()
     {
         try {
-            $expense = Event::create([
-                'name' => $this->name,
-                'event_reference_id' => $this->event_reference_id,
-                'event_description' => $this->event_description,
+            $this->validate();
+            $donation = Donation::create([
+                'donation_references_id' => $this->donation_references_id,
+                'amount' => $this->amount,
                 'date' => $this->date,
-                'location' => $this->location,
+                'name' => $this->name,
+                'category' => $this->category,
             ]);
 
-            if ($expense) {
+            if ($donation) {
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -47,7 +55,7 @@ class Index extends Component
             } else {
                 $this->notification()->error(
                     $title = 'Error',
-                    $description = 'Failed to update expense status'
+                    $description = 'Failed to update donation status'
                 );
             }
         } catch (\Throwable $th) {
@@ -61,15 +69,15 @@ class Index extends Component
     public function update()
     {
         try {
-            $expense = Event::find($this->objId);
-            $expense->update([
-                'name' => $this->name,
-                'event_reference_id' => $this->event_reference_id,
-                'event_description' => $this->event_description,
+            $donation = Donation::find($this->objId);
+            $donation->update([
+                'donation_references_id' => $this->donation_references_id,
+                'amount' => $this->amount,
                 'date' => $this->date,
-                'location' => $this->location,
+                'name' => $this->name,
+                'category' => $this->category,
             ]);
-            if ($expense->save()) {
+            if ($donation->save()) {
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -80,7 +88,7 @@ class Index extends Component
             } else {
                 $this->notification()->error(
                     $title = 'Error',
-                    $description = 'Failed to update expense status'
+                    $description = 'Failed to update donation status'
                 );
             }
         } catch (\Throwable $th) {
@@ -112,8 +120,8 @@ class Index extends Component
     public function delete()
     {
         try {
-            $expense = Event::find($this->objId);
-            if ($expense->delete()) {
+            $donation = Donation::find($this->objId);
+            if ($donation->delete()) {
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -124,7 +132,7 @@ class Index extends Component
             } else {
                 $this->notification()->error(
                     $title = 'Error',
-                    $description = 'Failed to update expense status'
+                    $description = 'Failed to update donation status'
                 );
             }
         } catch (\Throwable $th) {
@@ -140,12 +148,12 @@ class Index extends Component
         try {
             $this->objId = $pkey;
             $this->dispatch('edit-modal');
-            $expense = Event::find($this->objId);
-            $this->name = $expense->name;
-            $this->event_reference_id = $expense->event_reference_id;
-            $this->event_description = $expense->event_description;
-            $this->date = $expense->date;
-            $this->location = $expense->location;
+            $donation = Donation::find($this->objId);
+            $this->donation_references_id = $donation->donation_references_id;
+            $this->amount = $donation->amount;
+            $this->date = $donation->date;
+            $this->name = $donation->name;
+            $this->category = $donation->category;
             $this->dispatch('open-modal', ['name' => $name]);
         } catch (\Throwable $th) {
             $this->notification()->error(
@@ -154,10 +162,10 @@ class Index extends Component
             );
         }
     }
-
     public function render()
     {
-        $this->event_references = EventReference::where('status', 'Active')->whereNotIn('id', ['5', '3'])->get();
-        return view('livewire.analytics.events.index');
+        $this->donation_references = DonationReference::where('status', 'Active')->get();
+        $this->users = User::with('user_detail')->where('status', 'Active')->get();
+        return view('livewire.analytics.donation.index');
     }
 }

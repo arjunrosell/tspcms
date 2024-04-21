@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incomes', function (Blueprint $table) {
+        Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('income_references_id');
+            $table->foreignId('donation_references_id');
+            $table->string('name')->nullable();
+            $table->string('category')->nullable();
             $table->double('amount');
-            $table->string('remarks')->nullable();
-            $table->string('address')->default('Concepcion');
-            $table->string('received_from')->nullable();
+            $table->date('date');
             $table->enum('status', ['Active', 'Disabled'])->default('Active');
             $table->timestamps();
             $table->softDeletes();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('incomes');
+        Schema::dropIfExists('donations');
     }
 };

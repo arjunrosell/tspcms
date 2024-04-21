@@ -16,8 +16,8 @@ class DonationReferenceSeeder extends Seeder
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
-        DB::table('income_references')->truncate();
-        DB::table('income_references')->insert([
+        DB::table('donation_references')->truncate();
+        DB::table('donation_references')->insert([
             [
                 'name' => 'Mass Collection',
                 'slug' => Str::slug('Mass Collection'),

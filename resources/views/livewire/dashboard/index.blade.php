@@ -255,7 +255,7 @@
             </div>
         </div>
 
-        <div>
+        {{-- <div>
             <div class="">
                 <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Sales Summary
                     (Overview of the month)</h2>
@@ -275,7 +275,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 

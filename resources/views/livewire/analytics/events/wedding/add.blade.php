@@ -58,18 +58,11 @@
                     <div>
                         <label class="block mb-1 text-sm font-bold text-white ">Type of Wedding</label>
                         <div class="flex items-center gap-4 ">
-                            <div>
-                                <label for="nuptial" class="text-sm text-white cursor-pointer ">Nutial(With
-                                    mass)</label>
-                                <input type="checkbox" id="nuptial" wire:model='type_wedding'
-                                    class="text-indigo-500 cursor-pointer form-input">
-                            </div>
-                            <div>
-                                <label for="simple_wedding" class="text-sm text-white cursor-pointer ">Simple
-                                    Wedding(Without mass)</label>
-                                <input type="checkbox" id="simple_wedding" wire:model='type_wedding'
-                                    class="text-indigo-500 cursor-pointer form-input">
-                            </div>
+                            <select wire:model='type_wedding'
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
+                                <option value="Nutial(With mass)">Nutial(With mass)</option>
+                                <option value="Simple Wedding(Without mass)">Simple Wedding(Without mass)</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -129,7 +122,7 @@
                                 <input type="text" class=" form-input" id="groom_date_bap"
                                     wire:model='groom_date_bap'>
                             </div>
-                            <div class="grid grid-cols-3 gap-2 ">
+                            {{-- <div class="grid grid-cols-3 gap-2 ">
                                 <div class="flex flex-col gap-1">
                                     <label for="groom_book_no_1" class="text-sm text-white ">Book #</label>
                                     <input type="number" class=" form-input" id="groom_book_no_1"
@@ -145,7 +138,7 @@
                                     <input type="number" class=" form-input" id="groom_page_no_1"
                                         wire:model='groom_page_no_1'>
                                 </div>
-                            </div>
+                            </div> --}}
                         </fieldset>
                         <fieldset class="p-3 border border-gray-400 rounded-md ">
                             <div class="flex flex-col gap-1 mb-5 ">
@@ -164,7 +157,7 @@
                                 <input type="text" class=" form-input" id="groom_date_confirm"
                                     wire:model='groom_date_confirm'>
                             </div>
-                            <div class="grid grid-cols-3 gap-2 ">
+                            {{-- <div class="grid grid-cols-3 gap-2 ">
                                 <div class="flex flex-col gap-1">
                                     <label for="groom_book_no_2" class="text-sm text-white ">Book #</label>
                                     <input type="number" class=" form-input" id="groom_book_no_2"
@@ -180,7 +173,7 @@
                                     <input type="number" class=" form-input" id="groom_page_no_2"
                                         wire:model='groom_page_no_2'>
                                 </div>
-                            </div>
+                            </div> --}}
                         </fieldset>
                     </div>
                 </div>
@@ -232,7 +225,7 @@
                                 <input type="text" class=" form-input" id="bride_date_bap"
                                     wire:model='bride_date_bap'>
                             </div>
-                            <div class="grid grid-cols-3 gap-2 ">
+                            {{-- <div class="grid grid-cols-3 gap-2 ">
                                 <div class="flex flex-col gap-1">
                                     <label for="bride_book_no_1" class="text-sm text-white ">Book #</label>
                                     <input type="number" class=" form-input" id="bride_book_no_1"
@@ -248,7 +241,7 @@
                                     <input type="number" class=" form-input" id="bride_page_no_1"
                                         wire:model='bride_page_no_1'>
                                 </div>
-                            </div>
+                            </div> --}}
                         </fieldset>
                         <fieldset class="p-3 border border-gray-400 rounded-md ">
                             <div class="flex flex-col gap-1 mb-5 ">
@@ -267,7 +260,7 @@
                                 <input type="text" class=" form-input" id="bride_date_confirm"
                                     wire:model='bride_date_confirm'>
                             </div>
-                            <div class="grid grid-cols-3 gap-2 ">
+                            {{-- <div class="grid grid-cols-3 gap-2 ">
                                 <div class="flex flex-col gap-1">
                                     <label for="bride_book_no_2" class="text-sm text-white ">Book #</label>
                                     <input type="number" class=" form-input" id="bride_book_no_2"
@@ -283,7 +276,7 @@
                                     <input type="number" class=" form-input" id="bride_page_no_2"
                                         wire:model='bride_page_no_2'>
                                 </div>
-                            </div>
+                            </div> --}}
                         </fieldset>
                     </div>
                 </div>

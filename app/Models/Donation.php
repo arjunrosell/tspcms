@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Event extends Model
+class Donation extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
+        'donation_references_id',
+        'category',
         'name',
-        'event_reference_id',
-        'event_description',
+        'amount',
         'date',
-        'location',
         'status',
     ];
 
-    public function event_reference()
+    public function donation_reference()
     {
-        return $this->belongsTo(EventReference::class, 'event_reference_id', 'id');
+        return $this->belongsTo(DonationReference::class, 'donation_references_id', 'id');
     }
 }

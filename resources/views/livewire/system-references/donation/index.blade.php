@@ -8,7 +8,7 @@
             <nav class="flex mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
-                        <a href="{{ route('system-references.income') }}"
+                        <a href="{{ route('system-references.donations') }}"
                             class="inline-flex items-center text-xs font-normal text-gray-600 hover:text-primary-red dark:text-gray-400 dark:hover:text-white">
                             <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor" viewBox="0 0 20 20">
@@ -25,7 +25,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="{{ route('system-references.income') }}"
+                            <a href="{{ route('system-references.donations') }}"
                                 class="text-xs font-normal text-gray-600 ms-1 hover:text-primary-red md:ms-2 dark:text-gray-400 dark:hover:text-white">
                                 Donations
                             </a>
@@ -58,9 +58,9 @@
             </button>
         </div>
 
-        <livewire:table.income-ref-table />
+        <livewire:table.donation-reference-table />
 
-        @include('livewire.system-references.incomes.modal.modal')
+        @include('livewire.system-references.donation.modal.modal')
 
         @push('script')
             <script>

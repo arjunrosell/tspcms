@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Analytics\Income;
 
-use App\Models\Income;
-use App\Models\IncomeReference;
+use App\Models\Donation;
+use App\Models\DonationReference;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class Index extends Component
 {
     use Actions;
-    public $income_references_id;
+    public $donation_references_id;
     public $amount;
     public $remarks;
     public $address;
@@ -21,7 +21,7 @@ class Index extends Component
     public $received_by;
     public $status;
     public $objId;
-    public $income_references;
+    public $donation_references;
     public $users;
     public $show = true;
 
@@ -30,7 +30,7 @@ class Index extends Component
     ];
 
     protected $rules = [
-        'income_references_id' => 'required',
+        'donation_references_id' => 'required',
         'amount' => 'required',
     ];
 
@@ -38,8 +38,8 @@ class Index extends Component
     {
         try {
             $this->validate();
-            $income = Income::create([
-                'income_references_id' => $this->income_references_id,
+            $income = Donation::create([
+                'donation_references_id' => $this->donation_references_id,
                 'amount' => $this->amount,
                 'remarks' => $this->remarks,
                 'received_from' => $this->received_from,
@@ -70,8 +70,8 @@ class Index extends Component
     public function update()
     {
         try {
-            $income = Income::find($this->objId);
-            $income->income_references_id = $this->income_references_id;
+            $income = Donation::find($this->objId);
+            $income->donation_references_id = $this->donation_references_id;
             $income->amount = $this->amount;
             $income->remarks = $this->remarks;
             $income->received_from = $this->received_from;
@@ -118,7 +118,7 @@ class Index extends Component
     public function delete()
     {
         try {
-            $income = Income::find($this->objId);
+            $income = Donation::find($this->objId);
             if ($income->delete()) {
                 $this->notification()->success(
                     $title = 'Success',
@@ -146,8 +146,8 @@ class Index extends Component
         try {
             $this->objId = $pkey;
             $this->dispatch('edit-modal');
-            $income = Income::find($this->objId);
-            $this->income_references_id = $income->income_references_id;
+            $income = Donation::find($this->objId);
+            $this->donation_references_id = $income->donation_references_id;
             $this->amount = $income->amount;
             $this->remarks = $income->remarks;
             $this->received_by = $income->received_by;
@@ -161,7 +161,7 @@ class Index extends Component
     }
     public function render()
     {
-        $this->income_references = IncomeReference::where('status', 'Active')->get();
+        $this->donation_references = DonationReference::where('status', 'Active')->get();
         $this->users = User::with('user_detail')->where('status', 'Active')->get();
         return view('livewire.analytics.income.index');
     }

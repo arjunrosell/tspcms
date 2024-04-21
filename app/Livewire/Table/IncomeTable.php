@@ -4,7 +4,7 @@ namespace App\Livewire\Table;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Income;
+use App\Models\Donation;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Blade;
@@ -12,7 +12,7 @@ use NumberFormatter;
 
 class IncomeTable extends DataTableComponent
 {
-    protected $model = Income::class;
+    protected $model = Donation::class;
 
     public function configure(): void
     {
@@ -21,7 +21,7 @@ class IncomeTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Income::query()->with(['user'])->select('incomes.*');
+        return Donation::query()->with(['user'])->select('incomes.*');
     }
 
     public function columns(): array
@@ -32,7 +32,7 @@ class IncomeTable extends DataTableComponent
                     return Blade::render("<livewire:components.action.edit obj_id='$row->id' />");
                 })
                 ->html(),
-            Column::make("Donation Category", "income_references.name")
+            Column::make("Donation Category", "donation_references.name")
                 ->searchable()
                 ->sortable(),
             Column::make("Amount", "amount")

@@ -19,8 +19,11 @@ class WeddingTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
-                ->sortable(),
+            Column::make('Actions', 'id')
+                ->format(function ($value, $row, Column $column) {
+                    return Blade::render("<x-button red sm icon='pencil' wire:click='editData($row->id)' />");
+                })
+                ->html(),
             Column::make("Date wedding", "date_wedding")
                 ->sortable(),
             Column::make("Time wedding", "time_wedding")
@@ -49,23 +52,11 @@ class WeddingTable extends DataTableComponent
                 ->sortable(),
             Column::make("Groom date bap", "groom_date_bap")
                 ->sortable(),
-            Column::make("Groom book no 1", "groom_book_no_1")
-                ->sortable(),
-            Column::make("Groom line no 1", "groom_line_no_1")
-                ->sortable(),
-            Column::make("Groom page no 1", "groom_page_no_1")
-                ->sortable(),
             Column::make("Groom place confirm", "groom_place_confirm")
                 ->sortable(),
             Column::make("Groom parish confirm", "groom_parish_confirm")
                 ->sortable(),
             Column::make("Groom date confirm", "groom_date_confirm")
-                ->sortable(),
-            Column::make("Groom book no 2", "groom_book_no_2")
-                ->sortable(),
-            Column::make("Groom line no 2", "groom_line_no_2")
-                ->sortable(),
-            Column::make("Groom page no 2", "groom_page_no_2")
                 ->sortable(),
             Column::make("Bride name", "bride_name")
                 ->sortable(),
@@ -87,31 +78,14 @@ class WeddingTable extends DataTableComponent
                 ->sortable(),
             Column::make("Bride date bap", "bride_date_bap")
                 ->sortable(),
-            Column::make("Bride book no 1", "bride_book_no_1")
-                ->sortable(),
-            Column::make("Bride line no 1", "bride_line_no_1")
-                ->sortable(),
-            Column::make("Bride page no 1", "bride_page_no_1")
-                ->sortable(),
             Column::make("Bride place confirm", "bride_place_confirm")
                 ->sortable(),
             Column::make("Bride parish confirm", "bride_parish_confirm")
                 ->sortable(),
             Column::make("Bride date confirm", "bride_date_confirm")
                 ->sortable(),
-            Column::make("Bride book no 2", "bride_book_no_2")
-                ->sortable(),
-            Column::make("Bride line no 2", "bride_line_no_2")
-                ->sortable(),
-            Column::make("Bride page no 2", "bride_page_no_2")
-                ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),
-            Column::make('Actions', 'id')
-                ->format(function ($value, $row, Column $column) {
-                    return Blade::render("<x-button red sm icon='pencil' wire:click='editData($row->id)' />");
-                })
-                ->html(),
         ];
     }
 

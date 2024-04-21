@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\SystemReferences\Incomes;
+namespace App\Livewire\SystemReferences\Donation;
 
-use App\Models\IncomeReference;
+use App\Models\DonationReference;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use WireUi\Traits\Actions;
@@ -23,7 +23,7 @@ class Index extends Component
     public function create()
     {
         try {
-            $position = IncomeReference::create([
+            $position = DonationReference::create([
                 'slug' => Str::slug($this->name),
                 'name' => $this->name,
             ]);
@@ -53,7 +53,7 @@ class Index extends Component
     public function update()
     {
         try {
-            $position = IncomeReference::find($this->objId);
+            $position = DonationReference::find($this->objId);
             $position->name = $this->name;
             $position->slug = Str::slug($this->name);
             if ($position->save()) {
@@ -99,7 +99,7 @@ class Index extends Component
     public function delete()
     {
         try {
-            $position = IncomeReference::find($this->objId);
+            $position = DonationReference::find($this->objId);
             if ($position->delete()) {
                 $this->notification()->success(
                     $title = 'Success',
@@ -127,7 +127,7 @@ class Index extends Component
         try {
             $this->objId = $pkey;
             $this->dispatch('edit-modal');
-            $position = IncomeReference::find($this->objId);
+            $position = DonationReference::find($this->objId);
             $this->name = $position->name;
             $this->dispatch('open-modal', ['name' => $name]);
         } catch (\Throwable $th) {
@@ -139,6 +139,6 @@ class Index extends Component
     }
     public function render()
     {
-        return view('livewire.system-references.incomes.index');
+        return view('livewire.system-references.donation.index');
     }
 }

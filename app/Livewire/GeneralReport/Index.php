@@ -15,7 +15,7 @@ class Index extends Component
     public function mount()
     {
         $this->columns[] = ['title' => 'Donation General Reports', 'width' => 300, 'hozAlign' => 'right', 'columns' => [
-            ['title' => 'Type of Income', 'hozAlign' => 'left', 'width' => 150, 'field' => 'receiverName', 'headerSort' => false, 'editor' => "input"],
+            ['title' => 'Type of Donation', 'hozAlign' => 'left', 'width' => 150, 'field' => 'receiverName', 'headerSort' => false, 'editor' => "input"],
             ['title' => 'Amount', 'hozAlign' => 'right', 'width' => 150, 'field' => 'phoneNumber', 'headerSort' => false, 'editor' => "input"]
         ]];
     }
