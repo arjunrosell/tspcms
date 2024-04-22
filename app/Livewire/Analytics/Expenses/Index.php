@@ -17,6 +17,7 @@ class Index extends Component
     public $remarks;
     public $status;
     public $objId;
+    public $date;
     public $expense_references;
     public $show = true;
 
@@ -30,7 +31,8 @@ class Index extends Component
             $expense = Expense::create([
                 'expense_references_id' => $this->expense_reference_id,
                 'amount' => $this->amount,
-                'remarks' => $this->remarks
+                'remarks' => $this->remarks,
+                'date' => $this->date,
             ]);
 
             if ($expense) {
@@ -62,6 +64,7 @@ class Index extends Component
             $expense->expense_references_id = $this->expense_reference_id;
             $expense->amount = $this->amount;
             $expense->remarks = $this->remarks;
+            $expense->date = $this->date;
             if ($expense->save()) {
                 $this->notification()->success(
                     $title = 'Success',
@@ -137,6 +140,7 @@ class Index extends Component
             $this->expense_reference_id = $expense->expense_references_id;
             $this->amount = $expense->amount;
             $this->remarks = $expense->remarks;
+            $this->date = $expense->date;
             $this->dispatch('open-modal', ['name' => $name]);
         } catch (\Throwable $th) {
             $this->notification()->error(

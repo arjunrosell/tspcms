@@ -14,20 +14,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- Scripts -->
-    <wireui:scripts />
     @livewireStyles
+    <wireui:scripts />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
     <!-- Styles -->
 </head>
 
 <body class="antialiased font-inter bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400"
     :class="{ 'sidebar-expanded': sidebarExpanded }" x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }" x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))">
-    
+
     <x-notifications z-index="z-[100]" position="bottom-center" />
     <!-- Page wrapper -->
     <div class="flex h-[100vh] overflow-hidden animate__animated animate__fadeIn">
-        
+
         <x-app.sidebar />
 
         <!-- Content area -->
@@ -45,7 +45,7 @@
 
     </div>
 
-    @livewireScriptConfig 
+    @livewireScriptConfig
     @livewireScripts
 
     @stack('script')
@@ -64,7 +64,7 @@
             document.querySelector('html').classList.add('dark');
             document.querySelector('html').style.colorScheme = 'dark';
         }
-        </script>
+    </script>
 </body>
 
 </html>

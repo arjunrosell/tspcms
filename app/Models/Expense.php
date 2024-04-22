@@ -15,6 +15,7 @@ class Expense extends Model
         'expense_references_id',
         'amount',
         'remarks',
+        'date',
     ];
 
     public function expense_references()

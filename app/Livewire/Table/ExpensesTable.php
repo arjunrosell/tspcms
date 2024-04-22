@@ -38,6 +38,11 @@ class ExpensesTable extends DataTableComponent
             Column::make("Remarks", "remarks")
                 ->searchable()
                 ->sortable(),
+            Column::make("Date", "date")
+                ->format(function ($value, $row, Column $column) {
+                    return Carbon::parse($row->date)->format('M d,Y');
+                })
+                ->sortable(),
             Column::make("Created at", "created_at")
                 ->format(function ($value, $row, Column $column) {
                     return Carbon::parse($row->created_at)->format('M d,Y');

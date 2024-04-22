@@ -21,26 +21,34 @@
                 <div class="p-4 space-y-4 md:p-5">
                     <div>
                         <label for="position"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expense Category</label>
-                            <select wire:model='expense_reference_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
-                                @forelse ($expense_references as $expense_reference)
-                                    <option value="{{$expense_reference->id}}">{{$expense_reference->name}}</option>
-                                @empty
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expense
+                            Category</label>
+                        <select wire:model='expense_reference_id'
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
+                            @forelse ($expense_references as $expense_reference)
+                                <option value="{{ $expense_reference->id }}">{{ $expense_reference->name }}</option>
+                            @empty
                                 <option>No Available Data</option>
-                                @endforelse
-                            </select>
+                            @endforelse
+                        </select>
                     </div>
                     <div>
                         <label for="position"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
                         <input type="number" wire:model='amount'
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"
-                            />
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                    </div>
+                    <div>
+                        <label for="position"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                        <input type="date" wire:model='date'
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
                     </div>
                     <div>
                         <label for="position"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
-                        <textarea wire:model='remarks'cols="30" rows="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"></textarea>
+                        <textarea wire:model='remarks'cols="30" rows="10"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"></textarea>
                     </div>
                 </div>
             </div>
@@ -87,26 +95,34 @@
                 <div class="p-4 space-y-4 md:p-5">
                     <div>
                         <label for="position"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expense Category</label>
-                            <select wire:model='expense_reference_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
-                                @forelse ($expense_references as $expense_reference)
-                                    <option value="{{$expense_reference->id}}">{{$expense_reference->name}}</option>
-                                @empty
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expense
+                            Category</label>
+                        <select wire:model='expense_reference_id'
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
+                            @forelse ($expense_references as $expense_reference)
+                                <option value="{{ $expense_reference->id }}">{{ $expense_reference->name }}</option>
+                            @empty
                                 <option>No Available Data</option>
-                                @endforelse
-                            </select>
+                            @endforelse
+                        </select>
                     </div>
                     <div>
                         <label for="position"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
                         <input type="number" wire:model='amount'
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"
-                            />
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                    </div>
+                    <div>
+                        <label for="position"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                        <input type="date" wire:model='date'
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
                     </div>
                     <div>
                         <label for="position"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
-                        <textarea wire:model='remarks'cols="30" rows="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"></textarea>
+                        <textarea wire:model='remarks'cols="30" rows="10"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"></textarea>
                     </div>
                 </div>
             </div>
@@ -118,8 +134,8 @@
                 </x-forms.button>
                 <x-forms.button wire:click='update'
                     class="flex items-center gap-1 text-xs font-normal tracking-wide text-white bg-indigo-700 rounded-md shadow-lg focus:outline-none hover:bg-indigo-800 me-2 ">
-                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m5 12 4.7 4.5 9.3-9" />
                     </svg>
