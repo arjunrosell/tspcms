@@ -10,7 +10,7 @@
         @keydown.escape.window="sidebarOpen = false" x-cloak="lg">
 
         <!-- Sidebar header -->
-        <div class="flex justify-between pr-3 mb-10 sm:px-2">
+        <div class="flex justify-center pr-3 mb-10 sm:px-2">
             <!-- Close button -->
             <button class="lg:hidden text-slate-500 hover:text-slate-400" @click.stop="sidebarOpen = !sidebarOpen"
                 aria-controls="sidebar" :aria-expanded="sidebarOpen">
@@ -19,9 +19,21 @@
             </button>
             <!-- Logo -->
             <a class="block" href="{{ route('index') }}">
-                <h1 class="text-2xl font-bold tracking-wide text-center text-white text-primary-yellow-light">Sto.
+                {{-- <h1 class="text-2xl font-bold tracking-wide text-center text-white text-primary-yellow-light">Sto.
                     Cristo Parish
-                    Church</h1>
+                    Church</h1> --}}
+                <img class="rounded-full"
+                    src="https://images.vexels.com/media/users/3/129738/isolated/preview/8810c93e6357c194080ab761e9035245-catholic-church-icon-by-vexels.png"
+                    width="300px" alt="logo"
+                    style="
+                        width: 125px;
+                        border-radius: 50%;
+                        background: repeating-linear-gradient(45deg, black, transparent 100px);
+                        margin: auto;
+                        display: block;
+                        position:relative;
+                        top:17px;
+                    ">
             </a>
         </div>
 

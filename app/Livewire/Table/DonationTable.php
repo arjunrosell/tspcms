@@ -18,7 +18,7 @@ class DonationTable extends DataTableComponent
         $this->setPrimaryKey('id');
     }
 
-    public function columns(): array
+    public function columns(): array 
     {
         return [
             Column::make('Action', 'id')
@@ -35,9 +35,9 @@ class DonationTable extends DataTableComponent
                 })
                 ->searchable()
                 ->sortable(),
-            Column::make("Donation Type", "category")
-                ->sortable(),
-            Column::make("Name", "name")
+            // Column::make("Donation Type", "category")
+            //     ->sortable(),
+            Column::make("Receive From", "name")
                 ->sortable(),
             Column::make("Date", "date")
                 ->sortable(),
@@ -46,6 +46,10 @@ class DonationTable extends DataTableComponent
                     return Carbon::parse($row->created_at)->format('M d,Y');
                 })
                 ->sortable(),
+            Column::make("View Reciept", "files")
+                ->format(function ($value, $row, Column $column) {
+                    return view('livewire.analytics.expenses.image-show', ['files' => 'storage/' . explode('/', $row->files)[1], "index" => $row->id]);
+                })
         ];
     }
 }

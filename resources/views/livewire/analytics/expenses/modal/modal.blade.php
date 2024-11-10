@@ -18,48 +18,91 @@
                 </button>
             </div>
             <div class="p-4 space-y-4 md:p-5">
-                <div class="p-4 space-y-4 md:p-5">
+                <div class="space-y-4">
+                    <!-- File Upload Field -->
                     <div>
-                        <label for="position"
+                        <label for="files"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload
+                            File</label>
+                        <input type="file" wire:model="files"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                        @error('files')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Expense Category Field -->
+                    <div>
+                        <label for="expense_reference_id"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expense
                             Category</label>
-                        <select wire:model='expense_reference_id'
+                        <select wire:model="expense_reference_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
-                            @forelse ($expense_references as $expense_reference)
-                                <option value="{{ $expense_reference->id }}">{{ $expense_reference->name }}</option>
-                            @empty
-                                <option>No Available Data</option>
-                            @endforelse
+
+                            <!-- Default option: "Select Category" -->
+                            <option value="">Select Category</option>
+
+                            <!-- Categories List -->
+                            @foreach ($expense_references as $expense_reference)
+                                <option value="{{ $expense_reference->id }}"
+                                    {{ old('expense_reference_id', $expense_reference_id) == $expense_reference->id ? 'selected' : '' }}>
+                                    {{ $expense_reference->name }}
+                                </option>
+                            @endforeach
                         </select>
+
+                        @error('expense_reference_id')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
                     </div>
+
+                    <!-- Amount Field -->
                     <div>
-                        <label for="position"
+                        <label for="amount"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
                         <input type="number" wire:model='amount'
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                        @error('amount')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
                     </div>
+
+                    <!-- Date Field -->
                     <div>
-                        <label for="position"
+                        <label for="date"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
                         <input type="date" wire:model='date'
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                        @error('date')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
                     </div>
+
+                    <!-- Remarks Field -->
                     <div>
-                        <label for="position"
+                        <label for="remarks"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
-                        <textarea wire:model='remarks'cols="30" rows="10"
+                        <textarea wire:model='remarks' cols="30" rows="5"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"></textarea>
                     </div>
                 </div>
+
+                <!-- Loading Spinner -->
+                <div x-show="isLoading" class="flex justify-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
             </div>
+
             <div
                 class="flex items-center justify-end p-4 border-t border-gray-200 rounded-b md:p-3 dark:border-gray-600">
                 <x-forms.button @click="closeModal"
                     class="flex items-center gap-1 text-xs font-normal tracking-wide text-black border rounded-md shadow-lg focus:outline-none group border-primary-red hover:text-white hover:bg-indigo-700 me-2">
                     Close
                 </x-forms.button>
-                <x-forms.button wire:click='create'
-                    class="flex items-center gap-1 text-xs font-normal tracking-wide text-white bg-indigo-700 rounded-md shadow-lg focus:outline-none hover:bg-indigo-800 me-2 ">
+                <x-forms.button wire:click="create"
+                    class="flex items-center gap-1 text-xs font-normal tracking-wide text-white bg-indigo-700 rounded-md shadow-lg focus:outline-none hover:bg-indigo-800 me-2">
                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -92,48 +135,83 @@
                 </button>
             </div>
             <div class="p-4 space-y-4 md:p-5">
-                <div class="p-4 space-y-4 md:p-5">
+                <div class="space-y-4">
                     <div>
-                        <label for="position"
+                        <label for="files"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload File
+                            (Optional)</label>
+                        <input type="file" wire:model="files"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                        @error('files')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <!-- Expense Category Field -->
+                    <div>
+                        <label for="expense_reference_id"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expense
                             Category</label>
-                        <select wire:model='expense_reference_id'
+                        <select wire:model="expense_reference_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
-                            @forelse ($expense_references as $expense_reference)
+                            @foreach ($expense_references as $expense_reference)
                                 <option value="{{ $expense_reference->id }}">{{ $expense_reference->name }}</option>
-                            @empty
-                                <option>No Available Data</option>
-                            @endforelse
+                            @endforeach
                         </select>
+                        @error('expense_reference_id')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
                     </div>
+
+                    <!-- Amount Field -->
                     <div>
-                        <label for="position"
+                        <label for="amount"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
-                        <input type="number" wire:model='amount'
+                        <input type="number" wire:model="amount"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                        @error('amount')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
                     </div>
+
+                    <!-- Date Field -->
                     <div>
-                        <label for="position"
+                        <label for="date"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                        <input type="date" wire:model='date'
+                        <input type="date" wire:model="date"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                        @error('date')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
                     </div>
+
+                    <!-- Remarks Field -->
                     <div>
-                        <label for="position"
+                        <label for="remarks"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
-                        <textarea wire:model='remarks'cols="30" rows="10"
+                        <textarea wire:model="remarks" cols="30" rows="5"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"></textarea>
+                        @error('remarks')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Loading Spinner (Optional) -->
+                <div x-show="isLoading" class="flex justify-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
                     </div>
                 </div>
             </div>
+
             <div
                 class="flex items-center justify-end p-4 border-t border-gray-200 rounded-b md:p-3 dark:border-gray-600">
                 <x-forms.button @click="closeModal"
                     class="flex items-center gap-1 text-xs font-normal tracking-wide text-black border rounded-md shadow-lg focus:outline-none group border-primary-red hover:text-white hover:bg-indigo-700 me-2">
                     Close
                 </x-forms.button>
-                <x-forms.button wire:click='update'
-                    class="flex items-center gap-1 text-xs font-normal tracking-wide text-white bg-indigo-700 rounded-md shadow-lg focus:outline-none hover:bg-indigo-800 me-2 ">
+                <x-forms.button wire:click="update"
+                    class="flex items-center gap-1 text-xs font-normal tracking-wide text-white bg-indigo-700 rounded-md shadow-lg focus:outline-none hover:bg-indigo-800 me-2">
                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

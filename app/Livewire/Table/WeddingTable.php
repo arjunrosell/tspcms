@@ -34,58 +34,59 @@ class WeddingTable extends DataTableComponent
                 ->sortable(),
             Column::make("Groom name", "groom_name")
                 ->sortable(),
-            Column::make("Groom age", "groom_age")
-                ->sortable(),
-            Column::make("Groom bday", "groom_bday")
-                ->sortable(),
-            Column::make("Groom father", "groom_father")
-                ->sortable(),
-            Column::make("Groom mother", "groom_mother")
-                ->sortable(),
-            Column::make("Groom address", "groom_address")
-                ->sortable(),
+
+            // Column::make("Groom age", "groom_age")
+            //     ->sortable(),
+            // Column::make("Groom bday", "groom_bday")
+            //     ->sortable(),
+            // Column::make("Groom father", "groom_father")
+            //     ->sortable(),
+            // Column::make("Groom mother", "groom_mother")
+            //     ->sortable(),
+            // Column::make("Groom address", "groom_address")
+            //     ->sortable(),
             Column::make("Groom contact no", "groom_contact_no")
                 ->sortable(),
-            Column::make("Groom place baptism", "groom_place_baptism")
-                ->sortable(),
-            Column::make("Groom parish of", "groom_parish_of")
-                ->sortable(),
-            Column::make("Groom date bap", "groom_date_bap")
-                ->sortable(),
-            Column::make("Groom place confirm", "groom_place_confirm")
-                ->sortable(),
-            Column::make("Groom parish confirm", "groom_parish_confirm")
-                ->sortable(),
-            Column::make("Groom date confirm", "groom_date_confirm")
-                ->sortable(),
+            // Column::make("Groom place baptism", "groom_place_baptism")
+            //     ->sortable(),
+            // Column::make("Groom parish of", "groom_parish_of")
+            //     ->sortable(),
+            // Column::make("Groom date bap", "groom_date_bap")
+            //     ->sortable(),
+            // Column::make("Groom place confirm", "groom_place_confirm")
+            //     ->sortable(),
+            // Column::make("Groom parish confirm", "groom_parish_confirm")
+            //     ->sortable(),
+            // Column::make("Groom date confirm", "groom_date_confirm")
+            //     ->sortable(),
             Column::make("Bride name", "bride_name")
                 ->sortable(),
-            Column::make("Bride age", "bride_age")
-                ->sortable(),
-            Column::make("Bride bday", "bride_bday")
-                ->sortable(),
-            Column::make("Bride father", "bride_father")
-                ->sortable(),
-            Column::make("Bride mother", "bride_mother")
-                ->sortable(),
-            Column::make("Bride address", "bride_address")
-                ->sortable(),
+            // Column::make("Bride age", "bride_age")
+            //     ->sortable(),
+            // Column::make("Bride bday", "bride_bday")
+            //     ->sortable(),
+            // Column::make("Bride father", "bride_father")
+            //     ->sortable(),
+            // Column::make("Bride mother", "bride_mother")
+            //     ->sortable(),
+            // Column::make("Bride address", "bride_address")
+            //     ->sortable(),
             Column::make("Bride contact no", "bride_contact_no")
                 ->sortable(),
-            Column::make("Bride place baptism", "bride_place_baptism")
-                ->sortable(),
-            Column::make("Bride parish of", "bride_parish_of")
-                ->sortable(),
-            Column::make("Bride date bap", "bride_date_bap")
-                ->sortable(),
-            Column::make("Bride place confirm", "bride_place_confirm")
-                ->sortable(),
-            Column::make("Bride parish confirm", "bride_parish_confirm")
-                ->sortable(),
-            Column::make("Bride date confirm", "bride_date_confirm")
-                ->sortable(),
-            Column::make("Created at", "created_at")
-                ->sortable(),
+            // Column::make("Bride place baptism", "bride_place_baptism")
+            //     ->sortable(),
+            // Column::make("Bride parish of", "bride_parish_of")
+            //     ->sortable(),
+            // Column::make("Bride date bap", "bride_date_bap")
+            //     ->sortable(),
+            // Column::make("Bride place confirm", "bride_place_confirm")
+            //     ->sortable(),
+            // Column::make("Bride parish confirm", "bride_parish_confirm")
+            //     ->sortable(),
+            // Column::make("Bride date confirm", "bride_date_confirm")
+            //     ->sortable(),
+            // Column::make("Created at", "created_at")
+            //     ->sortable(),
         ];
     }
 

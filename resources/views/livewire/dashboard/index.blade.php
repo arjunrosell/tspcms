@@ -2,7 +2,8 @@
     <div>
         <div class="mb-11">
             <div class="mb-4 ">
-                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Dashboard</h2>
+                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Expenses and Donation's
+                    Monitoring for Santo Cristo Parish Church</h2>
             </div>
             <nav class="flex mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -113,7 +114,8 @@
         </div>
         <div class="grid grid-cols-3 gap-2 mb-7">
             <div class="col-span-2 ">
-                <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Appointments Rate
+                <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Frequency of
+                    Appointment
                 </h2>
                 <div class="p-4 bg-white border ">
                     <canvas x-ref='appointment' class=""></canvas>

@@ -6,21 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Expense extends Model
+class Donation extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'expense_references_id',
+        'donation_references_id',
+        'category',
+        'name',
         'amount',
-        'files',
-        'remarks',
         'date',
+        'status',
     ];
 
-    public function expense_references()
+    public function donation_reference()
     {
-        return $this->belongsTo(ExpenseReference::class, 'expense_references_id', 'id');
+        return $this->belongsTo(DonationReference::class, 'donation_references_id', 'id');
     }
 }

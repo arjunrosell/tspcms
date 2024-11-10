@@ -1,85 +1,11 @@
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-    /* LANDING PAGE */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body,
-    html {
-        height: 100%;
-        font-family: "Poppins", sans-serif;
-        background-color: #000;
-    }
-
-    main.flex.items-center.justify-center.h-auto.min-h-screen.bg-blue-400 {
-        background-image: url({{ asset('images/bg.jpg') }});
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    .landing-page {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        text-align: center;
-    }
-
-    .title {
-        font-size: 4rem;
-        margin-bottom: 20px;
-        text-shadow: 1px 1px 2px #0c0b0b;
-        font-optical-sizing: auto;
-        font-weight: 700;
-        font-style: normal;
-        -webkit-text-stroke: 1px #000000;
-        color: white;
-    }
-
-
-    #showloginform {
-        font-family: inherit;
-    }
-
-    .button {
-        background-color: #007bff;
-        /* Bootstrap primary color */
-        color: white;
-        padding: 15px 30px;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-        cursor: pointer;
-    }
-
-    .button:hover {
-        background-color: #0056b3;
-        /* Darker shade on hover */
-    }
-
-    div#login_page {
-        max-width: 375px;
-        margin-top: 84px;
-    }
-
-    /*
-LOGIN */
     span.absolute.right-4.top-4 {
         left: 10px;
         top: 17px;
     }
-
     input.w-full.py-4.pl-6.pr-10.bg-transparent.border.rounded-lg.outline-none.border-stroke.focus\:border-primary.focus-visible\:shadow-none.dark\:border-form-strokedark.dark\:bg-form-input.dark\:focus\:border-primary {
         padding: 15px 0 15px 38px;
     }
-
     .w-full.p-4.sm\:p-12\.5.xl\:p-17\.5 {
         width: 370px;
         height: auto;
@@ -88,34 +14,34 @@ LOGIN */
     .bg-white.border.rounded-sm.border-stroke.shadow-default.dark\:border-strokedark.dark\:bg-boxdark {
         border-radius: 10px;
     }
-
     button.swal2-confirm.swal2-styled {
-        background: blue !important;
+    background: blue !important;
     }
 
     button.swal2-cancel.swal2-styled {
         background: red;
     }
-
-    #login_page {
-        display: none;
-    }
 </style>
+
 <div>
     <main class="flex items-center justify-center h-auto min-h-screen bg-blue-400">
         <div class="max-w-screen-lg p-4 mx-auto md:p-6 2xl:p-10">
             <!-- ====== Forms Section Start -->
-            <div class="bg-white border rounded-sm border-stroke shadow-default dark:border-strokedark dark:bg-boxdark"
-                id="login_page">
+            <div class="bg-white border rounded-sm border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="flex flex-wrap items-center">
-                    <div class="border-stroke dark:border-strokedark">
+                    <div class="hidden w-full xl:block xl:w-1/2">
+                        <div class="px-26 py-17.5 text-center">
+                            <a class="mb-5.5 inline-block" href="index.html">
+                                <img class="hidden dark:block" src="{{ asset('images/logo.png') }}" alt="Logo" />
+                                <img class="dark:hidden" src="{{ asset('images/logo.png') }}" alt="Logo" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
                         <div class="w-full p-4 sm:p-12.5 xl:p-17.5">
 
                             <a class="block" href="{{ route('index') }}">
-                                <img class="rounded-full"
-                                    src="https://images.vexels.com/media/users/3/129738/isolated/preview/8810c93e6357c194080ab761e9035245-catholic-church-icon-by-vexels.png"
-                                    width="300px" alt="logo"
-                                    style="
+                                    <img class="rounded-full" src="https://images.vexels.com/media/users/3/129738/isolated/preview/8810c93e6357c194080ab761e9035245-catholic-church-icon-by-vexels.png" width="300px" alt="logo" style="
                                         width: 125px;
                                         border-radius: 50%;
                                         background: repeating-linear-gradient(45deg, black, transparent 100px);
@@ -127,18 +53,17 @@ LOGIN */
                             </a>
                             <br>
 
-                            <h2
-                                class="text-center text-2xl font-bold mb-9 text-slate-700 dark:text-white sm:text-title-xl2">
-                                Login
+                            <h2 class="text-center text-2xl font-bold mb-9 text-slate-700 dark:text-white sm:text-title-xl2">
+                                Reset Password
                             </h2>
 
-                            <form action="{{ route('login.check') }}" method="POST">
+                            <form action="{{ route('reset.check') }}" method="POST">
                                 @csrf
                                 <div class="mb-4">
                                     <label class="mb-2.5 block font-medium text-slate-700 dark:text-white">Email</label>
                                     <div class="relative">
-                                        <input type="email" name="email"
-                                            class="w-full py-4 pl-6 pr-10 bg-transparent border rounded-lg outline-none border-stroke focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                        <input type="email" name="email" value="<?= isset($_GET['email'])?$_GET['email']:''?>"
+                                            class="w-full py-4 pl-6 pr-10 bg-transparent border rounded-lg outline-none border-stroke focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" readonly />
 
                                         <span class="absolute right-4 top-4">
                                             <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22"
@@ -155,16 +80,10 @@ LOGIN */
 
                                 <div class="mb-6">
                                     <label class="mb-2.5 block font-medium text-slate-700 dark:text-white">
-                                        Password</label>
+                                        New Password</label>
                                     <div class="relative">
                                         <input type="password" name="password"
                                             class="w-full py-4 pl-6 pr-10 bg-transparent border rounded-lg outline-none border-stroke focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-
-                                        <br>
-
-                                        <div>
-                                            <a href="#" onclick="resetPass()">Forget Password?</a>
-                                        </div>
 
                                         <span class="absolute right-4 top-4">
                                             <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22"
@@ -181,7 +100,6 @@ LOGIN */
                                         </span>
                                     </div>
                                 </div>
-
                                 <div class="mb-5">
                                     <input type="submit" value="Login"
                                         class="w-full p-4 font-medium text-white transition bg-blue-400 border rounded-lg cursor-pointer border-primary hover:bg-opacity-90" />
@@ -192,71 +110,6 @@ LOGIN */
                 </div>
             </div>
             <!-- ====== Forms Section End -->
-
-
-            <div id="landingPage" class="landing-page md:block hidden">
-                <h1 class="title">Welcome to Donation, Expenses and Events Monitoring System for Sto. Cristo Parish
-                    Church</h1>
-                <a href="#" id="showloginform" class="button">Get Started</a>
-            </div>
         </div>
     </main>
 </div>
-
-
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    document.querySelector('#showloginform').addEventListener('click', function() {
-        const loginForm = document.querySelector('#login_page');
-        const landingPage = document.querySelector('#landingPage');
-        if (loginForm.style.display === 'block') {
-            loginForm.style.display = 'none'; // Hide the form
-            landingPage.style.display = 'block';
-        } else {
-            loginForm.style.display = 'block'; // Show the form
-            landingPage.style.display = 'none';
-        }
-    });
-
-    const resetPass = async () => {
-        const {
-            value: email
-        } = await Swal.fire({
-            title: "Enter your email address",
-            input: "email",
-            inputLabel: "Your email address",
-            inputPlaceholder: "Enter your email address",
-            showCancelButton: true
-        });
-        if (email) {
-
-            let response = await fetch(`reset-pass/${email}`, {
-                method: "GET",
-                credentials: "same-origin",
-            });
-
-            let {
-                message,
-                status
-            } = await response.json();
-
-            if (status == 200) {
-                Swal.fire({
-                    title: "Success",
-                    text: message,
-                    icon: "success"
-                });
-            } else {
-                Swal.fire({
-                    title: "Failed",
-                    text: message,
-                    icon: "error"
-                });
-            }
-        }
-    }
-</script>

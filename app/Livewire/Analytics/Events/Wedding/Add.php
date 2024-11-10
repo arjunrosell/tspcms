@@ -5,6 +5,9 @@ namespace App\Livewire\Analytics\Events\Wedding;
 use App\Models\Wedding;
 use Livewire\Component;
 use WireUi\Traits\Actions;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class Add extends Component
 {
@@ -62,6 +65,17 @@ class Add extends Component
 
     public function create()
     {
+
+        $today = Carbon::today();
+
+        $weddingCounts = Wedding::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
+            ->whereDate('created_at', $today) // Filter for today
+            ->groupBy('date')
+            ->orderBy('date', 'desc')
+            ->limit(5)
+            ->get();
+
+
         try {
             $wedding = Wedding::create([
                 'date_wedding' => $this->date_wedding,
@@ -108,17 +122,26 @@ class Add extends Component
                 'bride_page_no_2' => $this->bride_page_no_2,
             ]);
 
-            if ($wedding) {
-                $this->notification()->success(
-                    $title = 'Success',
-                    $description = 'Your work was successfully saved'
-                );
-                $this->reset();
-                return redirect()->route('analytics-events-wedding.index');
+
+            if ($weddingCounts[0]->count < 5) {
+
+                if ($wedding) {
+                    $this->notification()->success(
+                        $title = 'Success',
+                        $description = 'Your work was successfully saved'
+                    );
+                    $this->reset();
+                    return redirect()->route('analytics-events-wedding.index');
+                } else {
+                    $this->notification()->error(
+                        $title = 'Error',
+                        $description = 'Failed to update wedding status'
+                    );
+                }
             } else {
-                $this->notification()->error(
-                    $title = 'Error',
-                    $description = 'Failed to update wedding status'
+                $this->notification()->warning(
+                    $title = 'Warning',
+                    $description = 'Failed to add: the maximum number of wedding events is 5 events per day.'
                 );
             }
         } catch (\Throwable $th) {

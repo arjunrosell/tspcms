@@ -13,9 +13,9 @@ class Donation extends Model
 
     protected $fillable = [
         'donation_references_id',
-        'category',
         'name',
         'amount',
+        'files',
         'date',
         'status',
     ];

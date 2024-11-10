@@ -57,6 +57,8 @@ class UserTable extends DataTableComponent
                     return Blade::render("<livewire:components.action.edit obj_id='$row->id' />");
                 })
                 ->html(),
+            Column::make("Status", "status")
+                ->sortable(),
             Column::make("Profile", "profile")
                 ->sortable(),
             Column::make("Fname", "fname")

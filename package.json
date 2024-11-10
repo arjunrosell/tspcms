@@ -18,7 +18,7 @@
     "dependencies": {
         "@ryangjchandler/alpine-clipboard": "^2.3.0",
         "animate.css": "^4.1.1",
-        "chart.js": "^4.4.2",
+        "chart.js": "^4.4.6",
         "flatpickr": "^4.6.13",
         "jquery": "^3.7.1",
         "tabulator-tables": "^6.0.1"

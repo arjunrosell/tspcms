@@ -71,25 +71,67 @@
                                 </svg>
                                 generate
                             </button>
+
                         </div>
+
+
                     </div>
                     <div id="guide-dashboard-filterResult" wire:ignore>
                         <div class="grid grid-cols-2 col-span-12 gap-2 overflow-x-auto rounded-lg border-1"
                             x-data="dragScroll">
-                            <div>
+                            {{-- <div x-data="tabulator" x-init="init()">
                                 <div x-data="tabulator()" class="mb-4 overflow-x-auto scrollbar-hidden">
                                     <div x-ref="tabulator"
                                         class="mt-5 overflow-x-auto border table-report table-report--tabulator">
                                     </div>
                                 </div>
+
+                                <button @click="printTable" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+                                    Print Table
+                                </button>
+                            </div> --}}
+
+                            <div x-data="tabulator" x-init="init()">
+                                <div x-ref="tabulator"></div>
+
+
+                                <!-- Total Amount Display -->
+                                <div class="mt-4">
+                                    <strong>Total Amount: </strong><span x-text="totalAmount"></span>
+                                </div>
+
+                                <!-- Print Button -->
+                                <button @click="printTable" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+                                    Print Donations
+                                </button>
                             </div>
-                            <div>
+
+
+                            <div x-data="expenses()" x-init="init()">
+                                <div x-ref="expenses"></div>
+
+                                <!-- Total Amount Display -->
+                                <div class="mt-4">
+                                    <strong>Total Amount: </strong><span x-text="totalAmount"></span>
+                                </div>
+
+
+                                <!-- Print Button -->
+                                <button @click="printTable" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+                                    Print Expenses 
+                                </button>
+
+                            </div>
+
+
+
+                            {{-- <div>
                                 <div x-data="expenses()" class="mb-4 overflow-x-auto scrollbar-hidden">
                                     <div x-ref="expenses"
                                         class="mt-5 overflow-x-auto border table-report table-report--tabulator">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -105,11 +147,84 @@
                     let table;
                     let expenses;
                     let arrayData;
+                    // Alpine.data('tabulator', () => ({
+                    //     tableData: @entangle('donationData').live,
+                    //     tableColumns: @entangle('columns').live,
+                    //     init() {
+                    //         table = new Tabulator(this.$refs.tabulator, {
+                    //             printAsHtml: true,
+                    //             printStyled: true,
+                    //             renderHorizontal: "virtual",
+                    //             placeholder: "No matching records found",
+                    //             dataTree: true,
+                    //             dataTreeStartExpanded: true,
+                    //             dataTreeSelectable: 1,
+                    //             autoResize: false,
+                    //             data: this.tableData,
+                    //             columns: this.tableColumns,
+                    //             selectable: true, // Enable row selection
+                    //             selectableCheck: function(row) {
+                    //                 // console.log(row.getData().parent);
+                    //                 // Check if the row is a parent row (assuming parent rows have a property 'isParent')
+                    //                 return !row.getData().parent; // Return false for parent rows
+                    //             },
+                    //             // cellEditing: function(cell) {
+                    //             //     console.log(cell);
+                    //             //     // Check if the row has children
+                    //             //     if (cell.getRow().getData().children) {
+                    //             //         // Disable editing for parent rows
+                    //             //         return false;
+                    //             //     }
+                    //             //     // Enable editing for child rows
+                    //             //     return true;
+                    //             // },
+                    //         });
+
+                    //         this.$watch('tableData', (value) => {
+                    //             table.setData(value);
+                    //         });
+
+                    //         Livewire.on('dataUpdated', (data) => {
+                    //             table.setColumns(data.column);
+                    //             table.setData(data.data);
+                    //             console.log(data.column);
+                    //             table.redraw(true);
+                    //         });
+
+                    //         function statusFormatter(cell) {
+                    //             if (cell.getValue() == "Arrived at Sorting Hub") {
+                    //                 cell.getElement().classList.add("bg-black",
+                    //                     "text-white"); // Corrected classList.add usage
+                    //             }
+                    //         }
+
+                    //         table.on("rowSelectionChanged", function(data, rows, selected, deselected) {
+                    //             arrayData = data[0];
+                    //         });
+
+                    //         table.on("cellEditing", function(cell) {
+                    //             console.log("asasd");
+                    //             if (cell.getRow().getData().children) {
+                    //                 // Disable editing for parent rows
+                    //                 return false;
+                    //             }
+                    //             // Enable editing for child rows
+                    //             return true;
+                    //         });
+                    //     },
+
+
+
+                    // }));
+
                     Alpine.data('tabulator', () => ({
                         tableData: @entangle('donationData').live,
                         tableColumns: @entangle('columns').live,
+                        table: null,
+                        totalAmount: 0,
+
                         init() {
-                            table = new Tabulator(this.$refs.tabulator, {
+                            this.table = new Tabulator(this.$refs.tabulator, {
                                 printAsHtml: true,
                                 printStyled: true,
                                 renderHorizontal: "virtual",
@@ -120,66 +235,132 @@
                                 autoResize: false,
                                 data: this.tableData,
                                 columns: this.tableColumns,
-                                selectable: true, // Enable row selection
+                                selectable: true,
                                 selectableCheck: function(row) {
-                                    // console.log(row.getData().parent);
-                                    // Check if the row is a parent row (assuming parent rows have a property 'isParent')
-                                    return !row.getData().parent; // Return false for parent rows
+                                    return !row.getData().parent;
                                 },
-                                // cellEditing: function(cell) {
-                                //     console.log(cell);
-                                //     // Check if the row has children
-                                //     if (cell.getRow().getData().children) {
-                                //         // Disable editing for parent rows
-                                //         return false;
-                                //     }
-                                //     // Enable editing for child rows
-                                //     return true;
-                                // },
                             });
 
                             this.$watch('tableData', (value) => {
-                                table.setData(value);
+                                this.table.setData(value);
+                                this.updateTotalAmount(value);
                             });
 
                             Livewire.on('dataUpdated', (data) => {
-                                table.setColumns(data.column);
-                                table.setData(data.data);
-                                console.log(data.column);
-                                table.redraw(true);
+                                this.table.setColumns(data.column);
+                                this.table.setData(data.data);
+                                this.table.redraw(true);
+                                this.updateTotalAmount(data.data);
                             });
 
-                            function statusFormatter(cell) {
-                                if (cell.getValue() == "Arrived at Sorting Hub") {
-                                    cell.getElement().classList.add("bg-black",
-                                        "text-white"); // Corrected classList.add usage
-                                }
-                            }
-
-                            table.on("rowSelectionChanged", function(data, rows, selected, deselected) {
-                                arrayData = data[0];
+                            this.table.on("rowSelectionChanged", (data, rows, selected, deselected) => {
+                                this.arrayData = data[0];
                             });
 
-                            table.on("cellEditing", function(cell) {
-                                console.log("asasd");
+                            this.table.on("cellEditing", (cell) => {
                                 if (cell.getRow().getData().children) {
-                                    // Disable editing for parent rows
                                     return false;
                                 }
-                                // Enable editing for child rows
                                 return true;
                             });
                         },
 
+                        updateTotalAmount(data) {
+                            const total = data.reduce((sum, item) => {
+                                return sum + (item.amount || 0);
+                            }, 0);
 
+                            this.totalAmount = total;
+                        },
 
+                        printTable() {
+                            if (this.table) {
+                                this.table.print();
+                            } else {
+                                console.error("Tabulator table is not initialized.");
+                            }
+                        },
                     }));
+
+                    // Alpine.data('expenses', () => ({
+                    //     tableData: @entangle('expensesData').live,
+                    //     tableColumns: @entangle('columnsexp').live,
+                    //     init() {
+                    //         expenses = new Tabulator(this.$refs.expenses, {
+                    //             printAsHtml: true,
+                    //             printStyled: true,
+                    //             renderHorizontal: "virtual",
+                    //             placeholder: "No matching records found",
+                    //             dataTree: true,
+                    //             dataTreeStartExpanded: true,
+                    //             dataTreeSelectable: 1,
+                    //             autoResize: false,
+                    //             data: this.tableData,
+                    //             columns: this.tableColumns,
+                    //             selectable: true, // Enable row selection
+                    //             selectableCheck: function(row) {
+                    //                 // console.log(row.getData().parent);
+                    //                 // Check if the row is a parent row (assuming parent rows have a property 'isParent')
+                    //                 return !row.getData().parent; // Return false for parent rows
+                    //             },
+                    //             // cellEditing: function(cell) {
+                    //             //     console.log(cell);
+                    //             //     // Check if the row has children
+                    //             //     if (cell.getRow().getData().children) {
+                    //             //         // Disable editing for parent rows
+                    //             //         return false;
+                    //             //     }
+                    //             //     // Enable editing for child rows
+                    //             //     return true;
+                    //             // },
+                    //         });
+
+                    //         this.$watch('tableData', (value) => {
+                    //             expenses.setData(value);
+                    //         });
+
+                    //         Livewire.on('dataUpdated', (data) => {
+                    //             table.setColumns(data.column);
+                    //             table.setData(data.data);
+                    //             console.log(data.column);
+                    //             table.redraw(true);
+                    //         });
+
+                    //         function statusFormatter(cell) {
+                    //             if (cell.getValue() == "Arrived at Sorting Hub") {
+                    //                 cell.getElement().classList.add("bg-black",
+                    //                     "text-white"); // Corrected classList.add usage
+                    //             }
+                    //         }
+
+                    //         table.on("rowSelectionChanged", function(data, rows, selected, deselected) {
+                    //             arrayData = data[0];
+                    //         });
+
+                    //         table.on("cellEditing", function(cell) {
+                    //             console.log("asasd");
+                    //             if (cell.getRow().getData().children) {
+                    //                 // Disable editing for parent rows
+                    //                 return false;
+                    //             }
+                    //             // Enable editing for child rows
+                    //             return true;
+                    //         });
+                    //     },
+
+
+
+                    // }));
+
 
                     Alpine.data('expenses', () => ({
                         tableData: @entangle('expensesData').live,
                         tableColumns: @entangle('columnsexp').live,
+                        expenses: null,
+                        totalAmount: 0, // Initialize total amount
+
                         init() {
-                            expenses = new Tabulator(this.$refs.expenses, {
+                            this.expenses = new Tabulator(this.$refs.expenses, {
                                 printAsHtml: true,
                                 printStyled: true,
                                 renderHorizontal: "virtual",
@@ -190,59 +371,50 @@
                                 autoResize: false,
                                 data: this.tableData,
                                 columns: this.tableColumns,
-                                selectable: true, // Enable row selection
+                                selectable: true,
                                 selectableCheck: function(row) {
-                                    // console.log(row.getData().parent);
-                                    // Check if the row is a parent row (assuming parent rows have a property 'isParent')
-                                    return !row.getData().parent; // Return false for parent rows
+                                    return !row.getData().parent;
                                 },
-                                // cellEditing: function(cell) {
-                                //     console.log(cell);
-                                //     // Check if the row has children
-                                //     if (cell.getRow().getData().children) {
-                                //         // Disable editing for parent rows
-                                //         return false;
-                                //     }
-                                //     // Enable editing for child rows
-                                //     return true;
-                                // },
                             });
 
                             this.$watch('tableData', (value) => {
-                                expenses.setData(value);
+                                this.expenses.setData(value);
+                                this.updateTotalAmount(value); // Update total whenever data changes
                             });
 
                             Livewire.on('dataUpdated', (data) => {
-                                table.setColumns(data.column);
-                                table.setData(data.data);
-                                console.log(data.column);
-                                table.redraw(true);
+                                this.expenses.setColumns(data.column);
+                                this.expenses.setData(data.data);
+                                this.expenses.redraw(true);
+                                this.updateTotalAmount(data
+                                    .data); // Update total when Livewire data updates
                             });
 
-                            function statusFormatter(cell) {
-                                if (cell.getValue() == "Arrived at Sorting Hub") {
-                                    cell.getElement().classList.add("bg-black",
-                                        "text-white"); // Corrected classList.add usage
-                                }
-                            }
-
-                            table.on("rowSelectionChanged", function(data, rows, selected, deselected) {
-                                arrayData = data[0];
+                            this.expenses.on("rowSelectionChanged", (data, rows, selected, deselected) => {
+                                this.arrayData = data[0];
                             });
 
-                            table.on("cellEditing", function(cell) {
-                                console.log("asasd");
+                            this.expenses.on("cellEditing", function(cell) {
                                 if (cell.getRow().getData().children) {
-                                    // Disable editing for parent rows
                                     return false;
                                 }
-                                // Enable editing for child rows
                                 return true;
                             });
                         },
 
+                        updateTotalAmount(data) {
 
+                            const total = data.reduce((sum, item) => {
+                                return sum + (Array.isArray(item.amount) ? item.amount.reduce((a, b) =>
+                                    a + b, 0) : item.amount || 0);
+                            }, 0);
 
+                            this.totalAmount = total;
+                        },
+
+                        printTable() {
+                            this.expenses.print();
+                        },
                     }));
 
                     Alpine.data('actions', () => ({

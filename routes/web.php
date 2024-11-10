@@ -13,6 +13,11 @@ use App\Livewire\Appointments\Index as AppointmentsIndex;
 use App\Livewire\SystemReferences\Expenses\Index as SysExpensesIndex;
 use App\Livewire\SystemReferences\Events\Index as SysEventsIndex;
 use App\Livewire\GeneralReport\Index as GeneralReportIndex;
+
+
+use App\Livewire\Audit\Index as AuditIndex;
+
+
 use App\Livewire\Analytics\Events\FuneralMass\Add as FuneralMassAdd;
 use App\Livewire\Analytics\Events\FuneralMass\Edit as FuneralMassEdit;
 use App\Livewire\Analytics\Events\Baptism\Add as BaptismAdd;
@@ -25,6 +30,7 @@ use App\Livewire\Analytics\Events\Wedding\Index as WeddingIndex;
 use App\Livewire\Analytics\Donation\Index as DonationIndex;
 use App\Livewire\SystemReferences\Donation\Index as SysDonationIndex;
 use App\Livewire\Auth\Login\Index as LoginIndex;
+use App\Livewire\Auth\Reset\Index as ResetIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +43,14 @@ use App\Livewire\Auth\Login\Index as LoginIndex;
 |
 */
 
+
 Route::middleware(['auth'])->get('/', DashboardIndex::class)->name('index');
 Route::get('/login', LoginIndex::class)->name('login');
+Route::get('/reset', ResetIndex::class)->name('reset');
 Route::post('login-check', [AuthController::class, 'login'])->name('login.check');
+Route::post('reset-check', [AuthController::class, 'resetPassword'])->name('reset.check');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('reset-pass/{email}', [AuthController::class, 'forgotPassword'])->name('reset-pass');
 
 Route::middleware(['auth'])->prefix('user-management')->name('user-management.')->group(function () {
     Route::get('/', UserIndex::class)->name('index');
@@ -84,6 +94,10 @@ Route::middleware(['auth'])->prefix('system-references')->name('system-reference
 
 Route::middleware(['auth'])->prefix('general-reports')->name('general-reports.')->group(function () {
     Route::get('/', GeneralReportIndex::class)->name('index');
+});
+
+Route::middleware(['auth'])->prefix('audit')->name('audit.')->group(function () {
+    Route::get('/', AuditIndex::class)->name('index');
 });
 
 

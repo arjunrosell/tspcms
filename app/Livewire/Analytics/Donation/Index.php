@@ -7,10 +7,12 @@ use App\Models\DonationReference;
 use App\Models\User;
 use Livewire\Component;
 use WireUi\Traits\Actions;
+use Livewire\WithFileUploads;
 
 class Index extends Component
 {
     use Actions;
+    use WithFileUploads;
 
     public $donation_references_id;
     public $name;
@@ -22,6 +24,7 @@ class Index extends Component
     public $donation_references;
     public $users;
     public $show = true;
+    public $files;
 
     protected $listeners = [
         'editModal' => 'fetch'
@@ -35,13 +38,20 @@ class Index extends Component
     public function create()
     {
         try {
+            $this->validate([
+                'files' => [
+                    'image',
+                    'max:4096',
+                ],
+            ]);
+
             $this->validate();
             $donation = Donation::create([
                 'donation_references_id' => $this->donation_references_id,
                 'amount' => $this->amount,
+                'files'  => $this->files->store('public'),
                 'date' => $this->date,
-                'name' => $this->name,
-                'category' => $this->category,
+                'name' => $this->name
             ]);
 
             if ($donation) {

@@ -31,7 +31,13 @@
                     </select>
                 </div>
                 <div>
-                    <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Donation
+                    <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload
+                        File</label>
+                    <input type="file" wire:model='files'
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                </div>
+                <div>
+                    {{-- <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Donation
                         Type</label>
                     <select wire:model='category'
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
@@ -39,25 +45,37 @@
                         <option value="Organization">Organization</option>
                         <option value="Anonymous">Anonymous</option>
                     </select>
-                    <div>
-                        <label for="position"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
-                        <input type="number" wire:model='amount'
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
-                    </div>
-                    <div>
+                    <div> --}}
+                    <label for="position"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+                    <input type="number" wire:model='amount'
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                </div>
+                {{-- <div>
                         <label for="position"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                         <input type="text" wire:model='name'
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
-                    </div>
-                    <div>
-                        <label for="position"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                        <input type="date" wire:model='date'
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
-                    </div>
-                    {{-- <div>
+                    </div> --}}
+                <div>
+                    <label for="position"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
+                    <textarea wire:model='remarks'cols="30" rows="10"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red"></textarea>
+                </div>
+                <div>
+                    <label for="position"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                    <input type="date" wire:model='date'
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                </div>
+                <div>
+                    <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Received
+                        From</label>
+                    <input type="text" wire:model='received_from'
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red" />
+                </div>
+                {{-- <div>
                     <label for="position"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
                     <input type="text" wire:model='address'
@@ -75,25 +93,25 @@
                         @endforelse
                     </select>
                 </div> --}}
-                </div>
-                <div
-                    class="flex items-center justify-end p-4 border-t border-gray-200 rounded-b md:p-3 dark:border-gray-600">
-                    <x-forms.button @click="closeModal"
-                        class="flex items-center gap-1 text-xs font-normal tracking-wide text-black border rounded-md shadow-lg focus:outline-none group border-primary-red hover:text-white hover:bg-indigo-700 me-2">
-                        Close
-                    </x-forms.button>
-                    <x-forms.button wire:click='create'
-                        class="flex items-center gap-1 text-xs font-normal tracking-wide text-white bg-indigo-700 rounded-md shadow-lg focus:outline-none hover:bg-indigo-800 me-2 ">
-                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m5 12 4.7 4.5 9.3-9" />
-                        </svg>
-                        Save
-                    </x-forms.button>
-                </div>
+            </div>
+            <div
+                class="flex items-center justify-end p-4 border-t border-gray-200 rounded-b md:p-3 dark:border-gray-600">
+                <x-forms.button @click="closeModal"
+                    class="flex items-center gap-1 text-xs font-normal tracking-wide text-black border rounded-md shadow-lg focus:outline-none group border-primary-red hover:text-white hover:bg-indigo-700 me-2">
+                    Close
+                </x-forms.button>
+                <x-forms.button wire:click='create'
+                    class="flex items-center gap-1 text-xs font-normal tracking-wide text-white bg-indigo-700 rounded-md shadow-lg focus:outline-none hover:bg-indigo-800 me-2 ">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m5 12 4.7 4.5 9.3-9" />
+                    </svg>
+                    Save
+                </x-forms.button>
             </div>
         </div>
+    </div>
     </div>
 </x-modal.modal>
 

@@ -19,7 +19,7 @@ class Index extends Component
     public function render()
     {
         $totalActiveUsers = User::where('status', 'Active')->paginate(1000);
-        $totalExpenses = Expense::sum('amount');
+        $totalExpenses = number_format(Expense::sum('amount'), 2);
         $totalDonations = Donation::sum('amount');
         $totalEvents = FuneralMass::all()->count() + Baptism::all()->count() + Wedding::all()->count();
         $this->upcomingWedddings  = Wedding::limit(5)->get();

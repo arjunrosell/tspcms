@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -27,6 +28,9 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+
+        $this->logoudit($request->email, "Login");
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -41,8 +45,20 @@ class AuthController extends Controller
         }
     }
 
+    public function logoudit($emial, $type)
+    {
+        DB::table('audit')->insert([
+            'audit' => "User " . $type . " emial : " . $emial,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
     public function logout(Request $request)
     {
+
+        $this->logoudit(Auth::user()->email, "Logout");
+
         Logout::dispatch(Auth::user());
         Auth::logout();
 
@@ -56,6 +72,8 @@ class AuthController extends Controller
     public function forgotPassword(Request $request)
     {
         $request->validate(['email' => 'required|email']);
+
+        $this->logoudit($request->email, "Forgot Passowrd");
 
         $status = Password::sendResetLink($request->only('email'));
 
@@ -71,6 +89,8 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
         ]);
+
+        $this->logoudit($request->email, "Reset Passowrd");
 
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
