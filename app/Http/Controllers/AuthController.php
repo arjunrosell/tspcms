@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
     public $userRequest;
+
     public function index()
     {
         return view('auth.login');
@@ -28,8 +29,7 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-
-        $this->logoudit($request->email, "Login");
+        $this->logAudit($request->email, "Login");
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -45,10 +45,10 @@ class AuthController extends Controller
         }
     }
 
-    public function logoudit($emial, $type)
+    public function logAudit($email, $type)
     {
         DB::table('audit')->insert([
-            'audit' => "User " . $type . " emial : " . $emial,
+            'audit' => "User " . $type . " email: " . $email,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -56,8 +56,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-
-        $this->logoudit(Auth::user()->email, "Logout");
+        $this->logAudit(Auth::user()->email, "Logout");
 
         Logout::dispatch(Auth::user());
         Auth::logout();
@@ -73,7 +72,7 @@ class AuthController extends Controller
     {
         $request->validate(['email' => 'required|email']);
 
-        $this->logoudit($request->email, "Forgot Passowrd");
+        $this->logAudit($request->email, "Forgot Password");
 
         $status = Password::sendResetLink($request->only('email'));
 
@@ -90,7 +89,7 @@ class AuthController extends Controller
             'password' => 'required|min:8|confirmed',
         ]);
 
-        $this->logoudit($request->email, "Reset Passowrd");
+        $this->logAudit($request->email, "Reset Password");
 
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),

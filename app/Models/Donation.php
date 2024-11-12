@@ -15,9 +15,10 @@ class Donation extends Model
         'donation_references_id',
         'name',
         'amount',
-        'files',
         'date',
         'status',
+        'donor_type',
+        'received_by'
     ];
 
     public function donation_reference()

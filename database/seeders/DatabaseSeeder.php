@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ExpensesReferenceSeeder::class,
             DonationReferenceSeeder::class,
             EventReferenceSeeder::class,
+            AuditSeeder::class
         ]);
     }
 }

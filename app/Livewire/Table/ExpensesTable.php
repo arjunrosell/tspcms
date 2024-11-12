@@ -18,12 +18,12 @@ class ExpensesTable extends DataTableComponent
         $this->setPrimaryKey('id');
     }
 
-    public function columns(): array 
+    public function columns(): array
     {
         return [
-            Column::make('Action', 'id')
+            Column::make('Expenses ID', 'id')
                 ->format(function ($value, $row, Column $column) {
-                    return Blade::render("<livewire:components.action.edit obj_id='$row->id' />");
+                    return $row->id;
                 })
                 ->html(),
             Column::make("Expense Category", "expense_references.name")
@@ -50,7 +50,10 @@ class ExpensesTable extends DataTableComponent
                 ->sortable(),
             Column::make("View Reciept", "files")
                 ->format(function ($value, $row, Column $column) {
-                    return view('livewire.analytics.expenses.image-show', ['files' => 'storage/' . explode('/', $row->files)[1], "index" => $row->id]);
+                    return view('livewire.analytics.expenses.image-show', [
+                        'files' => 'storage/' . explode('/', $row->files)[1],
+                        "index" => $row->id
+                    ]);
                 })
                 ->searchable()
                 ->sortable()

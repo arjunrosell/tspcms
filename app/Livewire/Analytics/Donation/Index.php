@@ -4,151 +4,59 @@ namespace App\Livewire\Analytics\Donation;
 
 use App\Models\Donation;
 use App\Models\DonationReference;
-use App\Models\User;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use Livewire\WithFileUploads;
 
 class Index extends Component
 {
-    use Actions;
-    use WithFileUploads;
+    use Actions, WithFileUploads;
 
-    public $donation_references_id;
-    public $name;
-    public $category;
-    public $amount;
-    public $date;
-    public $status;
-    public $objId;
-    public $donation_references;
-    public $users;
+    public $donation_references_id, $name, $amount, $date, $status, $donor_type, $received_by;
+    public $objId, $donation_references;
     public $show = true;
-    public $files;
+    public $donor_type_options = ['Anonymous', 'Organization', 'Donor Name'];
 
-    protected $listeners = [
-        'editModal' => 'fetch'
-    ];
+    protected $listeners = ['editModal' => 'fetch'];
 
     protected $rules = [
-        'donation_references_id' => 'required',
-        'amount' => 'required',
+        'donation_references_id' => 'required|exists:donation_references,id',
+        'amount' => 'required|numeric|min:0',
+        'date' => 'required|date|after_or_equal:today',
+        'donor_type' => 'required',
+        'received_by' => 'required|string|max:255',
+        'name' => 'required_if:donor_type,Organization,Donor Name',
+        'status' => 'nullable|in:Active,Inactive',
+    ];
+
+    protected $messages = [
+        'amount.min' => 'Amount cannot be negative.',
+        'date.after_or_equal' => 'The date must be today or a future date.',
+        'donation_references_id.required' => 'Please select a donation reference.',
+        'name.required_if' => 'Please provide the name of the organization when donating as an Organization.',
+        'received_by.required' => 'Please provide the name of the person or entity receiving the donation.',
     ];
 
     public function create()
     {
-        try {
-            $this->validate([
-                'files' => [
-                    'image',
-                    'max:4096',
-                ],
-            ]);
+        $this->validate();
 
-            $this->validate();
+        try {
             $donation = Donation::create([
-                'donation_references_id' => $this->donation_references_id,
-                'amount' => $this->amount,
-                'files'  => $this->files->store('public'),
-                'date' => $this->date,
-                'name' => $this->name
-            ]);
-
-            if ($donation) {
-                $this->notification()->success(
-                    $title = 'Success',
-                    $description = 'Your work was successfully saved'
-                );
-                $this->reset();
-                $this->dispatch('close-modal');
-                $this->dispatch('refreshDatatable');
-            } else {
-                $this->notification()->error(
-                    $title = 'Error',
-                    $description = 'Failed to update donation status'
-                );
-            }
-        } catch (\Throwable $th) {
-            $this->notification()->error(
-                $title = 'Error',
-                $description = 'Something went wrong ' . $th->getMessage()
-            );
-        }
-    }
-
-    public function update()
-    {
-        try {
-            $donation = Donation::find($this->objId);
-            $donation->update([
                 'donation_references_id' => $this->donation_references_id,
                 'amount' => $this->amount,
                 'date' => $this->date,
                 'name' => $this->name,
-                'category' => $this->category,
+                'donor_type' => $this->donor_type,
+                'status' => $this->status,
+                'received_by' => $this->received_by,
             ]);
-            if ($donation->save()) {
-                $this->notification()->success(
-                    $title = 'Success',
-                    $description = 'Your work was successfully saved'
-                );
-                $this->reset();
-                $this->dispatch('close-modal');
-                $this->dispatch('refreshDatatable');
-            } else {
-                $this->notification()->error(
-                    $title = 'Error',
-                    $description = 'Failed to update donation status'
-                );
-            }
-        } catch (\Throwable $th) {
-            $this->notification()->error(
-                $title = 'Error',
-                $description = 'Something went wrong'
-            );
-        }
-    }
 
-    public function confirmDelete($pkey)
-    {
-        try {
-            $this->objId = $pkey;
-            $this->dialog()->confirm([
-                'title'       => 'Are you Sure you want to archieve this?',
-                'description' => 'You cant revert this',
-                'acceptLabel' => 'Yes',
-                'method'      => 'delete'
-            ]);
+            $this->handleSuccess($donation);
         } catch (\Throwable $th) {
             $this->notification()->error(
-                $title = 'Error',
-                $description = 'Something went wrong'
-            );
-        }
-    }
-
-    public function delete()
-    {
-        try {
-            $donation = Donation::find($this->objId);
-            if ($donation->delete()) {
-                $this->notification()->success(
-                    $title = 'Success',
-                    $description = 'Your work was successfully saved'
-                );
-                $this->reset();
-                $this->dispatch('close-modal');
-                $this->dispatch('refreshDatatable');
-            } else {
-                $this->notification()->error(
-                    $title = 'Error',
-                    $description = 'Failed to update donation status'
-                );
-            }
-        } catch (\Throwable $th) {
-            $this->notification()->error(
-                $title = 'Error',
-                $description = 'Something went wrong'
+                'Error',
+                'Something went wrong: ' . $th->getMessage()
             );
         }
     }
@@ -157,25 +65,66 @@ class Index extends Component
     {
         try {
             $this->objId = $pkey;
-            $this->dispatch('edit-modal');
-            $donation = Donation::find($this->objId);
-            $this->donation_references_id = $donation->donation_references_id;
-            $this->amount = $donation->amount;
-            $this->date = $donation->date;
-            $this->name = $donation->name;
-            $this->category = $donation->category;
+            $donation = Donation::findOrFail($this->objId);
+
+            $this->fillDonationData($donation);
             $this->dispatch('open-modal', ['name' => $name]);
         } catch (\Throwable $th) {
             $this->notification()->error(
-                $title = 'Error',
-                $description = 'Failed to fetch data'
+                'Error',
+                'Failed to fetch data: ' . $th->getMessage()
             );
         }
     }
+
+    private function fillDonationData($donation)
+    {
+        $this->donation_references_id = $donation->donation_references_id;
+        $this->amount = $donation->amount;
+        $this->date = $donation->date;
+        $this->name = $donation->name;
+        $this->donor_type = $donation->donor_type;
+        $this->status = $donation->status;
+        $this->received_by = $donation->received_by;
+    }
+
+    private function handleSuccess($donation)
+    {
+        if ($donation) {
+            $this->notification()->success(
+                'Success',
+                'Your donation was successfully saved.'
+            );
+            $this->resetFields();
+            $this->dispatch('close-modal');
+            $this->dispatch('refreshDatatable');
+        } else {
+            $this->notification()->error(
+                'Error',
+                'Failed to save the donation.'
+            );
+        }
+    }
+
+    private function resetFields()
+    {
+        $this->reset([
+            'donation_references_id',
+            'name',
+            'amount',
+            'date',
+            'status',
+            'donor_type',
+            'received_by'
+        ]);
+    }
+
     public function render()
     {
         $this->donation_references = DonationReference::where('status', 'Active')->get();
-        $this->users = User::with('user_detail')->where('status', 'Active')->get();
-        return view('livewire.analytics.donation.index');
+
+        $showNameField = $this->donor_type == 'Organization';
+
+        return view('livewire.analytics.donation.index', compact('showNameField'));
     }
 }

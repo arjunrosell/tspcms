@@ -14,9 +14,12 @@ class Expense extends Model
     protected $fillable = [
         'expense_references_id',
         'amount',
-        'files',
         'remarks',
+        'status',
         'date',
+        'event_description',
+        'location',
+        'files',
     ];
 
     public function expense_references()
