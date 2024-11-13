@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('contact_no')->nullable();
             $table->string('permanent_address')->nullable();
+            $table->enum('status', ['Active', 'Disabled'])->default('Active')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -158,6 +158,6 @@ class Index extends Component
     public function render()
     {
         $this->event_references = EventReference::where('status', 'Active')->whereNotIn('id', ['5', '3'])->get();
-        return view('livewire.analytics.events.index');
+        return view('livewire.analytics.events.funeral-mass.index');
     }
 }

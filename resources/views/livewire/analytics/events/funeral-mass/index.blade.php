@@ -2,7 +2,8 @@
     <div x-data="initData">
         <div class="mb-6">
             <div class="mb-4 ">
-                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Events | Funeral Mass</h2>
+                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Events | Funeral Mass
+                </h2>
             </div>
             <nav class="flex mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -46,7 +47,7 @@
 
         <livewire:components.tabs.events-tab />
 
-        <div class="flex items-center gap-2 mb-5 ">
+        <div class="flex items-center gap-2 mb-6 ">
             <a href="{{ route('analytics-events-funeral-mass.add-funeral-mass') }}"
                 class="inline-flex items-center gap-2 px-3 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -55,9 +56,10 @@
                         d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4.2a1 1 0 1 0-2 0V11H7.8a1 1 0 1 0 0 2H11v3.2a1 1 0 1 0 2 0V13h3.2a1 1 0 1 0 0-2H13V7.8Z"
                         clip-rule="evenodd" />
                 </svg>
-                Funeral Mass
+                Add Funeral Mass
             </a>
         </div>
+
 
         <livewire:table.funeral-mass-table />
 

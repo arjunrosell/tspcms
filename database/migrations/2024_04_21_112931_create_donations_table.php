@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->double('amount');
             $table->date('date');
+            $table->string('category')->nullable();
             $table->enum('status', ['Active', 'Disabled'])->default('Active')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class FuneralMass extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'date',
         'pangalan_ng_namatay',
@@ -24,6 +23,5 @@ class FuneralMass extends Model
         'pangalan_ng_nagpalista',
         'contact_no',
         'taga_pagdiwang',
-        'status',
     ];
 }

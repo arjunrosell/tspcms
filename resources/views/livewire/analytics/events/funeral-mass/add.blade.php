@@ -1,4 +1,11 @@
 <div>
+    <!-- Success message -->
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <div x-data="initData">
         <div class="mb-11">
             <div class="mb-4 ">
@@ -45,7 +52,7 @@
             </nav>
         </div>
 
-        <div class=" max-w-[1000px] w-90% mx-auto border bg-gray-200 border-gray-400 px-4 pt-8 pb-4 rounded-md">
+        <div class="w-full mx-auto border bg-gray-200 border-gray-400 px-4 pt-8 pb-4 rounded-md">
             <div class="grid grid-cols-3 gap-4 mb-5 ">
                 <div class="inline-flex flex-col">
                     <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Date</label>
