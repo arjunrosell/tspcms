@@ -23,31 +23,33 @@ class FuneralMassTable extends DataTableComponent
                 ->sortable(),
             Column::make("Date", "date")
                 ->sortable(),
-            Column::make("Pangalan ng namatay", "pangalan_ng_namatay")
+            Column::make("Deceased Name", "deceased_name")
                 ->sortable(),
-            Column::make("Petsa ng kamatayan", "petsa_ng_kamatayan")
+            Column::make("Death Date", "death_date")
                 ->sortable(),
-            Column::make("Petsa ng libing", "petsa_ng_libing")
+            Column::make("Burial Date", "burial_date")
                 ->sortable(),
-            Column::make("Oras ng alis", "oras_ng_alis")
+            Column::make("Departure Time", "departure_time")
                 ->sortable(),
-            Column::make("Edad", "edad")
+            Column::make("Departure Time", "birth_date")
                 ->sortable(),
-            Column::make("Pangalan ng asawa", "pangalan_ng_asawa")
+            Column::make("Age", "age")
                 ->sortable(),
-            Column::make("Taga saan", "taga_saan")
+            Column::make("Spouse Name", "spouse_name")
                 ->sortable(),
-            Column::make("Sanhi ng kamatayan", "sanhi_ng_kamatayan")
+            Column::make("Place of Origin", "place_of_origin")
                 ->sortable(),
-            Column::make("Oras ng misa", "oras_ng_misa")
+            Column::make("Cause of Death", "cause_of_death")
                 ->sortable(),
-            Column::make("Saan ililibing", "saan_ililibing")
+            Column::make("Mass Time", "mass_time")
                 ->sortable(),
-            Column::make("Pangalan ng nagpalista", "pangalan_ng_nagpalista")
+            Column::make("Burial Place", "burial_place")
                 ->sortable(),
-            Column::make("Contact no", "contact_no")
+            Column::make("Registrant Name", "registrant_name")
                 ->sortable(),
-            Column::make("Taga pagdiwang", "taga_pagdiwang")
+            Column::make("Contact Number", "contact_number")
+                ->sortable(),
+            Column::make("Celebration Place", "celebration_place")
                 ->sortable(),
             Column::make("Status", "status")
                 ->sortable(),
@@ -63,6 +65,6 @@ class FuneralMassTable extends DataTableComponent
 
     public function editData($control_num)
     {
-        return redirect()->route('analytics-events-funeral-mass.edit-funeral-mass', ['pkey' => $control_num]);
+        return redirect()->route('analytics-events-funeral-mass.edit-funeral-mass', ['funeralMassId' => $control_num]);
     }
 }

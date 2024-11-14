@@ -5,99 +5,136 @@ namespace App\Livewire\Analytics\Events\FuneralMass;
 use App\Models\FuneralMass;
 use Livewire\Component;
 use WireUi\Traits\Actions;
+use Carbon\Carbon;
 
 class Edit extends Component
 {
     use Actions;
 
-    public $status;
-    public $objId;
-    public $show = true;
+    public $funeralMassId;
     public $date;
-    public $pangalan_ng_namatay;
-    public $petsa_ng_kamatayan;
-    public $petsa_ng_libing;
-    public $oras_ng_alis;
-    public $edad;
-    public $pangalan_ng_asawa;
-    public $taga_saan;
-    public $sanhi_ng_kamatayan;
-    public $oras_ng_misa;
-    public $saan_ililibing;
-    public $pangalan_ng_nagpalista;
-    public $contact_no;
-    public $taga_pagdiwang;
+    public $deceased_name;
+    public $death_date;
+    public $birth_date;
+    public $age;
+    public $mass_time;
+    public $spouse_name;
+    public $place_of_origin;
+    public $cause_of_death;
+    public $departure_time;
+    public $burial_place;
+    public $burial_date;
+    public $registrant_name;
+    public $contact_number;
+    public $celebration_place;
 
-    protected $listeners = [
-        'editModal' => 'fetch'
+    protected $rules = [
+        'date' => 'required|date',
+        'deceased_name' => 'required|string|max:255',
+        'death_date' => 'required|date|before_or_equal:today',
+        'birth_date' => 'required|date|before_or_equal:today',
+        'age' => 'required|integer|min:0',
+        'mass_time' => 'nullable',
+        'spouse_name' => 'nullable|string|max:255',
+        'place_of_origin' => 'nullable|string|max:255',
+        'cause_of_death' => 'nullable|string|max:255',
+        'departure_time' => 'nullable',
+        'burial_place' => 'nullable|string|max:255',
+        'burial_date' => 'required|date|after_or_equal:today',
+        'registrant_name' => 'nullable|string|max:255',
+        'contact_number' => 'nullable|string|max:20',
+        'celebration_place' => 'nullable|string|max:255',
     ];
+
+    public function messages()
+    {
+        return [
+            'birth_date.before_or_equal' => 'The birth date cannot be in the future.',
+            'death_date.before_or_equal' => 'The death date cannot be in the future.',
+            'burial_date.after_or_equal' => 'The burial date must be in the future.',
+        ];
+    }
+
+    public function mount($funeralMassId)
+    {
+        $this->loadFuneralMass($funeralMassId);
+    }
+
+    public function loadFuneralMass($funeralMassId)
+    {
+        $funeralMass = FuneralMass::findOrFail($funeralMassId);
+        $this->funeralMassId = $funeralMass->id;
+        $this->date = $funeralMass->date;
+        $this->deceased_name = $funeralMass->deceased_name;
+        $this->death_date = $funeralMass->death_date;
+        $this->birth_date = $funeralMass->birth_date;
+        $this->age = $funeralMass->age;
+        $this->mass_time = $funeralMass->mass_time;
+        $this->spouse_name = $funeralMass->spouse_name;
+        $this->place_of_origin = $funeralMass->place_of_origin;
+        $this->cause_of_death = $funeralMass->cause_of_death;
+        $this->departure_time = $funeralMass->departure_time;
+        $this->burial_place = $funeralMass->burial_place;
+        $this->burial_date = $funeralMass->burial_date;
+        $this->registrant_name = $funeralMass->registrant_name;
+        $this->contact_number = $funeralMass->contact_number;
+        $this->celebration_place = $funeralMass->celebration_place;
+        $this->status = $funeralMass->status;
+    }
 
     public function update()
     {
-        try {
-            $funeral_mass = FuneralMass::find($this->objId);
-            $funeral_mass->update([
-                'date' => $this->date,
-                'pangalan_ng_namatay' => $this->pangalan_ng_namatay,
-                'petsa_ng_kamatayan' => $this->petsa_ng_kamatayan,
-                'petsa_ng_libing' => $this->petsa_ng_libing,
-                'oras_ng_alis' => $this->oras_ng_alis,
-                'edad' => $this->edad,
-                'pangalan_ng_asawa' => $this->pangalan_ng_asawa,
-                'taga_saan' => $this->taga_saan,
-                'sanhi_ng_kamatayan' => $this->sanhi_ng_kamatayan,
-                'oras_ng_misa' => $this->oras_ng_misa,
-                'saan_ililibing' => $this->saan_ililibing,
-                'pangalan_ng_nagpalista' => $this->pangalan_ng_nagpalista,
-                'contact_no' => $this->contact_no,
-                'taga_pagdiwang' => $this->taga_pagdiwan,
-            ]);
+        // Validate the updated data
+        $this->validate();
 
-            if ($funeral_mass->save()) {
-                $this->notification()->success(
-                    $title = 'Success',
-                    $description = 'Your work was successfully saved'
-                );
-                $this->reset();
-                return redirect()->route('analytics-events-funeral-mass.index');
-            } else {
-                $this->notification()->error(
-                    $title = 'Error',
-                    $description = 'Failed to update funeral_mass status'
-                );
-            }
-        } catch (\Throwable $th) {
+        // Check if the number of events on the selected date exceeds the limit (5 per day), excluding the current one
+        $eventsCount = FuneralMass::whereDate('date', $this->date)
+            ->where('id', '!=', $this->funeralMassId) // Exclude the current mass being updated
+            ->count();
+
+        if ($eventsCount >= 5) {
             $this->notification()->error(
-                $title = 'Error',
-                $description = 'Something went wrong'
+                'Failed to update',
+                'The maximum number of funeral events for ' . $this->date . ' has been reached (5 events per day).'
             );
+            return;
         }
+
+        // Find the funeral mass by ID and update the record
+        $funeralMass = FuneralMass::findOrFail($this->funeralMassId);
+        $funeralMass->update([
+            'date' => $this->date,
+            'deceased_name' => $this->deceased_name,
+            'death_date' => $this->death_date,
+            'birth_date' => $this->birth_date,
+            'age' => $this->age,
+            'mass_time' => $this->mass_time,
+            'spouse_name' => $this->spouse_name,
+            'place_of_origin' => $this->place_of_origin,
+            'cause_of_death' => $this->cause_of_death,
+            'departure_time' => $this->departure_time,
+            'burial_place' => $this->burial_place,
+            'burial_date' => $this->burial_date,
+            'registrant_name' => $this->registrant_name,
+            'contact_number' => $this->contact_number,
+            'celebration_place' => $this->celebration_place,
+            'status' => $this->status,
+        ]);
+
+        // Success notification
+        $this->notification()->success(
+            'Funeral mass updated successfully',
+            'The funeral mass for ' . $this->deceased_name . ' has been updated.'
+        );
+
+        // Redirect back to the events page
+        return redirect()->to('/analytics/events');
     }
-    public function mount($pkey)
+
+    public function updatedBirthDate($value)
     {
-        try {
-            $this->objId = $pkey;
-            $funeral_mass = FuneralMass::find($this->objId);
-            $this->date = $funeral_mass->date;
-            $this->pangalan_ng_namatay = $funeral_mass->pangalan_ng_namatay;
-            $this->petsa_ng_kamatayan = $funeral_mass->petsa_ng_kamatayan;
-            $this->petsa_ng_libing = $funeral_mass->petsa_ng_libing;
-            $this->oras_ng_alis = $funeral_mass->oras_ng_alis;
-            $this->edad = $funeral_mass->edad;
-            $this->pangalan_ng_asawa = $funeral_mass->pangalan_ng_asawa;
-            $this->taga_saan = $funeral_mass->taga_saan;
-            $this->sanhi_ng_kamatayan = $funeral_mass->sanhi_ng_kamatayan;
-            $this->oras_ng_misa = $funeral_mass->oras_ng_misa;
-            $this->saan_ililibing = $funeral_mass->saan_ililibing;
-            $this->pangalan_ng_nagpalista = $funeral_mass->pangalan_ng_nagpalista;
-            $this->contact_no = $funeral_mass->contact_no;
-            $this->taga_pagdiwang = $funeral_mass->taga_pagdiwang;
-        } catch (\Throwable $th) {
-            $this->notification()->error(
-                $title = 'Error',
-                $description = 'Failed to fetch data'
-            );
-        }
+        // Update the age based on the birth date
+        $this->age = Carbon::parse($value)->age;
     }
 
     public function render()

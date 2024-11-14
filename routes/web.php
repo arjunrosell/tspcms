@@ -64,10 +64,11 @@ Route::middleware(['auth'])->prefix('analytics')->name('analytics.')->group(func
     Route::get('/events', EventsIndex::class)->name('events');
 });
 
+Route::get('/analytics/events/funeral-mass', FuneralMassIndex::class)->name('analytics-events-funeral-mass');
 Route::middleware(['auth'])->prefix('analytics-events-funeral-mass')->name('analytics-events-funeral-mass.')->group(function () {
     Route::get('/', FuneralMassIndex::class)->name('index');
     Route::get('/add-funeral-mass', FuneralMassAdd::class)->name('add-funeral-mass');
-    Route::get('/edit-funeral-mass/{pkey}', FuneralMassEdit::class)->name('edit-funeral-mass');
+    Route::get('/edit-funeral-mass/{funeralMassId}', FuneralMassEdit::class)->name('edit-funeral-mass');
 });
 
 Route::middleware(['auth'])->prefix('analytics-events-wedding')->name('analytics-events-wedding.')->group(function () {

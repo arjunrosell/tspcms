@@ -1,150 +1,189 @@
-<div>
-    <div x-data="initData">
-        <div class="mb-11">
-            <div class="mb-4 ">
-                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Update | Funeral Mass
-                </h2>
-            </div>
-            <nav class="flex mb-4" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <li class="inline-flex items-center">
-                        <a href="{{ route('analytics.events') }}"
-                            class="inline-flex items-center text-xs font-normal text-gray-600 hover:text-primary-red dark:text-gray-400 dark:hover:text-white">
-                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
-                            </svg>
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <svg class="w-3 h-3 mx-1 text-gray-400 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 9 4-4-4-4" />
-                            </svg>
-                            <a href="{{ route('analytics-events-funeral-mass.add-funeral-mass') }}"
-                                class="text-xs font-normal text-gray-600 ms-1 hover:text-primary-red md:ms-2 dark:text-gray-400 dark:hover:text-white">
-                                Funeral Mass
-                            </a>
-                        </div>
-                    </li>
-                    <li aria-current="page">
-                        <div class="flex items-center">
-                            <svg class="w-3 h-3 mx-1 text-gray-400 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 9 4-4-4-4" />
-                            </svg>
-                            <span class="text-xs font-normal text-gray-600 ms-1 md:ms-2 dark:text-gray-400">Index</span>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-
-        <div class="w-full mx-auto border bg-gray-200 border-gray-400 px-4 pt-8 pb-4 rounded-md">
-            <div class="grid grid-cols-3 gap-4 mb-5 ">
-                <div class="inline-flex flex-col">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Date</label>
-                    <input type="date" class=" form-input" wire:model='date'>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 gap-4 mb-5 ">
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Buong Pangalan ng
-                        Namatay</label>
-                    <input type="text" class=" form-input" wire:model='pangalan_ng_namatay'>
-                </div>
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Petsa ng
-                        Kamatayan</label>
-                    <input type="date" class=" form-input" wire:model='petsa_ng_kamatayan'>
-                </div>
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Petsa ng
-                        Libing</label>
-                    <input type="date" class=" form-input" wire:model='petsa_ng_libing'>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 gap-4 mb-5 ">
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Oras ng alis sa
-                        Bahay</label>
-                    <input type="time" class=" form-input" wire:model='oras_ng_alis'>
-                </div>
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Edad</label>
-                    <input type="number" class=" form-input" wire:model='edad'>
-                </div>
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Pangalan ng
-                        Asawa</label>
-                    <input type="text" class=" form-input" wire:model='pangalan_ng_asawa'>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4 mb-5 ">
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Taga Saan</label>
-                    <input type="text" class=" form-input" wire:model='taga_saan'>
-                </div>
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Sanhi ng
-                        Kamatayan</label>
-                    <input type="text" class=" form-input" wire:model='sanhi_ng_kamatayan'>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 gap-4 mb-5 ">
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Oras ng
-                        Misa</label>
-                    <input type="time" class=" form-input" wire:model='oras_ng_misa'>
-                </div>
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Saan
-                        Ililibing</label>
-                    <input type="text" class=" form-input" wire:model='saan_ililibing'>
-                </div>
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">pangalan ng
-                        nagpalista</label>
-                    <input type="text" class=" form-input" wire:model='pangalan_ng_nagpalista'>
-                </div>
-            </div>
-            <div class="grid grid-cols-4 gap-4 mb-5 ">
-                <div class="inline-flex flex-col ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Contact
-                        Number</label>
-                    <input type="number" placeholder="09***34***" class=" form-input" wire:model='contact_no'>
-                </div>
-                <div class="inline-flex flex-col col-span-3 ">
-                    <label for="" class="text-sm font-semibold tracking-wide text-gray-600 ">Taga
-                        pagdiwang</label>
-                    <input type="text" class=" form-input" wire:model='taga_pagdiwang'>
-                </div>
-            </div>
-            <div class="flex items-center justify-end gap-2 ">
-                <a href="{{ route('analytics.events') }}"
-                    class="inline-flex items-center gap-2 px-3 py-2 text-sm text-indigo-600 transition-colors duration-150 ease-linear border border-indigo-600 rounded-md hover:text-white hover:bg-indigo-700">
-                    Back
-                </a>
-                <button wire:click='update'
-                    class="inline-flex items-center gap-1 px-3 py-2 text-sm text-white transition-colors duration-150 ease-linear bg-indigo-600 rounded-md hover:bg-indigo-700">
-                    <svg class="w-4 h-4 text-white " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        fill="currentColor">
-                        <path
-                            d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z">
-                        </path>
-                    </svg>
-                    Save
-                </button>
+<div class="container mx-auto mt-5">
+    <form wire:submit.prevent="update" class="space-y-6"> <!-- Change 'create' to 'update' -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                <input type="date" id="date" wire:model="date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
         </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="deceased_name" class="block text-sm font-medium text-gray-700">Deceased Name</label>
+                <input type="text" id="deceased_name" wire:model="deceased_name"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('deceased_name')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="birth_date" class="block text-sm font-medium text-gray-700">Birth Date</label>
+                <input type="date" id="birth_date" wire:model="birth_date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('birth_date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="death_date" class="block text-sm font-medium text-gray-700">Death Date</label>
+                <input type="date" id="death_date" wire:model="death_date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('death_date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                <input type="number" id="age" wire:model="age" readonly
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('age')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="burial_date" class="block text-sm font-medium text-gray-700">Burial Date</label>
+                <input type="date" id="burial_date" wire:model="burial_date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('burial_date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="mass_time" class="block text-sm font-medium text-gray-700">Mass Time</label>
+                <input type="time" id="mass_time" wire:model="mass_time"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('mass_time')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="cause_of_death" class="block text-sm font-medium text-gray-700">Cause of Death</label>
+                <input type="text" id="cause_of_death" wire:model="cause_of_death"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('cause_of_death')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="departure_time" class="block text-sm font-medium text-gray-700">Departure Time</label>
+                <input type="time" id="departure_time" wire:model="departure_time"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('departure_time')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="burial_place" class="block text-sm font-medium text-gray-700">Burial Place</label>
+                <input type="text" id="burial_place" wire:model="burial_place"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('burial_place')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="registrant_name" class="block text-sm font-medium text-gray-700">Registrant Name</label>
+                <input type="text" id="registrant_name" wire:model="registrant_name"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('registrant_name')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="spouse_name" class="block text-sm font-medium text-gray-700">Spouse Name</label>
+                <input type="text" id="spouse_name" wire:model="spouse_name"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('spouse_name')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="place_of_origin" class="block text-sm font-medium text-gray-700">Place of Origin</label>
+                <input type="text" id="place_of_origin" wire:model="place_of_origin"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('place_of_origin')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="contact_number" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                <input type="text" id="contact_number" wire:model="contact_number"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('contact_number')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
 
-        @push('script')
-        @endpush
-    </div>
+            <div>
+                <label for="celebration_place" class="block text-sm font-medium text-gray-700">Celebration
+                    Place</label>
+                <input type="text" id="celebration_place" wire:model="celebration_place"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('celebration_place')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
 
+        <div class="mt-6 flex items-center justify-end gap-2">
+            <a href="{{ route('analytics-events-wedding.index') }}"
+                class="inline-flex items-center gap-2 px-3 py-2 text-sm text-indigo-600 transition-colors duration-150 ease-linear border border-indigo-600 rounded-md hover:text-white hover:bg-indigo-700">
+                Back
+            </a>
+            <button type="submit"
+                class="inline-flex items-center gap-1 px-3 py-2 text-sm text-white transition-colors duration-150 ease-linear bg-indigo-600 rounded-md hover:bg-indigo-700">
+                <svg class="w-4 h-4 text-white " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    fill="currentColor">
+                    <path
+                        d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z">
+                    </path>
+                </svg>
+                Update
+            </button>
+        </div>
+    </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#birth_date').on('input', function() {
+            var birthDate = $(this).val();
+            var birthDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+            if (birthDateRegex.test(birthDate)) {
+                var birthDateObj = new Date(birthDate);
+                var currentDate = new Date();
+
+                var age = currentDate.getFullYear() - birthDateObj.getFullYear();
+                var month = currentDate.getMonth() - birthDateObj.getMonth();
+                if (month < 0 || (month === 0 && currentDate.getDate() < birthDateObj.getDate())) {
+                    age--;
+                }
+                $('#age').val(age);
+            } else {
+                $('#age').val('');
+            }
+        });
+    });
+</script>
