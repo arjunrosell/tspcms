@@ -58,13 +58,13 @@ class Add extends Component
     public function create()
     {
         $this->validate();
-        $eventsCount = FuneralMass::whereDate('date', $this->date)->count();
+        $eventsCount = FuneralMass::whereDate('burial_date', $this->burial_date)->count();
 
         if ($eventsCount >= 5) {
 
             $this->notification()->error(
                 'Failed to add',
-                'The maximum number of funeral events for ' . $this->date . ' has been reached (5 events per day).'
+                'The maximum number of funeral mass for ' . $this->burial_date . ' has been reached (5 events per day).'
             );
             return;
         }
@@ -91,8 +91,8 @@ class Add extends Component
             'Funeral mass created successfully',
             'The funeral mass for ' . $this->deceased_name . ' has been added to the system.'
         );
-        // $this->reset();
-        return redirect()->to('/analytics/events');
+        $this->reset();
+        // return redirect()->to('/analytics/events');
     }
 
     public function updatedBirthDate($value)
