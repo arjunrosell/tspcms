@@ -137,8 +137,8 @@
                         if (key == "analytics") {
                             key = "analyticsManagement"
                         }
-                        if (key == "system-references") {
-                            key = "systemReferences"
+                        if (key == "system-maintenance") {
+                            key = "systemMaintenance"
                         }
                         switch (key) {
                             case 'userManagement':
@@ -149,7 +149,7 @@
                                 this.sidebarExpanded ? this.analyticsdMenu = !this.analyticsdMenu : this
                                     .sidebarExpanded = true
                                 break;
-                            case 'systemReferences':
+                            case 'systemMaintenance':
                                 this.sidebarExpanded ? this.systemRefMenu = !this.systemRefMenu : this
                                     .sidebarExpanded = true
                                 break;
@@ -165,7 +165,7 @@
                             case 'analyticsManagement':
                                 return this.analyticsdMenu
                                 break;
-                            case 'systemReferences':
+                            case 'systemMaintenance':
                                 return this.systemRefMenu
                                 break;
                             default:

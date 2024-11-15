@@ -27,10 +27,9 @@ class Add extends Component
     public $registrant_name;
     public $contact_number;
     public $celebration_place;
-    public $status = 'Active';
 
     protected $rules = [
-        'date' => 'required|date',
+        'date' => 'required|date|after_or_equal:today',
         'deceased_name' => 'required|string|max:255',
         'death_date' => 'required|date|before_or_equal:today',
         'birth_date' => 'required|date|before_or_equal:today',
@@ -47,14 +46,6 @@ class Add extends Component
         'celebration_place' => 'nullable|string|max:255',
     ];
 
-    public function messages()
-    {
-        return [
-            'birth_date.before_or_equal' => 'The birth date cannot be in the future.',
-            'death_date.before_or_equal' => 'The death date cannot be in the future.',
-            'burial_date.after_or_equal' => 'The burial date must be in the future.',
-        ];
-    }
     public function create()
     {
         $this->validate();
@@ -85,7 +76,6 @@ class Add extends Component
             'registrant_name' => $this->registrant_name,
             'contact_number' => $this->contact_number,
             'celebration_place' => $this->celebration_place,
-            'status' => $this->status,
         ]);
         $this->notification()->success(
             'Funeral mass created successfully',

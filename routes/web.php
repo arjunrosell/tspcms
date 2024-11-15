@@ -74,7 +74,7 @@ Route::middleware(['auth'])->prefix('analytics-events-funeral-mass')->name('anal
 Route::middleware(['auth'])->prefix('analytics-events-wedding')->name('analytics-events-wedding.')->group(function () {
     Route::get('/', WeddingIndex::class)->name('index');
     Route::get('/add-wedding', WeddingAdd::class)->name('add-wedding');
-    Route::get('/edit-wedding/{pkey}', WeddingEdit::class)->name('edit-wedding');
+    Route::get('/edit-wedding/{weddingId}', WeddingEdit::class)->name('edit-wedding');
 });
 
 Route::middleware(['auth'])->prefix('analytics-events-baptism')->name('analytics-events-baptism.')->group(function () {

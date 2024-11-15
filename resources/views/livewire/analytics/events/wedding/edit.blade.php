@@ -1,309 +1,331 @@
-<div>
-    <div x-data="initData">
-        <div class="mb-11">
-            <div class="mb-4 ">
-                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Wedding Application Form
-                    | Update</h2>
-            </div>
-            <nav class="flex mb-4" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <li class="inline-flex items-center">
-                        <a href="{{ route('analytics.events') }}"
-                            class="inline-flex items-center text-xs font-normal text-gray-600 hover:text-primary-red dark:text-gray-400 dark:hover:text-white">
-                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
-                            </svg>
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <svg class="w-3 h-3 mx-1 text-gray-400 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 9 4-4-4-4" />
-                            </svg>
-                            <a href="{{ route('analytics-events-funeral-mass.add-funeral-mass') }}"
-                                class="text-xs font-normal text-gray-600 ms-1 hover:text-primary-red md:ms-2 dark:text-gray-400 dark:hover:text-white">
-                                Wedding Mass
-                            </a>
-                        </div>
-                    </li>
-                    <li aria-current="page">
-                        <div class="flex items-center">
-                            <svg class="w-3 h-3 mx-1 text-gray-400 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 9 4-4-4-4" />
-                            </svg>
-                            <span class="text-xs font-normal text-gray-600 ms-1 md:ms-2 dark:text-gray-400">Index</span>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-
+<div class="container mx-auto mt-5">
+    <form wire:submit.prevent="update" class="space-y-6">
         <div>
-            <div class="flex items-start justify-between px-4 py-6 bg-gray-700 rounded-md mb-7">
-                <div>
-                    <div class="mb-5">
-                        <label class="block mb-1 text-sm font-bold text-white ">Date of Wedding</label>
-                        <div>
-                            <input type="date" class=" form-input" wire:model='date_wedding'>
-                            <input type="time" class=" form-input" wire:model='time_wedding'>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block mb-1 text-sm font-bold text-white ">Type of Wedding</label>
-                        <div class="flex items-center gap-4 ">
-                            <select wire:model='type_wedding'
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-red focus:border-primary-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-red dark:focus:border-primary-red">
-                                <option value="Nutial(With mass)">Nutial(With mass)</option>
-                                <option value="Simple Wedding(Without mass)">Simple Wedding(Without mass)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <label class="block mb-1 text-sm font-bold text-white ">Date of Application</label>
-                    <div>
-                        <input type="date" class=" form-input" wire:model='date_application'>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-3 mb-5 ">
-                <div>
-                    <h4 class="mb-3 text-xl font-bold tracking-wide ">Groom</h4>
-                    <div class="p-3 bg-gray-700 rounded-md ">
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="groom_name" class="text-sm text-white ">Name</label>
-                            <input type="text" class=" form-input" id="groom_name" wire:model='groom_name'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="groom_age" class="text-sm text-white ">Age</label>
-                            <input type="number" class=" form-input" id="groom_age" wire:model='groom_age'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="groom_bday" class="text-sm text-white ">Birthday</label>
-                            <input type="date" class=" form-input" id="groom_bday" wire:model='groom_bday'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="groom_father" class="text-sm text-white ">Father</label>
-                            <input type="text" class=" form-input" id="groom_father" wire:model='groom_father'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="groom_mother" class="text-sm text-white ">Mother</label>
-                            <input type="text" class=" form-input" id="groom_mother" wire:model='groom_mother'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="groom_address" class="text-sm text-white ">Address</label>
-                            <input type="text" class=" form-input" id="groom_address" wire:model='groom_address'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="groom_contact_no" class="text-sm text-white ">Contact No.</label>
-                            <input type="number" class=" form-input" id="groom_contact_no"
-                                wire:model='groom_contact_no'>
-                        </div>
-                        <fieldset class="p-3 mb-5 border border-gray-400 rounded-md ">
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="groom_place_baptism" class="text-sm text-white ">Place of Baptism</label>
-                                <input type="text" class=" form-input" id="groom_place_baptism"
-                                    wire:model='groom_place_baptism'>
-                            </div>
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="groom_parish_of" class="text-sm text-white ">Parish Of</label>
-                                <input type="text" class=" form-input" id="groom_parish_of"
-                                    wire:model='groom_parish_of'>
-                            </div>
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="groom_date_bap" class="text-sm text-white ">Date</label>
-                                <input type="date" class=" form-input" id="groom_date_bap"
-                                    wire:model='groom_date_bap'>
-                            </div>
-                            {{-- <div class="grid grid-cols-3 gap-2 ">
-                                <div class="flex flex-col gap-1">
-                                    <label for="groom_book_no_1" class="text-sm text-white ">Book #</label>
-                                    <input type="number" class=" form-input" id="groom_book_no_1"
-                                        wire:model='groom_book_no_1'>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="groom_line_no_1" class="text-sm text-white ">Line #</label>
-                                    <input type="number" class=" form-input" id="groom_line_no_1"
-                                        wire:model='groom_line_no_1'>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="groom_page_no_1" class="text-sm text-white ">Page #</label>
-                                    <input type="number" class=" form-input" id="groom_page_no_1"
-                                        wire:model='groom_page_no_1'>
-                                </div>
-                            </div> --}}
-                        </fieldset>
-                        <fieldset class="p-3 border border-gray-400 rounded-md ">
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="groom_place_confirm" class="text-sm text-white ">Place of
-                                    Confirmation</label>
-                                <input type="text" class=" form-input" id="groom_place_confirm"
-                                    wire:model='groom_place_confirm'>
-                            </div>
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="groom_parish_confirm" class="text-sm text-white ">Parish Of</label>
-                                <input type="text" class=" form-input" id="groom_parish_confirm"
-                                    wire:model='groom_parish_confirm'>
-                            </div>
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="groom_date_confirm" class="text-sm text-white ">Date</label>
-                                <input type="date" class=" form-input" id="groom_date_confirm"
-                                    wire:model='groom_date_confirm'>
-                            </div>
-                            {{-- <div class="grid grid-cols-3 gap-2 ">
-                                <div class="flex flex-col gap-1">
-                                    <label for="groom_book_no_2" class="text-sm text-white ">Book #</label>
-                                    <input type="number" class=" form-input" id="groom_book_no_2"
-                                        wire:model='groom_book_no_2'>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="groom_line_no_2" class="text-sm text-white ">Line #</label>
-                                    <input type="number" class=" form-input" id="groom_line_no_2"
-                                        wire:model='groom_line_no_2'>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="groom_page_no_2" class="text-sm text-white ">Page #</label>
-                                    <input type="number" class=" form-input" id="groom_page_no_2"
-                                        wire:model='groom_page_no_2'>
-                                </div>
-                            </div> --}}
-                        </fieldset>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="mb-3 text-xl font-bold tracking-wide ">Bride</h4>
-                    <div class="p-3 bg-gray-700 rounded-md ">
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="bride_name" class="text-sm text-white ">Name</label>
-                            <input type="text" class=" form-input" id="bride_name" wire:model='bride_name'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="bride_age" class="text-sm text-white ">Age</label>
-                            <input type="number" class=" form-input" id="bride_age" wire:model='bride_age'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="bride_bday" class="text-sm text-white ">Birthday</label>
-                            <input type="date" class=" form-input" id="bride_bday" wire:model='bride_bday'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="bride_father" class="text-sm text-white ">Father</label>
-                            <input type="text" class=" form-input" id="bride_father" wire:model='bride_father'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="bride_mother" class="text-sm text-white ">Mother</label>
-                            <input type="text" class=" form-input" id="bride_mother" wire:model='bride_mother'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="bride_address" class="text-sm text-white ">Address</label>
-                            <input type="text" class=" form-input" id="bride_address" wire:model='bride_address'>
-                        </div>
-                        <div class="flex flex-col gap-1 mb-5 ">
-                            <label for="bride_contact_no" class="text-sm text-white ">Contact No.</label>
-                            <input type="number" class=" form-input" id="bride_contact_no"
-                                wire:model='bride_contact_no'>
-                        </div>
-                        <fieldset class="p-3 mb-5 border border-gray-400 rounded-md ">
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="bride_place_baptism" class="text-sm text-white ">Place of Baptism</label>
-                                <input type="text" class=" form-input" id="bride_place_baptism"
-                                    wire:model='bride_place_baptism'>
-                            </div>
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="bride_parish_of" class="text-sm text-white ">Parish Of</label>
-                                <input type="text" class=" form-input" id="bride_parish_of"
-                                    wire:model='bride_parish_of'>
-                            </div>
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="bride_date_bap" class="text-sm text-white ">Date</label>
-                                <input type="date" class=" form-input" id="bride_date_bap"
-                                    wire:model='bride_date_bap'>
-                            </div>
-                            {{-- <div class="grid grid-cols-3 gap-2 ">
-                                <div class="flex flex-col gap-1">
-                                    <label for="bride_book_no_1" class="text-sm text-white ">Book #</label>
-                                    <input type="number" class=" form-input" id="bride_book_no_1"
-                                        wire:model='bride_book_no_1'>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="bride_line_no_1" class="text-sm text-white ">Line #</label>
-                                    <input type="number" class=" form-input" id="bride_line_no_1"
-                                        wire:model='bride_line_no_1'>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="bride_page_no_1" class="text-sm text-white ">Page #</label>
-                                    <input type="number" class=" form-input" id="bride_page_no_1"
-                                        wire:model='bride_page_no_1'>
-                                </div>
-                            </div> --}}
-                        </fieldset>
-                        <fieldset class="p-3 border border-gray-400 rounded-md ">
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="bride_place_confirm" class="text-sm text-white ">Place of
-                                    Confirmation</label>
-                                <input type="text" class=" form-input" id="bride_place_confirm"
-                                    wire:model='bride_place_confirm'>
-                            </div>
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="bride_parish_confirm" class="text-sm text-white ">Parish Of</label>
-                                <input type="text" class=" form-input" id="bride_parish_confirm"
-                                    wire:model='bride_parish_confirm'>
-                            </div>
-                            <div class="flex flex-col gap-1 mb-5 ">
-                                <label for="bride_date_confirm" class="text-sm text-white ">Date</label>
-                                <input type="date" class=" form-input" id="bride_date_confirm"
-                                    wire:model='bride_date_confirm'>
-                            </div>
-                            {{-- <div class="grid grid-cols-3 gap-2 ">
-                                <div class="flex flex-col gap-1">
-                                    <label for="bride_book_no_2" class="text-sm text-white ">Book #</label>
-                                    <input type="number" class=" form-input" id="bride_book_no_2"
-                                        wire:model='bride_book_no_2'>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="bride_line_no_2" class="text-sm text-white ">Line #</label>
-                                    <input type="number" class=" form-input" id="bride_line_no_2"
-                                        wire:model='bride_line_no_2'>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="bride_page_no_2" class="text-sm text-white ">Page #</label>
-                                    <input type="number" class=" form-input" id="bride_page_no_2"
-                                        wire:model='bride_page_no_2'>
-                                </div>
-                            </div> --}}
-                        </fieldset>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex items-center justify-end gap-2 ">
-                <a href="{{ route('analytics.events') }}"
-                    class="inline-flex items-center gap-2 px-3 py-2 text-sm text-indigo-600 transition-colors duration-150 ease-linear border border-indigo-600 rounded-md hover:text-white hover:bg-indigo-700">
-                    Back
-                </a>
-                <button wire:click='update'
-                    class="inline-flex items-center gap-1 px-3 py-2 text-sm text-white transition-colors duration-150 ease-linear bg-indigo-600 rounded-md hover:bg-indigo-700">
-                    <svg class="w-4 h-4 text-white " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        fill="currentColor">
-                        <path
-                            d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z">
-                        </path>
-                    </svg>
-                    Save
-                </button>
-            </div>
-
+            <label for="wedding_date" class="block text-sm font-medium text-gray-700">Date of Wedding</label>
+            <input type="date" id="wedding_date" wire:model="wedding_date"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                required>
+            @error('wedding_date')
+                <span class="text-red-500 text-xs">{{ $message }}</span>
+            @enderror
+        </div>
+        <div>
+            <label for="wedding_time" class="block text-sm font-medium text-gray-700">Time of Wedding</label>
+            <input type="time" id="wedding_time" wire:model="wedding_time"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                required>
+            @error('wedding_time')
+                <span class="text-red-500 text-xs">{{ $message }}</span>
+            @enderror
+        </div>
+        <div>
+            <label for="wedding_type" class="block text-sm font-medium text-gray-700">Type of Wedding</label>
+            <select id="wedding_type" wire:model="wedding_type"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                <option value="nuptial">Nuptial (With Mass)</option>
+                <option value="civil">Civil</option>
+            </select>
+            @error('wedding_type')
+                <span class="text-red-500 text-xs">{{ $message }}</span>
+            @enderror
+        </div>
+        <div>
+            <label for="application_date" class="block text-sm font-medium text-gray-700">Date of Application</label>
+            <input type="date" id="application_date" wire:model="application_date"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                required>
+            @error('application_date')
+                <span class="text-red-500 text-xs">{{ $message }}</span>
+            @enderror
         </div>
 
+        <!-- Groom's Information -->
+        <div class="border-t border-gray-300 pt-4 space-y-4">
+            <h3 class="text-lg font-medium text-gray-800">Groom's Information</h3>
+            <div>
+                <label for="groom_name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="groom_name" wire:model="groom_name"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('groom_name')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_birthday" class="block text-sm font-medium text-gray-700">Birthday</label>
+                <input type="date" id="groom_birthday" wire:model="groom_birthday"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('groom_birthday')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_age" class="block text-sm font-medium text-gray-700">Age</label>
+                <input type="number" id="groom_age" wire:model="groom_age" readonly
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('groom_age')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
 
-        @push('script')
-        @endpush
-    </div>
+            <div>
+                <label for="groom_father" class="block text-sm font-medium text-gray-700">Father's Name</label>
+                <input type="text" id="groom_father" wire:model="groom_father"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_father')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_mother" class="block text-sm font-medium text-gray-700">Mother's Name</label>
+                <input type="text" id="groom_mother" wire:model="groom_mother"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_mother')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_address" class="block text-sm font-medium text-gray-700">Address</label>
+                <input type="text" id="groom_address" wire:model="groom_address"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_address')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_contact" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                <input type="text" id="groom_contact" wire:model="groom_contact"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_contact')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_baptism" class="block text-sm font-medium text-gray-700">Place of Baptism</label>
+                <input type="text" id="groom_baptism" wire:model="groom_baptism"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_baptism')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_baptism_parish" class="block text-sm font-medium text-gray-700">Parish of
+                    Baptism</label>
+                <input type="text" id="groom_baptism_parish" wire:model="groom_baptism_parish"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_baptism_parish')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_baptism_date" class="block text-sm font-medium text-gray-700">Date of Baptism</label>
+                <input type="date" id="groom_baptism_date" wire:model="groom_baptism_date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_baptism_date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_confirmation" class="block text-sm font-medium text-gray-700">Place of
+                    Confirmation</label>
+                <input type="text" id="groom_confirmation" wire:model="groom_confirmation"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_confirmation')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_confirmation_parish" class="block text-sm font-medium text-gray-700">Parish of
+                    Confirmation</label>
+                <input type="text" id="groom_confirmation_parish" wire:model="groom_confirmation_parish"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_confirmation_parish')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="groom_confirmation_date" class="block text-sm font-medium text-gray-700">Date of
+                    Confirmation</label>
+                <input type="date" id="groom_confirmation_date" wire:model="groom_confirmation_date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('groom_confirmation_date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
 
+        <!-- Bride's Information -->
+        <div class="border-t border-gray-300 pt-4 space-y-4">
+            <h3 class="text-lg font-medium text-gray-800">Bride's Information</h3>
+
+            <div>
+                <label for="bride_name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="bride_name" wire:model="bride_name"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('bride_name')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_birthday" class="block text-sm font-medium text-gray-700">Birthday</label>
+                <input type="date" id="bride_birthday" wire:model="bride_birthday"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('bride_birthday')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_age" class="block text-sm font-medium text-gray-700">Age</label>
+                <input type="number" id="bride_age" wire:model="bride_age" readonly
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                    required>
+                @error('bride_age')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_father" class="block text-sm font-medium text-gray-700">Father's Name</label>
+                <input type="text" id="bride_father" wire:model="bride_father"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_father')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_mother" class="block text-sm font-medium text-gray-700">Mother's Name</label>
+                <input type="text" id="bride_mother" wire:model="bride_mother"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_mother')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_address" class="block text-sm font-medium text-gray-700">Address</label>
+                <input type="text" id="bride_address" wire:model="bride_address"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_address')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_contact" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                <input type="text" id="bride_contact" wire:model="bride_contact"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_contact')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_baptism" class="block text-sm font-medium text-gray-700">Place of Baptism</label>
+                <input type="text" id="bride_baptism" wire:model="bride_baptism"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_baptism')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_baptism_parish" class="block text-sm font-medium text-gray-700">Parish of
+                    Baptism</label>
+                <input type="text" id="bride_baptism_parish" wire:model="bride_baptism_parish"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_baptism_parish')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_baptism_date" class="block text-sm font-medium text-gray-700">Date of
+                    Baptism</label>
+                <input type="date" id="bride_baptism_date" wire:model="bride_baptism_date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_baptism_date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_confirmation" class="block text-sm font-medium text-gray-700">Place of
+                    Confirmation</label>
+                <input type="text" id="bride_confirmation" wire:model="bride_confirmation"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_confirmation')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_confirmation_parish" class="block text-sm font-medium text-gray-700">Parish of
+                    Confirmation</label>
+                <input type="text" id="bride_confirmation_parish" wire:model="bride_confirmation_parish"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_confirmation_parish')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="bride_confirmation_date" class="block text-sm font-medium text-gray-700">Date of
+                    Confirmation</label>
+                <input type="date" id="bride_confirmation_date" wire:model="bride_confirmation_date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                @error('bride_confirmation_date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="mt-6 flex items-center justify-end gap-2">
+            <a href="{{ route('analytics-events-wedding.index') }}"
+                class="inline-flex items-center gap-2 px-3 py-2 text-sm text-indigo-600 transition-colors duration-150 ease-linear border border-indigo-600 rounded-md hover:text-white hover:bg-indigo-700">
+                Back
+            </a>
+            <button type="submit"
+                class="inline-flex items-center gap-1 px-3 py-2 text-sm text-white transition-colors duration-150 ease-linear bg-indigo-600 rounded-md hover:bg-indigo-700">
+                Update
+            </button>
+        </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#groom_birthday').on('input', function() {
+                var birthDate = $(this).val();
+                var birthDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+                if (birthDateRegex.test(birthDate)) {
+                    var birthDateObj = new Date(birthDate);
+                    var currentDate = new Date();
+
+                    var age = currentDate.getFullYear() - birthDateObj.getFullYear();
+                    var month = currentDate.getMonth() - birthDateObj.getMonth();
+                    if (month < 0 || (month === 0 && currentDate.getDate() < birthDateObj.getDate())) {
+                        age--;
+                    }
+
+                    @this.set('groom_age', age);
+                } else {
+                    $('#groom_age').val('');
+                }
+            });
+
+            $('#bride_birthday').on('input', function() {
+                var birthDate = $(this).val();
+                var birthDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+                if (birthDateRegex.test(birthDate)) {
+                    var birthDateObj = new Date(birthDate);
+                    var currentDate = new Date();
+
+                    var age = currentDate.getFullYear() - birthDateObj.getFullYear();
+                    var month = currentDate.getMonth() - birthDateObj.getMonth();
+                    if (month < 0 || (month === 0 && currentDate.getDate() < birthDateObj.getDate())) {
+                        age--;
+                    }
+
+                    @this.set('bride_age', age);
+                } else {
+                    $('#bride_age').val('');
+                }
+            });
+        });
+    </script>
+    @push('script')
+    @endpush
 </div>

@@ -24,15 +24,15 @@ class WeddingTable extends DataTableComponent
                     return Blade::render("<x-button red sm icon='pencil' wire:click='editData($row->id)' />");
                 })
                 ->html(),
-            Column::make("Date wedding", "date_wedding")
+            Column::make("Date Wedding", "wedding_date")
                 ->sortable(),
-            Column::make("Time wedding", "time_wedding")
+            Column::make("Time Wedding", "wedding_time")
                 ->sortable(),
-            Column::make("Type wedding", "type_wedding")
+            Column::make("Type Wedding", "wedding_type")
                 ->sortable(),
-            Column::make("Date application", "date_application")
+            Column::make("Date Application", "application_date")
                 ->sortable(),
-            Column::make("Groom name", "groom_name")
+            Column::make("Groom Name", "groom_name")
                 ->sortable(),
 
             // Column::make("Groom age", "groom_age")
@@ -45,8 +45,8 @@ class WeddingTable extends DataTableComponent
             //     ->sortable(),
             // Column::make("Groom address", "groom_address")
             //     ->sortable(),
-            Column::make("Groom contact no", "groom_contact_no")
-                ->sortable(),
+            // Column::make("Groom Contact No.", "groom_contact")
+            //     ->sortable(),
             // Column::make("Groom place baptism", "groom_place_baptism")
             //     ->sortable(),
             // Column::make("Groom parish of", "groom_parish_of")
@@ -59,7 +59,7 @@ class WeddingTable extends DataTableComponent
             //     ->sortable(),
             // Column::make("Groom date confirm", "groom_date_confirm")
             //     ->sortable(),
-            Column::make("Bride name", "bride_name")
+            Column::make("Bride Name", "bride_name")
                 ->sortable(),
             // Column::make("Bride age", "bride_age")
             //     ->sortable(),
@@ -71,8 +71,8 @@ class WeddingTable extends DataTableComponent
             //     ->sortable(),
             // Column::make("Bride address", "bride_address")
             //     ->sortable(),
-            Column::make("Bride contact no", "bride_contact_no")
-                ->sortable(),
+            // Column::make("Bride Contact No", "bride_contact")
+            //     ->sortable(),
             // Column::make("Bride place baptism", "bride_place_baptism")
             //     ->sortable(),
             // Column::make("Bride parish of", "bride_parish_of")
@@ -92,6 +92,6 @@ class WeddingTable extends DataTableComponent
 
     public function editData($control_num)
     {
-        return redirect()->route('analytics-events-wedding.edit-wedding', ['pkey' => $control_num]);
+        return redirect()->route('analytics-events-wedding.edit-wedding', ['weddingId' => $control_num]);
     }
 }

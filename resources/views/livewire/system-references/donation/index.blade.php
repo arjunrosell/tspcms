@@ -2,7 +2,7 @@
     <div x-data="initData">
         <div class="mb-11">
             <div class="mb-4 ">
-                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">System References |
+                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">System Maintenance |
                     Donations</h2>
             </div>
             <nav class="flex mb-4" aria-label="Breadcrumb">

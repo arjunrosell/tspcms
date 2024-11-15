@@ -13,48 +13,42 @@ return new class extends Migration
     {
         Schema::create('weddings', function (Blueprint $table) {
             $table->id();
-            $table->date('date_wedding');
-            $table->time('time_wedding');
-            $table->string('type_wedding')->nullable();
-            $table->string('date_application')->nullable();
+            // Wedding Information
+            $table->date('wedding_date');
+            $table->time('wedding_time');
+            $table->string('wedding_type');
+            $table->date('application_date');
+
+            // Groom's Information
             $table->string('groom_name');
-            $table->string('groom_age');
-            $table->string('groom_bday')->nullable();
+            $table->integer('groom_age');
+            $table->date('groom_birthday');
             $table->string('groom_father')->nullable();
             $table->string('groom_mother')->nullable();
             $table->string('groom_address')->nullable();
-            $table->string('groom_contact_no')->nullable();
-            $table->string('groom_place_baptism')->nullable();
-            $table->string('groom_parish_of')->nullable();
-            $table->string('groom_date_bap')->nullable();
-            $table->string('groom_book_no_1')->nullable();
-            $table->string('groom_line_no_1')->nullable();
-            $table->string('groom_page_no_1')->nullable();
-            $table->string('groom_place_confirm')->nullable();
-            $table->string('groom_parish_confirm')->nullable();
-            $table->string('groom_date_confirm')->nullable();
-            $table->string('groom_book_no_2')->nullable();
-            $table->string('groom_line_no_2')->nullable();
-            $table->string('groom_page_no_2')->nullable();
+            $table->string('groom_contact')->nullable();
+            $table->string('groom_baptism')->nullable();
+            $table->string('groom_baptism_parish')->nullable();
+            $table->date('groom_baptism_date')->nullable();
+            $table->string('groom_confirmation')->nullable();
+            $table->string('groom_confirmation_parish')->nullable();
+            $table->date('groom_confirmation_date')->nullable();
+
+            // Bride's Information
             $table->string('bride_name');
-            $table->string('bride_age');
-            $table->string('bride_bday')->nullable();
+            $table->integer('bride_age');
+            $table->date('bride_birthday');
             $table->string('bride_father')->nullable();
             $table->string('bride_mother')->nullable();
             $table->string('bride_address')->nullable();
-            $table->string('bride_contact_no')->nullable();
-            $table->string('bride_place_baptism')->nullable();
-            $table->string('bride_parish_of')->nullable();
-            $table->string('bride_date_bap')->nullable();
-            $table->string('bride_book_no_1')->nullable();
-            $table->string('bride_line_no_1')->nullable();
-            $table->string('bride_page_no_1')->nullable();
-            $table->string('bride_place_confirm')->nullable();
-            $table->string('bride_parish_confirm')->nullable();
-            $table->string('bride_date_confirm')->nullable();
-            $table->string('bride_book_no_2')->nullable();
-            $table->string('bride_line_no_2')->nullable();
-            $table->string('bride_page_no_2')->nullable();
+            $table->string('bride_contact')->nullable();
+            $table->string('bride_baptism')->nullable();
+            $table->string('bride_baptism_parish')->nullable();
+            $table->date('bride_baptism_date')->nullable();
+            $table->string('bride_confirmation')->nullable();
+            $table->string('bride_confirmation_parish')->nullable();
+            $table->date('bride_confirmation_date')->nullable();
+
             $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@ class Edit extends Component
     public $celebration_place;
 
     protected $rules = [
-        'date' => 'required|date',
+        'date' => 'required|date|after_or_equal:today',
         'deceased_name' => 'required|string|max:255',
         'death_date' => 'required|date|before_or_equal:today',
         'birth_date' => 'required|date|before_or_equal:today',
@@ -79,28 +79,25 @@ class Edit extends Component
         $this->registrant_name = $funeralMass->registrant_name;
         $this->contact_number = $funeralMass->contact_number;
         $this->celebration_place = $funeralMass->celebration_place;
-        $this->status = $funeralMass->status;
     }
 
     public function update()
     {
-        // Validate the updated data
         $this->validate();
 
-        // Check if the number of events on the selected date exceeds the limit (5 per day), excluding the current one
-        $eventsCount = FuneralMass::whereDate('date', $this->date)
-            ->where('id', '!=', $this->funeralMassId) // Exclude the current mass being updated
+
+        $eventsCount = FuneralMass::whereDate('burial_date', $this->burial_date)
+            ->where('id', '!=', $this->funeralMassId)
             ->count();
 
         if ($eventsCount >= 5) {
             $this->notification()->error(
                 'Failed to update',
-                'The maximum number of funeral events for ' . $this->date . ' has been reached (5 events per day).'
+                'The maximum number of funeral mass for ' . $this->date . ' has been reached (5 events per day).'
             );
             return;
         }
 
-        // Find the funeral mass by ID and update the record
         $funeralMass = FuneralMass::findOrFail($this->funeralMassId);
         $funeralMass->update([
             'date' => $this->date,
@@ -118,22 +115,18 @@ class Edit extends Component
             'registrant_name' => $this->registrant_name,
             'contact_number' => $this->contact_number,
             'celebration_place' => $this->celebration_place,
-            'status' => $this->status,
         ]);
 
-        // Success notification
         $this->notification()->success(
             'Funeral mass updated successfully',
             'The funeral mass for ' . $this->deceased_name . ' has been updated.'
         );
 
-        // Redirect back to the events page
         return redirect()->to('/analytics/events');
     }
 
     public function updatedBirthDate($value)
     {
-        // Update the age based on the birth date
         $this->age = Carbon::parse($value)->age;
     }
 
