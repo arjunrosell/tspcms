@@ -29,6 +29,7 @@ use App\Livewire\Analytics\Events\Baptism\Index as BaptismIndex;
 use App\Livewire\Analytics\Events\Wedding\Index as WeddingIndex;
 use App\Livewire\Analytics\Events\Blessing\Index as BlessingIndex;
 use App\Livewire\Analytics\Events\Blessing\Add as AddBlessing;
+use App\Livewire\Analytics\Events\Blessing\Edit as EditBlessing;
 use App\Livewire\Analytics\Donation\Index as DonationIndex;
 use App\Livewire\SystemReferences\Donation\Index as SysDonationIndex;
 use App\Livewire\Auth\Login\Index as LoginIndex;
@@ -82,13 +83,13 @@ Route::middleware(['auth'])->prefix('analytics-events-wedding')->name('analytics
 Route::middleware(['auth'])->prefix('analytics-events-baptism')->name('analytics-events-baptism.')->group(function () {
     Route::get('/', BaptismIndex::class)->name('index');
     Route::get('/add-baptism', BaptismAdd::class)->name('add-baptism');
-    Route::get('/edit-baptism', BaptismEdit::class)->name('edit-baptism');
+    Route::get('/edit-baptism/{baptismId}', BaptismEdit::class)->name('edit-baptism');
 });
 
 Route::middleware(['auth'])->prefix('analytics-events-blessing')->name('analytics-events-blessing.')->group(function () {
     Route::get('/', BlessingIndex::class)->name('index');
     Route::get('/add-blessing', AddBlessing::class)->name('add-blessing');
-    // Route::get('/edit-blessing/{blessing}', EditBlessing::class)->name('edit-blessing');
+    Route::get('/edit-blessing/{blessingId}', EditBlessing::class)->name('edit-blessing');
 });
 
 

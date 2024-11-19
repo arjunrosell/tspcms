@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Table;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Baptism;
+use Illuminate\Support\Facades\Blade;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
 
 class BaptismTable extends DataTableComponent
 {
@@ -18,6 +19,11 @@ class BaptismTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            Column::make('Actions', 'id')
+                ->format(function ($value, $row, Column $column) {
+                    return Blade::render("<x-button red sm icon='pencil' wire:click='editData($row->id)' />");
+                })
+                ->html(),
             Column::make("Id", "id")
                 ->sortable()
                 ->searchable(),
@@ -51,10 +57,21 @@ class BaptismTable extends DataTableComponent
             Column::make("Offering", "offering")
                 ->sortable()
                 ->searchable(),
-
             Column::make("Created at", "created_at")
-                ->sortable(),
-
+                ->sortable()
+                ->searchable()
+                ->format(function ($value) {
+                    return \Carbon\Carbon::parse($value)->format('M d, Y g:i A');
+                }),
         ];
+    }
+    public function editData($baptismId)
+    {
+        if (!Baptism::find($baptismId)) {
+            session()->flash('error', 'Record not found.');
+            return;
+        }
+
+        return redirect()->route('analytics-events-baptism.edit-baptism', ['baptismId' => $baptismId]);
     }
 }

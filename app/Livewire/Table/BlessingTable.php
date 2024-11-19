@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Table;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Blessing;
+use Illuminate\Support\Facades\Blade;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
 
 class BlessingTable extends DataTableComponent
 {
@@ -18,6 +19,11 @@ class BlessingTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            Column::make('Actions', 'id')
+                ->format(function ($value, $row, Column $column) {
+                    return Blade::render("<x-button red sm icon='pencil' wire:click='editData($row->id)' />");
+                })
+                ->html(),
             Column::make("Id", "id")
                 ->sortable()
                 ->searchable(),
@@ -49,5 +55,10 @@ class BlessingTable extends DataTableComponent
                     return \Carbon\Carbon::parse($value)->format('M d, Y g:i A');
                 }),
         ];
+    }
+
+    public function editData($control_num)
+    {
+        return redirect()->route('analytics-events-blessing.edit-blessing', ['blessingId' => $control_num]);
     }
 }
