@@ -20,7 +20,7 @@ class Index extends Component
     {
         $totalActiveUsers = User::where('status', 'Active')->paginate(1000);
         $totalExpenses = number_format(Expense::sum('amount'), 2);
-        $totalDonations = Donation::sum('amount');
+        $totalDonations = number_format(Donation::sum('amount'), 2);
         $totalEvents = FuneralMass::all()->count() + Baptism::all()->count() + Wedding::all()->count();
         $this->upcomingWedddings  = Wedding::limit(5)->get();
         $this->upcomingBapstisms  = Baptism::limit(5)->get();
