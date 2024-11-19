@@ -16,4 +16,9 @@ class Position extends Model
         'name',
         'status',
     ];
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
 }

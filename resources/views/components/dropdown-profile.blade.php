@@ -22,8 +22,16 @@
         x-transition:leave="transition ease-out duration-200" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0" x-cloak>
         <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200 dark:border-slate-700">
-            <div class="font-medium text-slate-800 dark:text-slate-100">{{ Auth::user()->name }}</div>
-            <div class="text-xs italic text-slate-500 dark:text-slate-400">Administrator</div>
+            <div class="font-medium text-slate-800 dark:text-slate-100">
+                {{ Auth::user()->user_detail->fname }} {{ Auth::user()->user_detail->lname }}
+            </div>
+            <div class="text-xs italic text-slate-500 dark:text-slate-400">
+                {{ Auth::user()->email }}
+            </div>
+            <div class="text-xs italic text-slate-500 dark:text-slate-400">
+                {{ Auth::user()->user_detail->position->name ?? 'No position available' }}
+            </div>
+
         </div>
         <ul>
             <li><a class="flex items-center px-3 py-1 text-sm font-medium text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400"
