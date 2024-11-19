@@ -34,11 +34,11 @@ class Edit extends Component
         'death_date' => 'required|date|before_or_equal:today',
         'birth_date' => 'required|date|before_or_equal:today',
         'age' => 'required|integer|min:0',
-        'mass_time' => 'nullable',
+        'mass_time' => 'nullable|time_between:08:00,17:00', //Validate 8 AM and 5 PM
         'spouse_name' => 'nullable|string|max:255',
         'place_of_origin' => 'nullable|string|max:255',
         'cause_of_death' => 'nullable|string|max:255',
-        'departure_time' => 'nullable',
+        'departure_time' => 'nullable|time_between:08:00,17:00',
         'burial_place' => 'nullable|string|max:255',
         'burial_date' => 'required|date|after_or_equal:today',
         'registrant_name' => 'nullable|string|max:255',
@@ -46,14 +46,10 @@ class Edit extends Component
         'celebration_place' => 'nullable|string|max:255',
     ];
 
-    public function messages()
-    {
-        return [
-            'birth_date.before_or_equal' => 'The birth date cannot be in the future.',
-            'death_date.before_or_equal' => 'The death date cannot be in the future.',
-            'burial_date.after_or_equal' => 'The burial date must be in the future.',
-        ];
-    }
+    protected $messages = [
+        'mass_time.time_between' => 'The time must be between 8:00 AM and 5:00 PM.',
+        'departure_time' => 'The time must be between 8:00 AM and 5:00 PM.',
+    ];
 
     public function mount($funeralMassId)
     {
@@ -118,7 +114,7 @@ class Edit extends Component
         ]);
 
         $this->notification()->success(
-            'Funeral mass updated successfully',
+            'Success',
             'The funeral mass for ' . $this->deceased_name . ' has been updated.'
         );
 

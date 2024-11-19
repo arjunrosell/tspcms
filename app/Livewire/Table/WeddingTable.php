@@ -24,10 +24,12 @@ class WeddingTable extends DataTableComponent
                     return Blade::render("<x-button red sm icon='pencil' wire:click='editData($row->id)' />");
                 })
                 ->html(),
-            Column::make("Date Wedding", "wedding_date")
-                ->sortable(),
             Column::make("Time Wedding", "wedding_time")
-                ->sortable(),
+                ->sortable()
+                ->searchable()
+                ->format(function ($value) {
+                    return \Carbon\Carbon::parse($value)->format('g:i A');
+                }),
             Column::make("Type Wedding", "wedding_type")
                 ->sortable(),
             Column::make("Date Application", "application_date")
@@ -87,6 +89,13 @@ class WeddingTable extends DataTableComponent
             //     ->sortable(),
             // Column::make("Created at", "created_at")
             //     ->sortable(),
+            Column::make("Created at", "created_at")
+                ->sortable()
+                ->searchable()
+                ->format(function ($value) {
+                    return \Carbon\Carbon::parse($value)->format('M d, Y g:i A');
+                }),
+
         ];
     }
 

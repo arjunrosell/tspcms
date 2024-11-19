@@ -15,6 +15,21 @@
                     Wedding
                 </a>
             </li>
+            <li class="me-2">
+                <a href="{{ route('analytics-events-baptism.index') }}"
+                    class=" {{ request()->routeIs('analytics-events-baptism.index') ? 'bg-blue-600 text-white' : 'hover:bg-gray-200' }}
+                   inline-block py-2 px-4 rounded-lg transition duration-300">
+                    Baptism
+                </a>
+            </li>
+            </li>
+            <li class="me-2">
+                <a href="{{ route('analytics-events-blessing.index') }}"
+                    class=" {{ request()->routeIs('analytics-events-blessing.index') ? 'bg-blue-600 text-white' : 'hover:bg-gray-200' }}
+                   inline-block py-2 px-4 rounded-lg transition duration-300">
+                    Blessing
+                </a>
+            </li>
         </ul>
     </div>
 </div>

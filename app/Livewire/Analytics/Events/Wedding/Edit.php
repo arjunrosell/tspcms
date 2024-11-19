@@ -35,7 +35,7 @@ class Edit extends Component
     {
         return [
             'wedding_date' => 'required|date|after_or_equal:' . $this->minWeddingDate,
-            'wedding_time' => 'nullable',
+            'wedding_time' => 'nullable|time_between:08:00,17:00', // Validate 8 AM and 5 PM
             'wedding_type' => 'required|string',
             'application_date' => 'required|date|after_or_equal:today',
 
@@ -75,6 +75,7 @@ class Edit extends Component
     {
         return [
             'wedding_date.after_or_equal' => 'The wedding date must be at least 1 week from today.',
+            'wedding_time.time_between' => 'The time must be between 8:00 AM and 5:00 PM.',
         ];
     }
 
@@ -173,7 +174,7 @@ class Edit extends Component
 
 
         $this->notification()->success(
-            'Wedding events  updated successfully',
+            'Success',
             'The wedding information for ' . $this->wedding_date . ' has been updated.'
         );
 

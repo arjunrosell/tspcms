@@ -147,7 +147,7 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-2">
-            <a href="{{ route('analytics-events-wedding.index') }}"
+            <a href="{{ route('analytics-events-funeral-mass.index') }}"
                 class="inline-flex items-center gap-2 px-3 py-2 text-sm text-indigo-600 transition-colors duration-150 ease-linear border border-indigo-600 rounded-md hover:text-white hover:bg-indigo-700">
                 Back
             </a>

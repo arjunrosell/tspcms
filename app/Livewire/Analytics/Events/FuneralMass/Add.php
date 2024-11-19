@@ -34,16 +34,21 @@ class Add extends Component
         'death_date' => 'required|date|before_or_equal:today',
         'birth_date' => 'required|date|before_or_equal:today',
         'age' => 'required|integer|min:0',
-        'mass_time' => 'required|date_format:H:i',
+        'mass_time' => 'required|date_format:H:i|time_between:08:00,17:00', //Validate 8 AM and 5 PM
         'spouse_name' => 'nullable|string|max:255',
         'place_of_origin' => 'nullable|string|max:255',
         'cause_of_death' => 'nullable|string|max:255',
-        'departure_time' => 'nullable|date_format:H:i',
+        'departure_time' => 'nullable|date_format:H:i|time_between:08:00,17:00',
         'burial_place' => 'nullable|string|max:255',
         'burial_date' => 'required|date|after_or_equal:today',
         'registrant_name' => 'nullable|string|max:255',
         'contact_number' => 'nullable|string|max:20',
         'celebration_place' => 'nullable|string|max:255',
+    ];
+
+    protected $messages = [
+        'mass_time.time_between' => 'The time must be between 8:00 AM and 5:00 PM.',
+        'departure_time' => 'The time must be between 8:00 AM and 5:00 PM.',
     ];
 
     public function create()
@@ -78,7 +83,7 @@ class Add extends Component
             'celebration_place' => $this->celebration_place,
         ]);
         $this->notification()->success(
-            'Funeral mass created successfully',
+            'Success',
             'The funeral mass for ' . $this->deceased_name . ' has been added to the system.'
         );
         $this->reset();

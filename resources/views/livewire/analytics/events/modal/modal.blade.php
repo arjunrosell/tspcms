@@ -1,4 +1,4 @@
-<x-modal.modal name="add">
+{{-- <x-modal.modal name="add">
     <div class="relative w-auto p-4">
         <div @click.outside="closeModal" x-show="show" x-transition:enter="animate__animated animate__fadeIn"
             class="relative w-[500px] bg-white rounded-lg shadow dark:bg-gray-700">
@@ -113,4 +113,4 @@
             </div>
         </div>
     </div>
-</x-modal.modal>
+</x-modal.modal> --}}

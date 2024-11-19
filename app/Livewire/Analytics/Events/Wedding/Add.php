@@ -33,7 +33,7 @@ class Add extends Component
     {
         return [
             'wedding_date' => 'required|date|after_or_equal:' . $this->minWeddingDate,
-            'wedding_time' => 'required|date_format:H:i',
+            'wedding_time' => 'required|date_format:H:i|time_between:08:00,17:00', // Validate 8 AM and 5 PM
             'wedding_type' => 'required|string',
             'application_date' => 'required|date|after_or_equal:today',
 
@@ -73,6 +73,7 @@ class Add extends Component
     {
         return [
             'wedding_date.after_or_equal' => 'The wedding date must be at least 1 week from today.',
+            'wedding_time.time_between' => 'The time must be between 8:00 AM and 5:00 PM.',
         ];
     }
 
@@ -128,7 +129,7 @@ class Add extends Component
         ]);
 
         $this->notification()->success(
-            'Wedding events created successfully',
+            'Success',
             'The Wedding information has been added to the system.'
         );
 

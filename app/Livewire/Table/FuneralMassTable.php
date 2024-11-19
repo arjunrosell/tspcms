@@ -30,7 +30,11 @@ class FuneralMassTable extends DataTableComponent
             Column::make("Burial Date", "burial_date")
                 ->sortable(),
             Column::make("Departure Time", "departure_time")
-                ->sortable(),
+                ->sortable()
+                ->searchable()
+                ->format(function ($value) {
+                    return \Carbon\Carbon::parse($value)->format('g:i A');
+                }),
             Column::make("Departure Time", "birth_date")
                 ->sortable(),
             Column::make("Age", "age")
@@ -42,7 +46,11 @@ class FuneralMassTable extends DataTableComponent
             Column::make("Cause of Death", "cause_of_death")
                 ->sortable(),
             Column::make("Mass Time", "mass_time")
-                ->sortable(),
+                ->sortable()
+                ->searchable()
+                ->format(function ($value) {
+                    return \Carbon\Carbon::parse($value)->format('g:i A');
+                }),
             Column::make("Burial Place", "burial_place")
                 ->sortable(),
             Column::make("Registrant Name", "registrant_name")
@@ -54,7 +62,11 @@ class FuneralMassTable extends DataTableComponent
             Column::make("Status", "status")
                 ->sortable(),
             Column::make("Created at", "created_at")
-                ->sortable(),
+                ->sortable()
+                ->searchable()
+                ->format(function ($value) {
+                    return \Carbon\Carbon::parse($value)->format('M d, Y g:i A');
+                }),
             Column::make('Actions', 'id')
                 ->format(function ($value, $row, Column $column) {
                     return Blade::render("<x-button red sm icon='pencil' wire:click='editData($row->id)' />");

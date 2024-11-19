@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Validator::extend('time_between', function ($attribute, $value, $parameters, $validator) {
+            $startTime = strtotime($parameters[0]);
+            $endTime = strtotime($parameters[1]);
+            $inputTime = strtotime($value);
+            return $inputTime >= $startTime && $inputTime <= $endTime;
+        });
     }
 }

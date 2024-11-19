@@ -19,11 +19,42 @@ class BaptismTable extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
+            Column::make("Date of Baptism", "date_of_baptism")
+                ->sortable()
+                ->searchable(),
+            Column::make("Name of Child", "name_of_child")
+                ->sortable()
+                ->searchable(),
+            Column::make("Father's Name", "father_name")
+                ->sortable()
+                ->searchable(),
+            Column::make("Mother's Name", "mother_name")
+                ->sortable()
+                ->searchable(),
+            Column::make("Legitimacy", "legitimacy")
+                ->sortable()
+                ->searchable(),
+            Column::make("Residence", "residence")
+                ->sortable()
+                ->searchable(),
+            Column::make("Minister of Baptism", "minister_of_baptism")
+                ->sortable()
+                ->searchable(),
+            Column::make("Parish Priest", "parish_priest")
+                ->sortable()
+                ->searchable(),
+            Column::make("Name of Baptized", "name_of_baptized")
+                ->sortable()
+                ->searchable(),
+            Column::make("Offering", "offering")
+                ->sortable()
+                ->searchable(),
+
             Column::make("Created at", "created_at")
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
+
         ];
     }
 }

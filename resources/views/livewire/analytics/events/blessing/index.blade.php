@@ -2,7 +2,8 @@
     <div x-data="initData">
         <div class="mb-6">
             <div class="mb-4 ">
-                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Event | Wedding</h2>
+                <h2 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Events | Funeral Mass
+                </h2>
             </div>
             <nav class="flex mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -45,8 +46,9 @@
         </div>
 
         <livewire:components.tabs.events-tab />
+
         <div class="flex items-center gap-2 mb-6 ">
-            <a href="{{ route('analytics-events-wedding.add-wedding') }}"
+            <a href="{{ route('analytics-events-blessing.add-blessing') }}"
                 class="inline-flex items-center gap-2 px-3 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 24 24">
@@ -58,7 +60,8 @@
             </a>
         </div>
 
-        <livewire:table.wedding-table />
+
+        <livewire:table.blessing-table />
 
         @include('livewire.analytics.events.modal.modal')
 
