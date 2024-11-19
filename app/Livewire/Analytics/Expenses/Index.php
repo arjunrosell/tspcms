@@ -4,11 +4,13 @@ namespace App\Livewire\Analytics\Expenses;
 
 use App\Models\Expense;
 use Livewire\Component;
+use App\Models\AuditLog;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use App\Models\ExpenseReference;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
@@ -58,6 +60,13 @@ class Index extends Component
             ]);
 
             if ($expense) {
+
+                $expenseReference = ExpenseReference::find($this->expense_reference_id);
+
+                $referenceName = $expenseReference ? $expenseReference->name : 'Unknown Reference';
+
+                $this->logAction('Created a new expense record for ' . $referenceName);
+
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your expense was successfully saved.'
@@ -83,6 +92,15 @@ class Index extends Component
                 $description = 'Something went wrong.'
             );
         }
+    }
+
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
+        ]);
     }
 
     public function render()

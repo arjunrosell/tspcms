@@ -3,8 +3,10 @@
 namespace App\Livewire\Analytics\Events\Blessing;
 
 use Livewire\Component;
+use App\Models\AuditLog;
 use App\Models\Blessing;
 use WireUi\Traits\Actions;
+use Illuminate\Support\Facades\Auth;
 
 class Add extends Component
 {
@@ -50,8 +52,19 @@ class Add extends Component
             'blessed_item_and_count' => $this->blessedItemAndCount,
         ]);
 
+        $this->logAction('Created a new blessing record for ' . $this->fullname);
+
         $this->notification()->success('Success', 'Blessing record created successfully!');
         $this->reset();
+    }
+
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
+        ]);
     }
 
     public function render()

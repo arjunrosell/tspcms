@@ -2,32 +2,19 @@
 
 namespace App\Livewire\Audit;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\AuditLog;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public function logAudit($action)
-    {
-        $userId = Auth::id();
 
-        DB::table('audit')->insert([
-            'user_id' => $userId,
-            'audit' => $action,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-    }
-
+    use WithPagination;
+    public $perPage = 15;
     public function render()
     {
-        $data = DB::table('audit')
-            ->select('id', 'audit', 'created_at')
-            ->get();
+        $logs = AuditLog::latest()->paginate($this->perPage);
 
-        $this->logAudit('Viewed audit logs.');
-
-        return view('livewire.audit.index', ['data' => $data]);
+        return view('livewire.audit.index', ['logs' => $logs]);
     }
 }

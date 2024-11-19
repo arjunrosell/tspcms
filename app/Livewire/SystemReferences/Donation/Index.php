@@ -2,10 +2,12 @@
 
 namespace App\Livewire\SystemReferences\Donation;
 
-use App\Models\DonationReference;
 use Livewire\Component;
-use Illuminate\Support\Str;
+use App\Models\AuditLog;
 use WireUi\Traits\Actions;
+use Illuminate\Support\Str;
+use App\Models\DonationReference;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
@@ -29,6 +31,7 @@ class Index extends Component
             ]);
 
             if ($position) {
+                $this->logAction('Created new donation record' . $this->name);
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -57,6 +60,7 @@ class Index extends Component
             $position->name = $this->name;
             $position->slug = Str::slug($this->name);
             if ($position->save()) {
+                $this->logAction('Updated donation record ' . $this->name);
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -137,6 +141,16 @@ class Index extends Component
             );
         }
     }
+
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
+        ]);
+    }
+
     public function render()
     {
         return view('livewire.system-references.donation.index');

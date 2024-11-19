@@ -2,10 +2,12 @@
 
 namespace App\Livewire\UserManagement\Position;
 
-use App\Models\Position;
 use Livewire\Component;
+use App\Models\AuditLog;
+use App\Models\Position;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
@@ -29,6 +31,7 @@ class Index extends Component
             ]);
 
             if ($position) {
+                $this->logAction('Created a new position ' . $this->name);
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -57,6 +60,7 @@ class Index extends Component
             $position->name = $this->name;
             $position->slug = Str::slug($this->name);
             if ($position->save()) {
+                $this->logAction('Updated position ' . $this->name);
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -137,6 +141,16 @@ class Index extends Component
             );
         }
     }
+
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
+        ]);
+    }
+
     public function render()
     {
         return view('livewire.user-management.position.index');

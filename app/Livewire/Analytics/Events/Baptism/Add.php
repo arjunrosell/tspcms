@@ -4,7 +4,9 @@ namespace App\Livewire\Analytics\Events\Baptism;
 
 use App\Models\Baptism;
 use Livewire\Component;
+use App\Models\AuditLog;
 use WireUi\Traits\Actions;
+use Illuminate\Support\Facades\Auth;
 
 class Add extends Component
 {
@@ -82,12 +84,24 @@ class Add extends Component
             'remarks' => $this->remarks,
         ]);
 
+        $this->logAction('Created a new baptism record for ' . $this->name_of_child);
+
         $this->notification()->success(
             'Success',
             'Baptism record created successfully!'
         );
 
         $this->reset();
+    }
+
+
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
+        ]);
     }
 
     public function render()

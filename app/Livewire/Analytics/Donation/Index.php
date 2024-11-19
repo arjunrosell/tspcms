@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Analytics\Donation;
 
-use App\Models\Donation;
-use App\Models\DonationReference;
 use Livewire\Component;
+use App\Models\AuditLog;
+use App\Models\Donation;
 use WireUi\Traits\Actions;
 use Livewire\WithFileUploads;
+use App\Models\DonationReference;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
@@ -91,6 +93,9 @@ class Index extends Component
     private function handleSuccess($donation)
     {
         if ($donation) {
+            $donationReference = DonationReference::find($this->donation_references_id);
+            $referenceName = $donationReference ? $donationReference->name : 'Unknown Reference';
+            $this->logAction('Created a new donation record for ' . $referenceName);
             $this->notification()->success(
                 'Success',
                 'Your donation was successfully saved.'
@@ -116,6 +121,15 @@ class Index extends Component
             'status',
             'donor_type',
             'received_by'
+        ]);
+    }
+
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
         ]);
     }
 

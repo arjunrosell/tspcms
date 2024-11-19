@@ -3,12 +3,14 @@
 namespace App\Livewire\UserManagement\User;
 
 use App\Models\User;
-use App\Models\UserDetail;
-use App\Models\Position;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use App\Models\AuditLog;
+use App\Models\Position;
+use App\Models\UserDetail;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class Index extends Component
 {
@@ -87,6 +89,9 @@ class Index extends Component
             ]);
 
             if ($userDetail->save()) {
+                $this->logAction(
+                    'Created a new user ' . $this->fname . ' ' . $this->lname
+                );
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -152,6 +157,8 @@ class Index extends Component
                 'permanent_address' => $this->permanent_address
             ]);
             if ($user->save()) {
+                $this->logAction('Updated user ' . $this->fname . ' ' . $this->lname);
+
                 $this->notification()->success(
                     $title = 'Success',
                     $description = 'Your work was successfully saved'
@@ -220,6 +227,15 @@ class Index extends Component
     public function resetComponent()
     {
         $this->reset();
+    }
+
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
+        ]);
     }
 
     public function render()

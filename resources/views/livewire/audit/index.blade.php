@@ -119,7 +119,7 @@
         </style>
 
         <table class="table-responsive">
-            <thead>
+            {{-- <thead>
                 <tr>
                     <th>ID</th>
                     <th>AUDIT</th>
@@ -129,17 +129,35 @@
             <tbody>
                 @foreach ($data as $rs)
                     <tr>
-                        <td>{{$rs->id}}</td>
-                        <td>{{$rs->audit}}</td>
-                        <td>{{date('Y-m-d h:i', strtotime($rs->created_at))}}</td>
+                        <td>{{ $rs->id }}</td>
+                        <td>{{ $rs->audit }}</td>
+                        <td>{{ date('Y-m-d h:i', strtotime($rs->created_at)) }}</td>
                     </tr>
                 @endforeach
 
+            </tbody> --}}
+            <thead>
+                <tr>
+                    <th class="border px-4 py-2">ID</th>
+                    <th class="border px-4 py-2">Audit</th>
+                    <th class="border px-4 py-2">Audit Date</th>
+                    <th class="border px-4 py-2">User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($logs as $log)
+                    <tr>
+                        <td class="border px-4 py-2">{{ $log->id }}</td>
+                        <td class="border px-4 py-2">{{ $log->audit }}</td>
+                        <td>{{ \Carbon\Carbon::parse($log->audit_date)->format('Y-m-d (h:i A)') }}</td>
+                        <td class="border px-4 py-2">{{ $log->user?->email ?? 'System' }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-
-
-
+        <div class="mt-4">
+            {{ $logs->links() }}
+        </div>
     </div>
 
 </div>

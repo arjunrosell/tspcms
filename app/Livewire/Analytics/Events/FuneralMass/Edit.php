@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Analytics\Events\FuneralMass;
 
-use App\Models\FuneralMass;
-use Livewire\Component;
-use WireUi\Traits\Actions;
 use Carbon\Carbon;
+use Livewire\Component;
+use App\Models\AuditLog;
+use WireUi\Traits\Actions;
+use App\Models\FuneralMass;
+use Illuminate\Support\Facades\Auth;
 
 class Edit extends Component
 {
@@ -113,6 +115,8 @@ class Edit extends Component
             'celebration_place' => $this->celebration_place,
         ]);
 
+        $this->logAction('Updated the funeral mass record for ' . $this->deceased_name);
+
         $this->notification()->success(
             'Success',
             'The funeral mass for ' . $this->deceased_name . ' has been updated.'
@@ -126,6 +130,14 @@ class Edit extends Component
         $this->age = Carbon::parse($value)->age;
     }
 
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
+        ]);
+    }
     public function render()
     {
         return view('livewire.analytics.events.funeral-mass.edit');

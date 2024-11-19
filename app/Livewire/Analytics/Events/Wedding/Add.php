@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Analytics\Events\Wedding;
 
+use Carbon\Carbon;
 use App\Models\Wedding;
 use Livewire\Component;
+use App\Models\AuditLog;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Add extends Component
 {
@@ -128,6 +130,8 @@ class Add extends Component
             'bride_confirmation_date' => $this->bride_confirmation_date,
         ]);
 
+        $this->logAction('Created a new wedding record for ' . $this->groom_name . ' and ' . $this->bride_name);
+
         $this->notification()->success(
             'Success',
             'The Wedding information has been added to the system.'
@@ -152,6 +156,15 @@ class Add extends Component
             $currentDate = Carbon::now();
             $this->bride_age = $currentDate->diffInYears($birthDate);
         }
+    }
+
+    private function logAction($message)
+    {
+        AuditLog::create([
+            'audit' => $message,
+            'audit_date' => now(),
+            'user_id' => Auth::id(),
+        ]);
     }
 
     public function render()

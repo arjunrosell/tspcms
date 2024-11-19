@@ -48,15 +48,15 @@ class ExpensesTable extends DataTableComponent
                     return Carbon::parse($row->created_at)->format('M d,Y');
                 })
                 ->sortable(),
-            Column::make("View Reciept", "files")
-                ->format(function ($value, $row, Column $column) {
-                    return view('livewire.analytics.expenses.image-show', [
-                        'files' => 'storage/' . explode('/', $row->files)[1],
-                        "index" => $row->id
-                    ]);
-                })
-                ->searchable()
-                ->sortable()
+            // Column::make("View Reciept", "files")
+            //     ->format(function ($value, $row, Column $column) {
+            //         return view('livewire.analytics.expenses.image-show', [
+            //             'files' => 'storage/' . explode('/', $row->files)[1],
+            //             "index" => $row->id
+            //         ]);
+            //     })
+            //     ->searchable()
+            //     ->sortable()
         ];
     }
 }
