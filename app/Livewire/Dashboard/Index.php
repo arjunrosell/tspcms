@@ -33,36 +33,31 @@ class Index extends Component
         $this->upcomingBapstisms = Baptism::limit(5)->get();
         $this->upcomingFuneralMass = FuneralMass::limit(5)->get();
 
-        // Fetch expense references (these are like categories or groupings)
         $expenseReferences = ExpenseReference::all();
 
-        // Fetch expenses and group by expense_references_id
         $expensesPerReference = Expense::selectRaw('expense_references_id, SUM(amount) as total')
             ->groupBy('expense_references_id')
             ->orderBy('expense_references_id', 'ASC')
             ->get()
-            ->keyBy('expense_references_id'); // Key by expense_references_id
+            ->keyBy('expense_references_id');
 
-        // Prepare data for the chart
-        $referenceLabels = $expenseReferences->pluck('name')->toArray(); // Get expense reference names (like categories)
+        $referenceLabels = $expenseReferences->pluck('name')->toArray();
         $referenceExpenses = $expenseReferences->map(function ($reference) use ($expensesPerReference) {
-            return $expensesPerReference[$reference->id]->total ?? 0; // Get total expenses per reference
+            return $expensesPerReference[$reference->id]->total ?? 0;
         })->toArray();
 
-        // Fetch donation references (these are like categories or groupings)
-        $donationReferences = DonationReference::all(); // Assuming a DonationReference model exists
 
-        // Fetch donations and group by donation_references_id
+        $donationReferences = DonationReference::all();
+
         $donationsPerReference = Donation::selectRaw('donation_references_id, SUM(amount) as total')
             ->groupBy('donation_references_id')
             ->orderBy('donation_references_id', 'ASC')
             ->get()
-            ->keyBy('donation_references_id'); // Key by donation_references_id
+            ->keyBy('donation_references_id');
 
-        // Prepare data for the donation chart
-        $donationLabels = $donationReferences->pluck('name')->toArray(); // Get donation reference names (like categories)
+        $donationLabels = $donationReferences->pluck('name')->toArray();
         $donationAmounts = $donationReferences->map(function ($reference) use ($donationsPerReference) {
-            return $donationsPerReference[$reference->id]->total ?? 0; // Get total donations per reference
+            return $donationsPerReference[$reference->id]->total ?? 0;
         })->toArray();
 
         return view('livewire.dashboard.index', compact('referenceLabels', 'referenceExpenses', 'donationLabels', 'donationAmounts', 'totalActiveUsers', 'totalExpenses', 'totalDonations', 'totalEvents'));
