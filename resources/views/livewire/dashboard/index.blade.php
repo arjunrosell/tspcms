@@ -112,268 +112,146 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-3 gap-2 mb-7">
-            <div class="col-span-2 ">
-                <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Frequency of
-                    Appointment
-                </h2>
-                <div class="p-4 bg-white border ">
-                    <canvas x-ref='appointment' class=""></canvas>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-5">
+            <div class="col-span-1 md:col-span-2">
+                <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100">Expenses per
+                    reference</h2>
+                <div class="p-4 mb-5 bg-white border">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+                <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100">Donations per
+                    reference</h2>
+                <div class="p-4 mb-5 bg-white border">
+                    <canvas id="donationChart"></canvas>
                 </div>
             </div>
-            <div>
-                <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Upcoming
-                    Weddings (This month)</h2>
-                <div class="bg-white border ">
-                    <div>
-                        <ul class=" divide-y-[1px] divide-gray-300">
-                            @forelse ($upcomingWedddings as $upcomingWeddding)
-                                <li
-                                    class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                    <div>
-                                        <p class="font-semibold ">
-                                            {{ $upcomingWeddding->groom_name . ' & ' . $upcomingWeddding->bride_name }}
-                                        </p>
-                                        <p class="text-xs font-light ">
-                                            {{ $upcomingWeddding->date_wedding . ' - ' . $upcomingWeddding->time_wedding }}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p class="px-2 py-1 text-sm text-black bg-green-400 rounded-md ">Weddings</p>
-                                    </div>
-                                </li>
-
-                            @empty
-                            @endforelse
-                            {{-- <li class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                <div>
-                                    <p class="font-semibold ">John Doe</p>
-                                    <p class="text-xs font-light ">April 15, 2024 - 8:15AM</p>
-                                </div>
-                                <div>
-                                    <p class="px-2 py-1 text-sm text-black bg-blue-400 rounded-md ">Wedding</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                <div>
-                                    <p class="font-semibold ">John Doe</p>
-                                    <p class="text-xs font-light ">April 15, 2024 - 8:15AM</p>
-                                </div>
-                                <div>
-                                    <p class="px-2 py-1 text-sm text-white bg-black rounded-md ">Funeral</p>
-                                </div>
-                            </li> --}}
-                        </ul>
+            <div class="grid gap-7 col-span-1 md:col-span-1">
+                <div>
+                    <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100">Upcoming
+                        Weddings (This month)</h2>
+                    <div class="bg-white border">
+                        <div>
+                            <ul class="divide-y-[1px] divide-gray-300">
+                                @forelse ($upcomingWedddings as $upcomingWeddding)
+                                    <li
+                                        class="flex items-center justify-between px-3 py-2 border-red-500 hover:border-l-2">
+                                        <div>
+                                            <p class="font-semibold">
+                                                {{ $upcomingWeddding->groom_name . ' & ' . $upcomingWeddding->bride_name }}
+                                            </p>
+                                            <p class="text-xs font-light">
+                                                {{ \Carbon\Carbon::parse($upcomingWeddding->wedding_date)->format('l, F j, Y') . ' - ' . \Carbon\Carbon::parse($upcomingWeddding->wedding_time)->format('g:i A') }}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="px-2 py-1 text-xs text-white uppercase bg-red-500 rounded-md">
+                                                Wedding
+                                            </p>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <p class="text-sm text-gray-500">No upcoming weddings</p>
+                                @endforelse
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <h2 class="mt-4 mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Upcoming
-                    Funeral Mass (This month)</h2>
-                <div class="bg-white border ">
-                    <div>
-                        <ul class=" divide-y-[1px] divide-gray-300">
-                            @forelse ($upcomingFuneralMass as $upcomingFuneralMas)
-                                <li
-                                    class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                    <div>
-                                        <p class="font-semibold ">
-                                            {{ $upcomingFuneralMas->pangalan_ng_namatay }}
-                                        </p>
-                                        <p class="text-xs font-light ">
-                                            {{ $upcomingFuneralMas->petsa_ng_libing . ' - ' . $upcomingFuneralMas->oras_ng_misa }}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p class="px-2 py-1 text-sm text-black bg-green-400 rounded-md ">Funeral</p>
-                                    </div>
-                                </li>
-
-                            @empty
-                            @endforelse
-                            {{-- <li class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                <div>
-                                    <p class="font-semibold ">John Doe</p>
-                                    <p class="text-xs font-light ">April 15, 2024 - 8:15AM</p>
-                                </div>
-                                <div>
-                                    <p class="px-2 py-1 text-sm text-black bg-blue-400 rounded-md ">Wedding</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                <div>
-                                    <p class="font-semibold ">John Doe</p>
-                                    <p class="text-xs font-light ">April 15, 2024 - 8:15AM</p>
-                                </div>
-                                <div>
-                                    <p class="px-2 py-1 text-sm text-white bg-black rounded-md ">Funeral</p>
-                                </div>
-                            </li> --}}
-                        </ul>
+                <div>
+                    <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100">Upcoming
+                        Funeral Mass (This month)</h2>
+                    <div class="bg-white border">
+                        <div>
+                            <ul class="divide-y-[1px] divide-gray-300">
+                                @forelse ($upcomingFuneralMass as $upcomingFuneralMas)
+                                    <li
+                                        class="flex items-center justify-between px-3 py-2 border-green-500 hover:border-l-2">
+                                        <div>
+                                            <p class="font-semibold">{{ $upcomingFuneralMas->deceased_name }}</p>
+                                            <p class="text-xs font-light">
+                                                {{ \Carbon\Carbon::parse($upcomingFuneralMas->burial_date)->format('l, F j, Y') . ' - ' . \Carbon\Carbon::parse($upcomingFuneralMas->burial_time)->format('g:i A') }}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="px-2 py-1 text-xs text-white uppercase bg-green-500 rounded-md">
+                                                Funeral
+                                            </p>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <p class="text-sm text-gray-500">No upcoming funeral masses</p>
+                                @endforelse
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <h2 class="mt-4 mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Upcoming
-                    Baptism (This month)</h2>
-                <div class="bg-white border ">
-                    <div>
-                        <ul class=" divide-y-[1px] divide-gray-300">
-                            @forelse ($upcomingBapstisms as $upcomingBapstism)
-                                <li
-                                    class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                    <div>
-                                        <p class="font-semibold ">
-                                            {{ $upcomingBapstism->groom_name . ' & ' . $upcomingBapstism->bride_name }}
-                                        </p>
-                                        <p class="text-xs font-light ">
-                                            {{ $upcomingBapstism->date_wedding . ' - ' . $upcomingBapstism->time_wedding }}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p class="px-2 py-1 text-sm text-black bg-green-400 rounded-md ">Weddings</p>
-                                    </div>
-                                </li>
-
-                            @empty
-                            @endforelse
-                            {{-- <li class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                <div>
-                                    <p class="font-semibold ">John Doe</p>
-                                    <p class="text-xs font-light ">April 15, 2024 - 8:15AM</p>
-                                </div>
-                                <div>
-                                    <p class="px-2 py-1 text-sm text-black bg-blue-400 rounded-md ">Wedding</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center justify-between px-3 py-2 border-indigo-500 hover:border-l-2">
-                                <div>
-                                    <p class="font-semibold ">John Doe</p>
-                                    <p class="text-xs font-light ">April 15, 2024 - 8:15AM</p>
-                                </div>
-                                <div>
-                                    <p class="px-2 py-1 text-sm text-white bg-black rounded-md ">Funeral</p>
-                                </div>
-                            </li> --}}
-                        </ul>
+                <div>
+                    <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100">Upcoming
+                        Baptism (This month)</h2>
+                    <div class="bg-white border">
+                        <div>
+                            <ul class="divide-y-[1px] divide-gray-300">
+                                @forelse ($upcomingBapstisms as $upcomingBapstism)
+                                    <li
+                                        class="flex items-center justify-between px-3 py-2 border-orange-500 hover:border-l-2">
+                                        <div>
+                                            <p class="font-semibold">{{ $upcomingBapstism->name_of_child }}</p>
+                                            <p class="text-xs font-light">
+                                                {{ \Carbon\Carbon::parse($upcomingBapstism->date_of_baptism)->format('l, F j, Y') . ' - ' . $upcomingBapstism->minister_of_baptism }}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="px-2 py-1 text-xs text-white uppercase bg-orange-500 rounded-md">
+                                                Baptism
+                                            </p>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <p class="text-sm text-gray-500">No Upcoming baptism</p>
+                                @endforelse
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        {{-- <div>
-            <div class="">
-                <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100 ">Sales Summary
-                    (Overview of the month)</h2>
-                <div class=" bg-white pl-7 p-4 border grid grid-cols-[30%_70%]">
-                    <div class="flex flex-col gap-10 pt-6">
-                        <div>
-                            <h4 class="text-4xl font-bold tracking-wide text-green-500 ">&#x20B1;20,000</h4>
-                            <p class="text-sm tracking-wide ">Overall Earnings</p>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold tracking-wide ">&#x20B1;1,000</h4>
-                            <p class="text-sm tracking-wide">Current Month Earnings</p>
-                        </div>
-                    </div>
-                    <div class="p-2 border ">
-                        <canvas x-ref='sales' class=""></canvas>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-    </div>
-
-    @push('script')
-        <script>
-            document.addEventListener('livewire:init', () => {
-                Alpine.data('initData', function() {
-                    return {
-                        months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
-                            'Dec'
-                        ],
-                        init() {
-                            let appointment = this.$refs.appointment;
-                            let sales = this.$refs.sales;
-
-                            // appoinment
-                            new Chart(appointment, {
-                                type: 'line',
-                                data: {
-                                    labels: this.months,
-                                    datasets: [{
-                                            label: 'Kasal',
-                                            data: [1, 4, 5, 6, 7],
-                                            borderColor: '#50623A',
-                                            backgroundColor: '#789461',
-                                        },
-                                        {
-                                            label: 'Binyag',
-                                            data: [2, 43, 43, 2, 23],
-                                            borderColor: '#FFB534',
-                                            backgroundColor: '#DBCC95',
-                                        },
-                                        {
-                                            label: 'Funeral',
-                                            data: [2, 10, 2, 5, 23],
-                                            borderColor: '#29ADB2',
-                                            backgroundColor: '#61A3BA',
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    responsive: true,
-                                    plugins: {
-                                        legend: {
-                                            position: 'top',
-                                        },
-                                        title: {
-                                            display: false,
-                                            text: 'Chart.js Line Chart'
-                                        }
-                                    }
-                                },
-                            });
-
-                            // sales summary
-                            new Chart(sales, {
-                                type: 'bar',
-                                data: {
-                                    labels: this.months,
-                                    datasets: [{
-                                        label: 'My First Dataset',
-                                        data: [65, 59, 80, 81, 56, 55, 40],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)',
-                                            'rgba(255, 205, 86, 0.2)',
-                                            'rgba(75, 192, 192, 0.2)',
-                                            'rgba(54, 162, 235, 0.2)',
-                                            'rgba(153, 102, 255, 0.2)',
-                                            'rgba(201, 203, 207, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgb(255, 99, 132)',
-                                            'rgb(255, 159, 64)',
-                                            'rgb(255, 205, 86)',
-                                            'rgb(75, 192, 192)',
-                                            'rgb(54, 162, 235)',
-                                            'rgb(153, 102, 255)',
-                                            'rgb(201, 203, 207)'
-                                        ],
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
-                                        }
-                                    }
-                                },
-                            });
-                        }
+        @push('script')
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                var expenseChart = new Chart(document.getElementById('expenseChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: @json($referenceLabels),
+                        datasets: [{
+                            label: 'Total Expenses',
+                            data: @json($referenceExpenses),
+                            backgroundColor: 'rgba(34, 197, 94, 0.2)',
+                            borderColor: 'rgb(34, 197, 94)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true
                     }
-                })
-            })
-        </script>
-    @endpush
+                });
 
+                var donationChart = new Chart(document.getElementById('donationChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: @json($donationLabels),
+                        datasets: [{
+                            label: 'Total Donations',
+                            data: @json($donationAmounts),
+                            backgroundColor: 'rgba(253, 230, 138, 0.4)',
+                            borderColor: 'rgba(249, 115, 22, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+            </script>
+        @endpush
+    </div>
 </div>
