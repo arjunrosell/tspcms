@@ -144,7 +144,8 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="px-2 py-1 text-xs text-white uppercase bg-red-500 rounded-md">
+                                            <p class="px-2 py-1 text-xs text-white uppercase bg-red-500 rounded-md cursor-pointer"
+                                                onclick="window.location='{{ route('analytics-events-wedding.index') }}'">
                                                 Wedding
                                             </p>
                                         </div>
@@ -172,7 +173,8 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="px-2 py-1 text-xs text-white uppercase bg-green-500 rounded-md">
+                                            <p class="px-2 py-1 text-xs text-white uppercase bg-green-500 rounded-md cursor-pointer"
+                                                onclick="window.location='{{ route('analytics-events-funeral-mass.index') }}'">
                                                 Funeral
                                             </p>
                                         </div>
@@ -200,7 +202,8 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="px-2 py-1 text-xs text-white uppercase bg-orange-500 rounded-md">
+                                            <p class="px-2 py-1 text-xs text-white uppercase bg-orange-500 rounded-md cursor-pointer"
+                                                onclick="window.location='{{ route('analytics-events-funeral-mass.index') }}'">
                                                 Baptism
                                             </p>
                                         </div>
@@ -214,7 +217,6 @@
                 </div>
             </div>
         </div>
-
         @push('script')
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
