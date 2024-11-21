@@ -112,20 +112,20 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-5">
-            <div class="col-span-1 md:col-span-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-5">
+            <div class="col-span-1 sm:col-span-2 lg:col-span-2">
                 <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100">Expenses per
                     reference</h2>
-                <div class="p-4 mb-5 bg-white border">
+                <div class="p-4 mb-5 bg-white border" style="position: relative; height: 500px; width: 100%">
                     <canvas id="expenseChart"></canvas>
                 </div>
                 <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100">Donations per
                     reference</h2>
-                <div class="p-4 mb-5 bg-white border">
+                <div class="p-4 mb-5 bg-white border" style="position: relative; height: 500px; width: 100%;">
                     <canvas id="donationChart"></canvas>
                 </div>
             </div>
-            <div class="grid gap-7 col-span-1 md:col-span-1">
+            <div class="grid gap-7 col-span-1 sm:col-span-2 lg:col-span-1">
                 <div>
                     <h2 class="mb-2 text-lg font-medium tracking-wide text-gray-800 dark:text-gray-100">Upcoming
                         Weddings (This month)</h2>
@@ -233,7 +233,8 @@
                         }]
                     },
                     options: {
-                        responsive: true
+                        responsive: true,
+                        maintainAspectRatio: false
                     }
                 });
 
@@ -250,10 +251,17 @@
                         }]
                     },
                     options: {
-                        responsive: true
+                        responsive: true,
+                        maintainAspectRatio: false
                     }
                 });
             </script>
+            <style>
+                canvas {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+            </style>
         @endpush
     </div>
 </div>
