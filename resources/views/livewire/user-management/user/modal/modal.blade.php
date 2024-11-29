@@ -19,7 +19,7 @@
             <div class="grid grid-cols-3 gap-2 ">
                 <div class="p-2 border border-gray-200 rounded-md ">
                     <h4 class="mb-8 text-sm tracking-wide ">Account Information</h4>
-                    <div class="flex items-center justify-center mb-5 ">
+                    {{-- <div class="flex items-center justify-center mb-5 ">
                         <div class="relative inline-block ">
                             <div class="w-32 h-32 rounded-full bg-primary-black"></div>
                             <label for="profile_pic"
@@ -33,7 +33,7 @@
                             </label>
                         </div>
                         <input type="file" wire:model='profile' hidden>
-                    </div>
+                    </div> --}}
                     <div>
                         <div class="mb-5">
                             <label for="email"

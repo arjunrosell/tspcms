@@ -30,12 +30,12 @@ class Index extends Component
             'width' => '100%',
             'hozAlign' => 'right',
             'columns' => [
-                ['title' => 'Donation Category', 'hozAlign' => 'left', 'width' => '33%', 'field' => 'donationReference'],
-                ['title' => 'Amount', 'hozAlign' => 'left', 'width' => '33%', 'field' => 'amount'],
+                ['title' => 'Donation Category', 'hozAlign' => 'left', 'width' => '33.33%', 'field' => 'donationReference'],
+                ['title' => 'Amount', 'hozAlign' => 'left', 'width' => '33.33%', 'field' => 'amount'],
                 [
-                    'title' => 'Total Amount',
+                    'title' => 'Total Donation',
                     'hozAlign' => 'left',
-                    'width' => '33%',
+                    'width' => '33.33%',
                     'field' => 'totalAmount',
                 ],
             ],
@@ -47,11 +47,11 @@ class Index extends Component
             'hozAlign' => 'right',
             'columns' => [
                 ['title' => 'Type of Expenses', 'hozAlign' => 'left', 'width' => '33%', 'field' => 'category'],
-                ['title' => 'Amount', 'hozAlign' => 'left', 'width' => '33%', 'field' => 'amount'],
+                ['title' => 'Amount', 'hozAlign' => 'left', 'width' => '33.33%', 'field' => 'amount'],
                 [
-                    'title' => 'Total Amount',
+                    'title' => 'Total Expenses',
                     'hozAlign' => 'left',
-                    'width' => '33%',
+                    'width' => '33.33%',
                     'field' => 'totalAmount',
                 ],
             ],

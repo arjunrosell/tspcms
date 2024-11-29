@@ -124,28 +124,27 @@
                                 autoResize: false,
                                 data: this.tableData,
                                 columns: this.tableColumns,
-                                columns1: this.tableColumns,
                                 selectable: true,
                                 selectableCheck: function(row) {
                                     return !row.getData().parent;
                                 },
                                 printHeader: function() {
                                     return `
-                            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; margin: 20px 0 40px 0;">
-                                <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
-                                    <img src="{{ asset('images/logo.png') }}" width="100" height="100" class="rounded-full"/>
-                                    <div style="text-align: center; font-size: 12px;">
-                                        <h6 style="margin: 0;"><b>STO. CRISTO PARISH CHURCH</b></h6>
-                                        <h6 style="margin: 0;"><b>Gulod, Concepcion, General Tinio, Nueva Ecija</b></h6>
-                                        <h6 style="margin: 0;"><b>E-mail: stocristoparish680@gmail.com</b></h6>
+                                    <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; margin: 20px 0 40px 0;">
+                                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                                            <img src="{{ asset('images/logo.png') }}" width="100" height="100" class="rounded-full"/>
+                                            <div style="text-align: center; font-size: 12px;">
+                                                <h6 style="margin: 0;"><b>STO. CRISTO PARISH CHURCH</b></h6>
+                                                <h6 style="margin: 0;"><b>Gulod, Concepcion, General Tinio, Nueva Ecija</b></h6>
+                                                <h6 style="margin: 0;"><b>E-mail: stocristoparish680@gmail.com</b></h6>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div style="position: absolute; bottom: 10px; width: 100%; font-size: 12px;">
-                                <p><b>Facebook: Santo Cristo Parish</p>
-                                <p><b>Contact No: 0917-108-7582</b></p>
-                            </div>
-                        `;
+                                    <div style="position: absolute; bottom: 10px; width: 100%; font-size: 12px;">
+                                        <p><b>Facebook: Santo Cristo Parish</p>
+                                        <p><b>Contact No: 0917-108-7582</b></p>
+                                    </div>
+                                    `;
                                 }
                             });
                             this.$watch('tableData', (value) => {
@@ -211,27 +210,27 @@
                                 },
                                 printHeader: function() {
                                     return `
-                            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; margin: 20px 0 40px 0;">
-                                <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
-                                    <img src="{{ asset('images/logo.png') }}" width="100" height="100" class="rounded-full"/>
-                                    <div style="text-align: center; font-size: 12px;">
-                                        <h6 style="margin: 0;"><b>STO. CRISTO PARISH CHURCH</b></h6>
-                                        <h6 style="margin: 0;"><b>Gulod, Concepcion, General Tinio, Nueva Ecija</b></h6>
-                                        <h6 style="margin: 0;"><b>E-mail: stocristoparish680@gmail.com</b></h6>
+                                    <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; margin: 20px 0 40px 0;">
+                                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                                            <img src="{{ asset('images/logo.png') }}" width="100" height="100" class="rounded-full"/>
+                                            <div style="text-align: center; font-size: 12px;">
+                                                <h6 style="margin: 0;"><b>STO. CRISTO PARISH CHURCH</b></h6>
+                                                <h6 style="margin: 0;"><b>Gulod, Concepcion, General Tinio, Nueva Ecija</b></h6>
+                                                <h6 style="margin: 0;"><b>E-mail: stocristoparish680@gmail.com</b></h6>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div style="position: absolute; bottom: 10px; width: 100%; font-size: 12px;">
-                                <p><b>Facebook: Santo Cristo Parish</p>
-                                <p><b>Contact No: 0917-108-7582</b></p>
-                            </div>
-                        `;
+                                    <div style="position: absolute; bottom: 10px; width: 100%; font-size: 12px;">
+                                        <p><b>Facebook: Santo Cristo Parish</p>
+                                        <p><b>Contact No: 0917-108-7582</b></p>
+                                    </div>
+                                `;
                                 }
                             });
 
                             this.$watch('tableData', (value) => {
                                 this.expenses.setData(value);
-                                this.updateTotalAmount(value); // Update total whenever data changes
+                                this.updateTotalAmount(value);
                             });
 
                             Livewire.on('dataUpdated', (data) => {
@@ -239,7 +238,7 @@
                                 this.expenses.setData(data.data);
                                 this.expenses.redraw(true);
                                 this.updateTotalAmount(data
-                                    .data); // Update total when Livewire data updates
+                                    .data);
                             });
 
                             this.expenses.on("rowSelectionChanged", (data, rows, selected, deselected) => {

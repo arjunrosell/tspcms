@@ -29,11 +29,6 @@ class PositionSeeder extends Seeder
                 'created_at' => now(),
             ],
             [
-                'name' => 'Prist',
-                'slug' => Str::slug('Prist'),
-                'created_at' => now(),
-            ],
-            [
                 'name' => 'Ministry',
                 'slug' => Str::slug('Ministry'),
                 'created_at' => now(),
